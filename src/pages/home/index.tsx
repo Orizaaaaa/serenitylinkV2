@@ -1,9 +1,10 @@
-import React from 'react'
+
 import Header from '../../components/fragments/home/Header'
 import Hero from '../../components/fragments/home/Hero'
 import Categories from '../../components/fragments/home/Kategori'
 import TimeLine from '../../components/fragments/home/Timeline'
 import Footer from '../../components/fragments/home/Footer'
+import Aos from "aos";
 
 type Props = {}
 

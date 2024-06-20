@@ -11,14 +11,19 @@
   },
   "dependencies": {
     "@types/react-dom": "^18.3.0",
+    "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "i": "^0.3.7",
     "npm": "^10.8.1",
     "react": "^18.2.0",
+    "react-animated-css": "^1.2.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/react": "^18.2.66",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
