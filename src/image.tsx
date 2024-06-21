@@ -11,5 +11,6 @@ import polusi from './assets/water-polution.png';
 import transfortasi from './assets/logistic.png';
 import jalanRusak from './assets/jalanRusak.jpeg';
 import rusak from './assets/rusak.jpg';
+import logo from './assets/logo.png';
 
-export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi, jalanRusak, rusak }
+export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi, jalanRusak, rusak, logo }

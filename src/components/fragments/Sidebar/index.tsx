@@ -6,6 +6,7 @@ import { RxDashboard } from "react-icons/rx";
 import { FaHandHoldingWater } from "react-icons/fa";
 import { FaSmoking } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { logo } from "../../../image";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -69,7 +70,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between lg:justify-center gap-2 px-6 py-5.5 lg:py-6.5">
         <Link to="/">
-          <img src="" alt="bacot" />
+          <img className="w-20 h-20" src={logo} alt="bacot" />
         </Link>
 
         <button
