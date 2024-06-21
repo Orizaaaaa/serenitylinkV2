@@ -23,12 +23,12 @@ const Home = (props: Props) => {
                 <Categories />
             </section>
             <section id="laporan">
-                <div className="py-12 min-h-screen md:pt-24 heroBack">
+                <div className="py-28 heroBack">
                     <h1 className="text-center text-2xl md:text-5xl out text-slate-900 font-extrabold mb-8 md:mb-16 uppercase">
                         list report
                     </h1>
                     <div className="container mx-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3" data-aos="fade-up">
                             <CardLink to="/" >
                                 <div className="images h-[150px] w-full relative">
                                     <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
