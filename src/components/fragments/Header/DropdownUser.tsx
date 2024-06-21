@@ -43,8 +43,8 @@ const DropdownUser = () => {
     <div className="relative">
       <div className="flex items-center gap-4">
         <span className="hidden text-right lg:block">
-          <span className="block text-sm font-medium text-black dark:text-white">
-            <p>oriza sativa</p>
+          <span className="block text-sm font-medium text-black">
+            <p>Oriza sativa</p>
           </span>
           <span className="block text-xs">oriza@gmail.com</span>
         </span>
