@@ -11,7 +11,7 @@ const Header = () => {
     return (
         <header>
             <nav className='bg-transparent '>
-                <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
+                <div className='mx-auto flex w-full flex-wrap items-center justify-between p-4'>
                     <div className='flex items-center'>
                         <div className=''>
                             <img src='/logo2.jpg' className='mr-3 md:h-10 h-8 w-auto rounded-full' alt='Logo SerenityLink' />

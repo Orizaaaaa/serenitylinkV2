@@ -5,12 +5,11 @@ import { FaUsersGear } from "react-icons/fa6";
 function Hero() {
   return (
     <>
-      <section
-        className=' grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-2 '
+      <section className=' min-h-[92vh] grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-2 '
       >
         <div className='animate__fadeInLeft animate__animated animate__delay-0.7s order-last py-4 md:order-first md:py-0 lg:pr-8'>
 
-          <h1 className='mt-0 text-2xl font-bold font-inter md:mt-4  lg:text-5xl text-black '>  Website Pengaduan <span className='text-primary' >Citatah</span>  </h1>
+          <h1 className='mt-0 text-2xl font-bold font-inter md:mt-4  lg:text-6xl text-black '>  Website Pengaduan <span className='text-primary' >Citatah</span>  </h1>
           <p className='mt-10' >Masyarakat dapat mengadukan permasalahan yang terjadi di citatah perihal keamanan, ketertiban umum, kesejahtraan sosial, pemberdayaan masyarakat, pemerintahan, ekonomi dan pembangunan</p>
 
           <Link to={'/dashboard/report/new'} >
