@@ -29,7 +29,7 @@ function Footer() {
   };
   return (
     <>
-      <footer className='bg-[#1c2863] pt-10'>
+      <footer className='bg-primary pt-10'>
         <div className='mx-auto px-4 pt-5'>
           <div className='mb-20 flex flex-col gap-8 justify-center md:justify-around md:flex-row '>
             <div>
