@@ -9,5 +9,7 @@ import road from './assets/road.png';
 import tree from './assets/tree.png';
 import polusi from './assets/water-polution.png';
 import transfortasi from './assets/logistic.png';
+import jalanRusak from './assets/jalanRusak.jpeg';
+import rusak from './assets/rusak.jpg';
 
-export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi }
+export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi, jalanRusak, rusak }
