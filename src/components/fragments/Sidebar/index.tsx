@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
@@ -70,7 +70,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between lg:justify-center gap-2 px-6 py-5.5 lg:py-6.5">
         <Link to="/">
-          <img className="w-20 h-20" src={logo} alt="bacot" />
+          <img className="w-20 h-20" src={logo} alt="logo" />
         </Link>
 
         <button
