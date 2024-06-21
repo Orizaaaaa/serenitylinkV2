@@ -5,7 +5,7 @@ export default function timeLine() {
   return (
     <div>
       {/* <!-- component --> */}
-      <div className='min-h-screen bg-blue-600 py-6 flex flex-col justify-center sm:py-12'>
+      <div className='min-h-screen bg-[#1C2863] py-6 flex flex-col justify-center sm:py-12'>
         <div>
           <h1 className='text-center text-2xl md:text-5xl text-white font-extrabold mb-8 uppercase'>Alur Aduan</h1>
           <div className='py-3 sm:max-w-xl sm:mx-auto w-full px-2 sm:px-0'>

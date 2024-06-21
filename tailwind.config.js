@@ -10,6 +10,7 @@ export default {
         primary: "#2FACD6",
         primaryblue: '#3572EF',
         secondary: "#80CAEE",
+        black: '#353434'
       },
       fontSize: {
         "title-xxl": ["44px", "55px"],
