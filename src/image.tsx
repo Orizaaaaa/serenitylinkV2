@@ -8,5 +8,6 @@ import noparking from './assets/no-parking.png';
 import road from './assets/road.png';
 import tree from './assets/tree.png';
 import polusi from './assets/water-polution.png';
+import transfortasi from './assets/logistic.png';
 
-export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi }
+export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi }
