@@ -28,7 +28,151 @@ const Home = (props: Props) => {
                         list report
                     </h1>
                     <div className="container mx-auto">
-                        <div className="grid grid-cols-5">
+                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3">
+                            <CardLink to="/" >
+                                <div className="images h-[150px] w-full relative">
+                                    <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                                </div>
+                                <div className="space-y-2 mt-1">
+                                    <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                                    <div className="flex items-center gap-1 ">
+                                        <FaLocationDot color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 ">
+                                        <FaCalendar color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>12/12/2024</p>
+                                    </div>
+
+
+
+                                    <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                                    <div className="w-full my-3">
+                                        <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                    </div>
+                                </div>
+                            </CardLink>
+                            <CardLink to="/" >
+                                <div className="images h-[150px] w-full relative">
+                                    <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                                </div>
+                                <div className="space-y-2 mt-1">
+                                    <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                                    <div className="flex items-center gap-1 ">
+                                        <FaLocationDot color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 ">
+                                        <FaCalendar color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>12/12/2024</p>
+                                    </div>
+
+
+
+                                    <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                                    <div className="w-full my-3">
+                                        <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                    </div>
+                                </div>
+                            </CardLink>
+                            <CardLink to="/" >
+                                <div className="images h-[150px] w-full relative">
+                                    <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                                </div>
+                                <div className="space-y-2 mt-1">
+                                    <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                                    <div className="flex items-center gap-1 ">
+                                        <FaLocationDot color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 ">
+                                        <FaCalendar color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>12/12/2024</p>
+                                    </div>
+
+
+
+                                    <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                                    <div className="w-full my-3">
+                                        <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                    </div>
+                                </div>
+                            </CardLink>
+                            <CardLink to="/" >
+                                <div className="images h-[150px] w-full relative">
+                                    <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                                </div>
+                                <div className="space-y-2 mt-1">
+                                    <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                                    <div className="flex items-center gap-1 ">
+                                        <FaLocationDot color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 ">
+                                        <FaCalendar color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>12/12/2024</p>
+                                    </div>
+
+
+
+                                    <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                                    <div className="w-full my-3">
+                                        <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                    </div>
+                                </div>
+                            </CardLink>
+                            <CardLink to="/" >
+                                <div className="images h-[150px] w-full relative">
+                                    <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                                </div>
+                                <div className="space-y-2 mt-1">
+                                    <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                                    <div className="flex items-center gap-1 ">
+                                        <FaLocationDot color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 ">
+                                        <FaCalendar color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>12/12/2024</p>
+                                    </div>
+
+
+
+                                    <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                                    <div className="w-full my-3">
+                                        <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                    </div>
+                                </div>
+                            </CardLink>
+                            <CardLink to="/" >
+                                <div className="images h-[150px] w-full relative">
+                                    <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                                </div>
+                                <div className="space-y-2 mt-1">
+                                    <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                                    <div className="flex items-center gap-1 ">
+                                        <FaLocationDot color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 ">
+                                        <FaCalendar color='#6E849C' />
+                                        <p className='text-gray-500 text-sm'>12/12/2024</p>
+                                    </div>
+
+
+
+                                    <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                                    <div className="w-full my-3">
+                                        <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                    </div>
+                                </div>
+                            </CardLink>
                             <CardLink to="/" >
                                 <div className="images h-[150px] w-full relative">
                                     <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
