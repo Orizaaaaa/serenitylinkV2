@@ -15,7 +15,7 @@ const NavigationList = ({ pathname, title, icon, }: Props) => {
             <NavLink
                 to={`${pathname}`}
                 className={`group relative flex  items-center gap-2.5 rounded-lg px-4 py-2 font-medium text-bodydark2 duration-300
-                 ease-in-out hover:bg-primary  hover:text-white dark:hover:bg-meta-4 ${location.pathname.includes(pathname) ? "bg-primary text-white" : ""} `}
+                 ease-in-out hover:bg-primary  hover:text-white dark:hover:bg-meta-4 ${location.pathname.includes(pathname) ? "bg-primary text-white font-medium" : ""} `}
             >
                 {icon}
                 {title}

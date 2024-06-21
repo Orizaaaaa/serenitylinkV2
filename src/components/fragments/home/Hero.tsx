@@ -3,8 +3,7 @@ function Hero() {
   return (
     <>
       <section
-        className='
-grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-2'
+        className=' grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-2 '
       >
         <div className='animate__fadeInLeft animate__animated animate__delay-0.7s order-last py-4 md:order-first md:py-0 lg:pr-8'>
           <div className='flex items-center'>

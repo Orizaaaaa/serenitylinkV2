@@ -12,6 +12,10 @@ export default {
         secondary: "#80CAEE",
       }
     },
+    fontFamily: {
+      inter: ['Inter', 'sans-serif'],
+      poppins: ['Poppins', 'sans-serif'],
+    }
   },
   plugins: [],
 }
