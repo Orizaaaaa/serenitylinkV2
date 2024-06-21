@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DropdownMessage from "./DropdownMessage";
 import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
+import { logo } from "../../../image";
 
 
 const Header = (props: {
@@ -53,9 +54,9 @@ const Header = (props: {
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
             <img
-              width={36}
-              height={36}
-              src={"/logoOnly.svg"}
+              width={37}
+              height={40}
+              src={logo}
               alt="Logo"
             />
           </Link>
