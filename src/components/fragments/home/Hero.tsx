@@ -5,9 +5,9 @@ import { FaUsersGear } from "react-icons/fa6";
 function Hero() {
   return (
     <>
-      <section className=' min-h-[92vh] grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-2 '
+      <section className=' min-h-[92vh] grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-5 '
       >
-        <div className='animate__fadeInLeft animate__animated animate__delay-0.7s order-last py-4 md:order-first md:py-0 lg:pr-8'>
+        <div className='animate__fadeInLeft animate__animated animate__delay-0.7s order-last py-4 md:order-first md:py-0 lg:pr-8 col-span-3'>
 
           <h1 className='mt-0 text-2xl font-bold font-inter md:mt-4  lg:text-6xl text-black '>  Website Pengaduan <span className='text-primary' >Citatah</span>  </h1>
           <p className='mt-10' >Masyarakat dapat mengadukan permasalahan yang terjadi di citatah perihal keamanan, ketertiban umum, kesejahtraan sosial, pemberdayaan masyarakat, pemerintahan, ekonomi dan pembangunan</p>
@@ -40,9 +40,9 @@ function Hero() {
           </div>
 
         </div>
-        <div className='animate__fadeInRight animate__animated animate__delay-0.7s group order-first mx-auto max-w-md pb-12 pt-24 md:order-last lg:pl-20'>
+        <div className='animate__fadeInRight animate__animated animate__delay-0.7s group order-first mx-auto max-w-md pb-12 pt-24 md:order-last lg:pl-20 col-span-2'>
           <div className='relative' style={{ transform: 'perspective(1000px) rotate(0deg) rotateY(0deg) scale3d(1,1,1)', willChange: 'transform' }}>
-            <div className='flex h-60 w-60 items-center justify-center overflow-hidden  bg-transparent md:h-[28rem] md:w-[28rem]'>
+            <div className='flex w-full h-full items-center justify-center overflow-hidden  bg-transparent'>
               <img className='' src={logo} alt='logo' />
             </div>
           </div>
