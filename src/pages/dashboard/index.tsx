@@ -5,9 +5,30 @@ import DefaultLayout from "../../components/layout/DefaultLayout"
 import { jalanRusak, manusiaLaptop } from "../../image"
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 
 const Dashboard = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
     return (
         <DefaultLayout>
             <Card>
@@ -32,9 +53,28 @@ const Dashboard = () => {
                     Buat Laporan
                 </Link>
 
-                <button className=" bg-white text-black px-4 py-2 rounded-md    " >
-                    Status
-                </button>
+                {/* dropdown status */}
+                <div className="relative inline-block text-left" ref={dropdownRef}>
+                    <button className=" bg-white text-black px-4 py-2 rounded-md flex justify-center items-center gap-2" onClick={toggleDropdown} >
+                        Status
+                        <IoIosArrowDown />
+                    </button>
+                    <div
+                        id="dropdownMenu"
+                        className={`${isOpen ? '' : 'hidden'} z-9999 origin-top-right absolute right-0 md:left-0 mt-2 w-56 rounded-md bg-white`}
+                        role="menu"
+                    >
+                        <div className="py-1" role="none">
+                            <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
+                                Menunggu
+                            </button>
+                            <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
+                                Di Proses
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
