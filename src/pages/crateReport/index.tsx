@@ -6,19 +6,28 @@ import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaf
 import Maps from "../../components/fragments/maps/Maps";
 
 const CreateReport = () => {
+    const [formData, setFormData] = useState({
+        title: "",
+        image: null,
+        lat: -6.840540,
+        long: 107.430687,
+        location: '',
+        desc: ''
 
-    const [markerPosition, setMarkerPosition] = useState({ lat: -6.840540, lng: 107.430687 });
+    });
+
 
     // Komponen untuk menangani event klik pada peta
     const MapEvents = () => {
         useMapEvents({
             click(e: any) {
                 // Memperbarui posisi marker dengan posisi klik
-                setMarkerPosition(e.latlng);
+                setFormData({ ...formData, lat: e.latlng.lat, long: e.latlng.lng, });
             }
         });
         return null;
     };
+
 
     return (
         <DefaultLayout>
@@ -33,11 +42,29 @@ const CreateReport = () => {
 
                     </div>
 
+                    {/* <div className="image flex justify-content-center ">
+                        {formData.image && formData.image instanceof Blob ? (
+                            <img src={URL.createObjectURL(formData.image)} />
+                        ) : (
+                            <img src={defaultImageModal} />
+                        )}
+
+                        <input
+                            type="file"
+                            className="d-none"
+                            id="image-input-add"
+                            onChange={(e) => handleImageChange(e, 'add')}
+                        />
+
+                        <button className="btn btn-input border-0 p-0 position-absolute bottom-0 end-0" type="button" >
+                            <img src={iconPencil} onClick={() => handleFileManager('add')} />
+                        </button>
+                    </div> */}
 
                 </div>
 
                 {/* maps */}
-                <Maps markerPosition={markerPosition} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md mt-4" >
+                <Maps markerPosition={{ lat: formData.lat, lng: formData.long }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md mt-4" >
                     <MapEvents />
                 </Maps>
 
