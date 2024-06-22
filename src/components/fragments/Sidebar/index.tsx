@@ -109,7 +109,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
               <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
-              <NavigationList icon={<FaHandHoldingWater size={19} />} title="Kalkulator Hidrasi" pathname="/hidrasi_kalkulator" />
+              <NavigationList icon={<FaHandHoldingWater size={19} />} title="Kalkulator Hidrasi" pathname="/semua-laporan" />
               <NavigationList icon={<FaSmoking size={19} />} title="Kalkulator Rokok" pathname="/rokok_kalkulator" />
               <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
 
