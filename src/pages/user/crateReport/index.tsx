@@ -8,7 +8,7 @@ import { camera } from "../../../image";
 import { useNavigate } from "react-router-dom";
 import { buttonKategori } from "../../../utils/dataObject";
 
-const CreateReport = () => {
+const CreateReportUser = () => {
     const [formData, setFormData] = useState({
         title: "",
         image: null as File | null,
@@ -131,4 +131,4 @@ const CreateReport = () => {
     )
 }
 
-export default CreateReport
+export default CreateReportUser

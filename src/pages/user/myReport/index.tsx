@@ -8,7 +8,7 @@ import CardLink from "../../../components/elemets/card/CardLink";
 import { jalanRusak } from "../../../image";
 import { FaCalendar, FaLocationDot } from "react-icons/fa6";
 
-const MyReport = () => {
+const MyReportUser = () => {
 
     // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
@@ -110,4 +110,4 @@ const MyReport = () => {
     )
 }
 
-export default MyReport
+export default MyReportUser

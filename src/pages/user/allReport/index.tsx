@@ -9,7 +9,7 @@ import { jalanRusak } from '../../../image'
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6'
 
 
-const AllReport = () => {
+const AllReportUser = () => {
     // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -112,4 +112,4 @@ const AllReport = () => {
     )
 }
 
-export default AllReport
+export default AllReportUser

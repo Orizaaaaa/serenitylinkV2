@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
 
-const Dashboard = () => {
+const DashboardUser = () => {
 
     // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
@@ -112,4 +112,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default DashboardUser

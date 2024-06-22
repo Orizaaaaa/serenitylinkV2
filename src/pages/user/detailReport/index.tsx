@@ -3,7 +3,7 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { jalanRusak, rusak } from "../../../image"
 
 
-const DetailReport = () => {
+const DetailReportUser = () => {
     const data = [
         {
             title: 'Judul Laporan  ',
@@ -72,4 +72,4 @@ const DetailReport = () => {
     )
 }
 
-export default DetailReport
+export default DetailReportUser
