@@ -3,6 +3,7 @@ import DefaultLayout from "../../components/layout/DefaultLayout"
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
+import Card from "../../components/elemets/card/Card";
 
 const MyReport = () => {
 
@@ -27,6 +28,14 @@ const MyReport = () => {
 
     return (
         <DefaultLayout>
+            <Card>
+                <div className="grid ">
+                    <div className="flex-col space-y-3 my-auto">
+                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Laporan Saya </h1>
+                        <p className="text-gray-500 text-sm md:text-base" >Ini adalah halaman pengaduan yang berisikan pengaduan yang sebelum nya telah anda  buat</p>
+                    </div>
+                </div>
+            </Card >
 
             {/* search and dropdown */}
             <div className="w-full  mt-4 relative ">
