@@ -4,11 +4,12 @@ import InputReport from "../../components/elemets/input/InputReport"
 import DefaultLayout from "../../components/layout/DefaultLayout"
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import Maps from "../../components/fragments/maps/Maps";
+import { camera } from "../../image";
 
 const CreateReport = () => {
     const [formData, setFormData] = useState({
         title: "",
-        image: null,
+        image: null as File | null,
         lat: -6.840540,
         long: 107.430687,
         location: '',
@@ -28,6 +29,24 @@ const CreateReport = () => {
         return null;
     };
 
+    const handleFileManager = (fileName: string) => {
+        if (fileName === 'add') {
+            const fileInput = document.getElementById("image-input-add") as HTMLInputElement | null;
+            fileInput ? fileInput.click() : null;
+        } else {
+            console.log('error');
+
+        }
+    };
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, InputSelect: string) => {
+        if (InputSelect === 'add') {
+            const selectedImage = e.target.files?.[0];
+            setFormData({ ...formData, image: selectedImage || null });
+        } else {
+            console.log('error');
+
+        }
+    };
 
     return (
         <DefaultLayout>
@@ -42,25 +61,31 @@ const CreateReport = () => {
 
                     </div>
 
-                    {/* <div className="image flex justify-content-center ">
+                    {/* images input */}
+                    <div className="images ">
                         {formData.image && formData.image instanceof Blob ? (
-                            <img src={URL.createObjectURL(formData.image)} />
+                            <img className="h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
                         ) : (
-                            <img src={defaultImageModal} />
+                            <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
+                                <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
+                                    <img className="w-20 h-20 mx-auto" src={camera} />
+                                    <p>*Masukan gambar sebagai bukti kuat pengajuan laporan</p>
+                                </button>
+                            </div>
                         )}
 
                         <input
                             type="file"
-                            className="d-none"
+                            className="hidden"
                             id="image-input-add"
                             onChange={(e) => handleImageChange(e, 'add')}
                         />
 
-                        <button className="btn btn-input border-0 p-0 position-absolute bottom-0 end-0" type="button" >
-                            <img src={iconPencil} onClick={() => handleFileManager('add')} />
-                        </button>
-                    </div> */}
-
+                        <div className="flex justify-end gap-3 mt-3">
+                            <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
+                            <button className="bg-primary text-white px-4 py-2 rounded-md" >Kirim Laporan</button>
+                        </div>
+                    </div>
                 </div>
 
                 {/* maps */}
