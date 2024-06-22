@@ -5,8 +5,8 @@ type Props = {
     markerPosition: any
     zoom: number
     text: string
-    children: React.ReactNode
-    className: string
+    children?: React.ReactNode
+    className?: string
 }
 
 const Maps = ({ markerPosition, zoom, text, children, className }: Props) => {
