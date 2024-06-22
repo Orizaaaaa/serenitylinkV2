@@ -13,5 +13,6 @@ import jalanRusak from './assets/jalanRusak.jpeg';
 import rusak from './assets/rusak.jpg';
 import logo from './assets/logo.png';
 import logo2 from './assets/logo2.svg';
+import manusiaLaptop from './assets/manusiaLaptop.svg';
 
-export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi, jalanRusak, rusak, logo, logo2 }
+export { bandit, education, garbage, hospital, medicalkit, taman, noparking, road, tree, polusi, transfortasi, jalanRusak, rusak, logo, logo2, manusiaLaptop }
