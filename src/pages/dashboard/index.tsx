@@ -10,9 +10,10 @@ import { IoIosArrowDown } from "react-icons/io";
 
 
 const Dashboard = () => {
+
+    // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -22,13 +23,14 @@ const Dashboard = () => {
             setIsOpen(false);
         }
     };
-
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+
     return (
         <DefaultLayout>
             <Card>

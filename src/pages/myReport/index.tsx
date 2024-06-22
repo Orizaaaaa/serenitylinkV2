@@ -6,9 +6,9 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const MyReport = () => {
 
+    // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -18,13 +18,13 @@ const MyReport = () => {
             setIsOpen(false);
         }
     };
-
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
     return (
         <DefaultLayout>
 
