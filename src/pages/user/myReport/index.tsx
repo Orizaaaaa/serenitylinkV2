@@ -1,15 +1,14 @@
-import { FaCalendar, FaLocationDot } from "react-icons/fa6";
-import Card from "../../components/elemets/card/Card"
-import CardLink from "../../components/elemets/card/CardLink";
-import DefaultLayout from "../../components/layout/DefaultLayout"
-import { jalanRusak, manusiaLaptop } from "../../image"
+import { useEffect, useRef, useState } from "react";
+import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import Card from "../../../components/elemets/card/Card";
+import CardLink from "../../../components/elemets/card/CardLink";
+import { jalanRusak } from "../../../image";
+import { FaCalendar, FaLocationDot } from "react-icons/fa6";
 
-
-const Dashboard = () => {
+const MyReport = () => {
 
     // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
@@ -30,21 +29,18 @@ const Dashboard = () => {
         };
     }, []);
 
-
     return (
         <DefaultLayout>
             <Card>
-                <div className="grid grid-cols-1 lg:grid-cols-2">
+                <div className="grid ">
                     <div className="flex-col space-y-3 my-auto">
-                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Selamat datang di dashboard masyarakat !</h1>
-                        <p className="text-gray-500 text-sm md:text-base" >Senang melihat Anda kembali. Mari kita mulai hari ini dengan membuat pengaduan yang bijak dan bermanfaat</p>
-                    </div>
-                    <div className="flex justify-center">
-                        <img src={manusiaLaptop} alt="dashboard" />
+                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Laporan Saya </h1>
+                        <p className="text-gray-500 text-sm md:text-base" >Ini adalah halaman pengaduan yang berisikan pengaduan yang sebelum nya telah anda  buat</p>
                     </div>
                 </div>
             </Card >
 
+            {/* search and dropdown */}
             <div className="w-full  mt-4 relative ">
                 <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
                 <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
@@ -79,6 +75,8 @@ const Dashboard = () => {
                 </div>
             </div>
 
+
+            {/* data laporan saya */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
                 <CardLink to="/" >
                     <div className="images h-[150px] w-full relative">
@@ -108,8 +106,8 @@ const Dashboard = () => {
 
             </div>
 
-        </DefaultLayout >
+        </DefaultLayout>
     )
 }
 
-export default Dashboard
+export default MyReport

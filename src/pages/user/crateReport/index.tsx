@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Card from "../../components/elemets/card/Card"
-import InputReport from "../../components/elemets/input/InputReport"
-import DefaultLayout from "../../components/layout/DefaultLayout"
+import Card from "../../../components/elemets/card/Card"
+import InputReport from "../../../components/elemets/input/InputReport"
+import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { useMapEvents } from 'react-leaflet';
-import Maps from "../../components/fragments/maps/Maps";
-import { camera } from "../../image";
+import Maps from "../../../components/fragments/maps/Maps";
+import { camera } from "../../../image";
 import { useNavigate } from "react-router-dom";
-import { buttonKategori } from "../../utils/dataObject";
+import { buttonKategori } from "../../../utils/dataObject";
 
 const CreateReport = () => {
     const [formData, setFormData] = useState({

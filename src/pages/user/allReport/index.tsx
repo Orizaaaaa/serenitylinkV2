@@ -1,11 +1,11 @@
 import { IoSearch } from 'react-icons/io5'
-import DefaultLayout from '../../components/layout/DefaultLayout'
+import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { Link } from 'react-router-dom'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useEffect, useRef, useState } from 'react'
-import Card from '../../components/elemets/card/Card'
-import CardLink from '../../components/elemets/card/CardLink'
-import { jalanRusak } from '../../image'
+import Card from '../../../components/elemets/card/Card'
+import CardLink from '../../../components/elemets/card/CardLink'
+import { jalanRusak } from '../../../image'
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6'
 
 

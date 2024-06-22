@@ -1,10 +1,10 @@
 
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
-import Dashboard from './pages/dashboard';
-import CreateReport from './pages/crateReport';
-import DetailReport from './pages/detailReport';
-import AllReport from './pages/allReport';
+import Dashboard from './pages/user/dashboard';
+import CreateReport from './pages/user/crateReport';
+import DetailReport from './pages/user/detailReport';
+import AllReport from './pages/user/allReport';
 import MyReport from './pages/myReport';
 function App() {
   return (
