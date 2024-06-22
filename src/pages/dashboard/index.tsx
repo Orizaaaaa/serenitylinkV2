@@ -5,9 +5,8 @@ import DefaultLayout from "../../components/layout/DefaultLayout"
 import { jalanRusak, manusiaLaptop } from "../../image"
 import { IoSearch } from "react-icons/io5";
 
-type Props = {}
 
-const Dashboard = (props: Props) => {
+const Dashboard = () => {
     return (
         <DefaultLayout>
             <Card>
