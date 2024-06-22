@@ -68,16 +68,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     if (role === 'user') {
       return (
         <>
-          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
-          <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya" />
-          <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan" />
+          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-user" />
+          <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-user" />
+          <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan-user" />
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
         </>
       )
     } else if (role === 'admin') {
       return (
         <>
-          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
+          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-user" />
         </>
       )
     }

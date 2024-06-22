@@ -47,7 +47,7 @@ const AllReport = () => {
             </div>
 
             <div className="flex mt-4 gap-3">
-                <Link to={"/dashboard/buat-laporan"} className="bg-primary text-white px-4 py-2 rounded-md " >
+                <Link to={"/dashboard-user/detail-laporan-user"} className="bg-primary text-white px-4 py-2 rounded-md " >
                     Buat Laporan
                 </Link>
 
