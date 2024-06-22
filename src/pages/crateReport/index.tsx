@@ -2,9 +2,10 @@ import { useState } from "react";
 import Card from "../../components/elemets/card/Card"
 import InputReport from "../../components/elemets/input/InputReport"
 import DefaultLayout from "../../components/layout/DefaultLayout"
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { useMapEvents } from 'react-leaflet';
 import Maps from "../../components/fragments/maps/Maps";
 import { camera } from "../../image";
+import { useNavigate } from "react-router-dom";
 
 const CreateReport = () => {
     const [formData, setFormData] = useState({
@@ -54,7 +55,14 @@ const CreateReport = () => {
         }
     };
 
-    console.log(formData);
+    // submit image
+    const navigate = useNavigate()
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        console.log(formData);
+        navigate('/dashboard')
+    };
+
 
 
     return (
@@ -91,7 +99,7 @@ const CreateReport = () => {
 
                         <div className="flex justify-center gap-3 mt-3">
                             <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
-                            <button className="bg-primary text-white px-4 py-2 rounded-md" >Kirim Laporan</button>
+                            <button className="bg-primary text-white px-4 py-2 rounded-md" onClick={handleSubmit}>Kirim Laporan</button>
                         </div>
                     </div>
                 </div>

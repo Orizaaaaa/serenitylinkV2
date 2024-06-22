@@ -4,6 +4,7 @@ import CardLink from "../../components/elemets/card/CardLink";
 import DefaultLayout from "../../components/layout/DefaultLayout"
 import { jalanRusak, manusiaLaptop } from "../../image"
 import { IoSearch } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -27,9 +28,9 @@ const Dashboard = () => {
             </div>
 
             <div className="flex mt-4 gap-3">
-                <button className="bg-primary text-white px-4 py-2 rounded-md " >
+                <Link to={"/dashboard/buat-laporan"} className="bg-primary text-white px-4 py-2 rounded-md " >
                     Buat Laporan
-                </button>
+                </Link>
 
                 <button className=" bg-white text-black px-4 py-2 rounded-md    " >
                     Status
