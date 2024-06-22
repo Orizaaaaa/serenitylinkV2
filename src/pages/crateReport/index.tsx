@@ -6,6 +6,7 @@ import { useMapEvents } from 'react-leaflet';
 import Maps from "../../components/fragments/maps/Maps";
 import { camera } from "../../image";
 import { useNavigate } from "react-router-dom";
+import { buttonKategori } from "../../utils/dataObject";
 
 const CreateReport = () => {
     const [formData, setFormData] = useState({
@@ -14,7 +15,8 @@ const CreateReport = () => {
         lat: -6.840540,
         long: 107.430687,
         location: '',
-        desc: ''
+        desc: '',
+        categori: ''
 
     });
 
@@ -34,7 +36,10 @@ const CreateReport = () => {
         return null;
     };
 
-
+    //lingkaran button
+    const handleCategory = (value: string) => {
+        setFormData({ ...formData, categori: value })
+    }
     //input gambar
     const handleFileManager = (fileName: string) => {
         if (fileName === 'add') {
@@ -99,7 +104,6 @@ const CreateReport = () => {
 
                         <div className="flex justify-center gap-3 mt-3">
                             <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
-                            <button className="bg-primary text-white px-4 py-2 rounded-md" onClick={handleSubmit}>Kirim Laporan</button>
                         </div>
                     </div>
                 </div>
@@ -109,6 +113,18 @@ const CreateReport = () => {
                     <MapEvents />
                 </Maps>
 
+                <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 container mx-auto gap-5 mt-5'>
+
+                    {buttonKategori.map((category, index) => (
+                        <button className={` p-6 mx-auto rounded-md ${formData.categori === category.value && 'bg-primary text-black'} `} key={index} onClick={() => handleCategory(category.value)} >
+                            <img className="w-full h-[100px] " src={category.image} alt={'image kategori'} />
+                            <p className="text-sm md:text-base mt-3  " >{category.name}</p>
+                        </button>
+                    ))}
+
+                </div>
+
+                <button className="bg-primary text-white px-4 py-2 rounded-md w-full mt-4" onClick={handleSubmit}>Kirim Laporan</button>
             </Card>
         </DefaultLayout>
 
