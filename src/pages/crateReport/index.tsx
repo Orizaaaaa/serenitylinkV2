@@ -24,7 +24,7 @@ const CreateReport = () => {
         <DefaultLayout>
             <Card>
                 <h1 className="text-lg font-semibold text-primary py-4 border-b-2 border-primary" >Buat Laporan</h1>
-                <div className="grid grid-cols-2 mt-4s gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-4">
                     <div className="input-report mt-4">
                         <InputReport htmlFor="title" title="Judul Laporan  " type="text" onChange={() => { }} value="" />
                         <InputReport htmlFor="title" title="Lokasi kejadian  " type="text" onChange={() => { }} value="" placeholder="nama jalan atau tempat.." />
@@ -33,13 +33,13 @@ const CreateReport = () => {
 
                     </div>
 
-                    <Maps markerPosition={markerPosition} zoom={13} text="Lokasi kejadian" >
-                        <MapEvents />
-                    </Maps>
-                    <div className="image-input">
 
-                    </div>
                 </div>
+
+                {/* maps */}
+                <Maps markerPosition={markerPosition} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md mt-4" >
+                    <MapEvents />
+                </Maps>
 
             </Card>
         </DefaultLayout>
