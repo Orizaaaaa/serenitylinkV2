@@ -62,6 +62,25 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   }, [sidebarExpanded]);
 
+  // sidebar validation
+
+  const setSidebar = (role: string) => {
+    if (role === 'user') {
+      return (
+        <>
+          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
+          <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya" />
+          <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan" />
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
+        </>
+      )
+    } else if (role === 'admin') {
+      return (
+        <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
+      )
+    }
+  }
+
   return (
     <aside
       ref={sidebar}
@@ -109,10 +128,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
-              <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
-              <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya" />
-              <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan" />
-              <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
+
+              {/* logic sidebar ada di sini */}
+              {setSidebar('admin')}
 
 
               {/* <!-- Menu Item Calendar -->
