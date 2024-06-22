@@ -76,7 +76,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       )
     } else if (role === 'admin') {
       return (
-        <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
+        <>
+          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
+        </>
       )
     }
   }
@@ -130,7 +132,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('admin')}
+              {setSidebar('user')}
 
 
               {/* <!-- Menu Item Calendar -->
