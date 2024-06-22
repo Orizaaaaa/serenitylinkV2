@@ -27,6 +27,8 @@ const MyReport = () => {
     }, []);
     return (
         <DefaultLayout>
+
+            {/* search and dropdown */}
             <div className="w-full  mt-4 relative ">
                 <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
                 <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
@@ -60,6 +62,8 @@ const MyReport = () => {
                     </div>
                 </div>
             </div>
+
+
         </DefaultLayout>
     )
 }
