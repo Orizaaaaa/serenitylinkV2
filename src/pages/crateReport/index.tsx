@@ -17,6 +17,10 @@ const CreateReport = () => {
 
     });
 
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
     // Komponen untuk menangani event klik pada peta
     const MapEvents = () => {
@@ -29,6 +33,8 @@ const CreateReport = () => {
         return null;
     };
 
+
+    //input gambar
     const handleFileManager = (fileName: string) => {
         if (fileName === 'add') {
             const fileInput = document.getElementById("image-input-add") as HTMLInputElement | null;
@@ -48,23 +54,25 @@ const CreateReport = () => {
         }
     };
 
+    console.log(formData);
+
+
     return (
         <DefaultLayout>
             <Card>
                 <h1 className="text-lg font-semibold text-primary py-4 border-b-2 border-primary" >Buat Laporan</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-4">
                     <div className="input-report mt-4">
-                        <InputReport htmlFor="title" title="Judul Laporan  " type="text" onChange={() => { }} value="" />
-                        <InputReport htmlFor="title" title="Lokasi kejadian  " type="text" onChange={() => { }} value="" placeholder="nama jalan atau tempat.." />
-                        <label className="font-medium" htmlFor="message" >Deskripsi Laporan  </label>
-                        <textarea id="message" rows={4} className="block p-2.5 w-full bg-gray-300 rounded-md outline-none mt-2" ></textarea>
-
+                        <InputReport htmlFor="title" title="Judul Laporan  " type="text" onChange={handleChange} value={formData.title} />
+                        <InputReport htmlFor="location" title="Lokasi kejadian  " type="text" onChange={handleChange} value={formData.location} placeholder="nama jalan atau tempat.." />
+                        <label className="font-medium" htmlFor="desc" >Deskripsi Laporan  </label>
+                        <textarea onChange={handleChange} name="desc" id="desc" cols={30} value={formData.desc} rows={4} className="block p-2.5 w-full bg-gray-300 rounded-md outline-none mt-2" ></textarea>
                     </div>
 
                     {/* images input */}
                     <div className="images ">
                         {formData.image && formData.image instanceof Blob ? (
-                            <img className="h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                            <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
                         ) : (
                             <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
                                 <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
@@ -81,7 +89,7 @@ const CreateReport = () => {
                             onChange={(e) => handleImageChange(e, 'add')}
                         />
 
-                        <div className="flex justify-end gap-3 mt-3">
+                        <div className="flex justify-center gap-3 mt-3">
                             <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                             <button className="bg-primary text-white px-4 py-2 rounded-md" >Kirim Laporan</button>
                         </div>
