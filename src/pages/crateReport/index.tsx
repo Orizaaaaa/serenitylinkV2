@@ -116,8 +116,8 @@ const CreateReport = () => {
                 <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 container mx-auto gap-5 mt-5'>
 
                     {buttonKategori.map((category, index) => (
-                        <button className={` p-6 mx-auto rounded-md ${formData.categori === category.value && 'bg-primary text-black'} `} key={index} onClick={() => handleCategory(category.value)} >
-                            <img className="w-full h-[100px] " src={category.image} alt={'image kategori'} />
+                        <button className={` p-3 md:p-6 mx-auto rounded-md ${formData.categori === category.value && 'bg-primary text-black'} `} key={index} onClick={() => handleCategory(category.value)} >
+                            <img className="w-full h-[70px] md:h-[100px] " src={category.image} alt={'image kategori'} />
                             <p className="text-sm md:text-base mt-3  " >{category.name}</p>
                         </button>
                     ))}
