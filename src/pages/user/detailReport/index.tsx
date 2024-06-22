@@ -1,6 +1,6 @@
 import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { jalanRusak, rusak } from "../../../image"
+import { jalanRusak } from "../../../image"
 
 
 const DetailReportUser = () => {
