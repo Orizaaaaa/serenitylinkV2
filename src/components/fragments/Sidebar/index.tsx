@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from "react";
 
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
-import { FaHandHoldingWater } from "react-icons/fa";
+import { FaBookReader, FaHandHoldingWater } from "react-icons/fa";
 import { FaSmoking } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { logo } from "../../../image";
+import { FaBookOpen } from "react-icons/fa6";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -109,8 +110,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
               <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard" />
-              <NavigationList icon={<FaHandHoldingWater size={19} />} title="Kalkulator Hidrasi" pathname="/semua-laporan" />
-              <NavigationList icon={<FaSmoking size={19} />} title="Kalkulator Rokok" pathname="/rokok_kalkulator" />
+              <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya" />
+              <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan" />
               <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
 
 
