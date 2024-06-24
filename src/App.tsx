@@ -24,7 +24,6 @@ function App() {
       {/* router officer */}
       <Route path="/dashboard-officer" element={<DashboardOfficer />} />
       <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
-      {/* laporan saya */}
       <Route path="/dashboard-officer/detail-laporan-officer" element={<DetailRaportOfficer />} />
 
 

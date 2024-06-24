@@ -1,15 +1,23 @@
-import React from 'react'
+
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { IoSearch } from 'react-icons/io5'
 import CardLink from '../../../components/elemets/card/CardLink'
 import { jalanRusak } from '../../../image'
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6'
+import Card from '../../../components/elemets/card/Card'
 
-type Props = {}
 
-const MyReportOfficer = (props: Props) => {
+const MyReportOfficer = () => {
     return (
         <DefaultLayout>
+            <Card>
+                <div className="grid ">
+                    <div className="flex-col space-y-3 my-auto">
+                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Laporan Saya </h1>
+                        <p className="text-gray-500 text-sm md:text-base" >Ini adalah halaman pengaduan yang berisikan pengaduan yang telah anda selesaikan</p>
+                    </div>
+                </div>
+            </Card >
             <div className="w-full  mt-4 relative ">
                 <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
                 <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
