@@ -7,6 +7,7 @@ import CreateReportUser from './pages/user/crateReport';
 import AllReportUser from './pages/user/allReport';
 import MyReportUser from './pages/user/myReport';
 import DashboardOfficer from './pages/officer/dashboard';
+import DetailRaportOfficer from './pages/officer/detailReport';
 function App() {
   return (
     <Routes>
@@ -22,7 +23,7 @@ function App() {
       {/* router officer */}
       <Route path="/dashboard-officer" element={<DashboardOfficer />} />
       {/* laporan saya */}
-      {/* <Route path="/dashboard-officer/detail-laporan-officer" element={<DashboardOfficer />} /> */}
+      <Route path="/dashboard-officer/detail-laporan-officer" element={<DetailRaportOfficer />} />
 
 
     </Routes>
