@@ -6,6 +6,7 @@ import DetailReportUser from './pages/user/detailReport';
 import CreateReportUser from './pages/user/crateReport';
 import AllReportUser from './pages/user/allReport';
 import MyReportUser from './pages/user/myReport';
+import DashboardOfficer from './pages/officer/dashboard';
 function App() {
   return (
     <Routes>
@@ -14,11 +15,16 @@ function App() {
       {/* router user */}
       <Route path="/dashboard-user" element={<DashboardUser />} />
       <Route path="/dashboard-user/buat-laporan-user" element={<CreateReportUser />} />
-      <Route path="/dashboard-user/detail-laporan-user" element={<DetailReportUser />} />
+      <Route path=" " element={<DetailReportUser />} />
       <Route path="/semua-laporan-user" element={<AllReportUser />} />
       <Route path="/laporan-saya-user" element={<MyReportUser />} />
 
       {/* router officer */}
+      <Route path="/dashboard-officer" element={<DashboardOfficer />} />
+      {/* laporan saya */}
+      {/* <Route path="/dashboard-officer/detail-laporan-officer" element={<DashboardOfficer />} /> */}
+
+
     </Routes>
   )
 }
