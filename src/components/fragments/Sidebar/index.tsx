@@ -81,6 +81,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-officer" />
         </>
       )
+    } else if (role === 'admin') {
+      return (
+        <>
+          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-admin" />
+        </>
+      )
+
+
     }
   }
 
@@ -133,7 +141,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('officer')}
+              {setSidebar('admin')}
 
 
               {/* <!-- Menu Item Calendar -->
