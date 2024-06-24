@@ -1,8 +1,9 @@
 
 import Card from '../../../components/elemets/card/Card'
-import Maps from '../../../components/fragments/maps/Maps'
+import MapsAdmin from '../../../components/fragments/mapsAdmin/MapsAdmin'
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { manusiaLaptop } from '../../../image'
+
 
 
 const DashboardAdmin = () => {
@@ -34,18 +35,12 @@ const DashboardAdmin = () => {
 
     }
 
-    const dataMaps =
-        [
-            {
-                lat: -6.840540,
-                lng: 107.430687
-            },
-            {
-                lat: -6.840540,
-                lng: 107.430690
-            },
-
-        ]
+    const markers = [
+        { lat: -6.840540, lng: 107.430687, popupText: 'Hola amigos' },
+        { lat: -7.039868, lng: 107.520927, popupText: 'Marker 2' },
+        { lat: -6.884082, lng: 107.541306, popupText: 'Marker 3' },
+        // Tambahkan marker lainnya di sini
+    ];
 
     return (
         <DefaultLayout>
@@ -72,6 +67,20 @@ const DashboardAdmin = () => {
                     </Card>
                 ))}
             </div >
+
+            {/* <MapContainer className={'h-[370px] rounded-md my-5'} center={{ lat: -6.917464, lng: 107.619125 }} zoom={10} scrollWheelZoom={false}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {markers.map((marker, index) => (
+                    <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }}>
+                        <Popup>
+                            {marker.popupText}
+                        </Popup>
+                    </Marker>
+                ))}
+            </MapContainer> */}
+            <MapsAdmin center={{ lat: -6.917464, lng: 107.619125 }} dataMarker={markers} />
 
 
 

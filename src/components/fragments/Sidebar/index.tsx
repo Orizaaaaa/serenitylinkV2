@@ -3,8 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
-import { FaBookReader, FaHandHoldingWater } from "react-icons/fa";
-import { FaSmoking } from "react-icons/fa";
+import { FaBookReader } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { logo } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
@@ -141,7 +140,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('user')}
+              {setSidebar('admin')}
 
 
               {/* <!-- Menu Item Calendar -->
