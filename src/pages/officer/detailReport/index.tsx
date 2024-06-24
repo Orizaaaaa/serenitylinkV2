@@ -98,17 +98,6 @@ const DetailRaportOfficer = () => {
             {/* maps */}
             <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
 
-
-            <div className="coment">
-
-                <h1 className="mt-4">Pesan : </h1>
-                <input className="w-full h-9 rounded-md bg-gray-400  px-3 outline-none" type="text" name="" id="" />
-
-                <div className="flex justify-end ">
-                    <button className="bg-primary text-white px-4 py-2 rounded-md  mt-4" >Kirim pesan</button>
-                </div>
-            </div>
-
         </DefaultLayout>
     )
 }

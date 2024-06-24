@@ -103,7 +103,7 @@ const SubmitReportAdmin = () => {
                     <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
                         <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
                             <img className="w-20 h-20 mx-auto" src={camera} />
-                            <p>*Masukan gambar sebagai bukti kuat pengajuan laporan</p>
+                            <p>*Masukan gambar sebagai bukti laporan selesai</p>
                         </button>
                     </div>
                 )}
@@ -120,15 +120,11 @@ const SubmitReportAdmin = () => {
                 </div>
             </div>
 
-            <div className="coment">
 
-                <h1 className="mt-4">Pesan : </h1>
-                <input className="w-full h-9 rounded-md bg-gray-400  px-3 outline-none" type="text" name="" id="" />
 
-                <div className="flex justify-end ">
-                    <button className="bg-primary text-white px-4 py-2 rounded-md  mt-4" >Kirim pesan</button>
-                </div>
-            </div>
+
+            <button className="bg-primary text-white px-4 py-2 rounded-md w-full mt-4" >Selesaikan Pengaduan</button>
+
 
 
 
