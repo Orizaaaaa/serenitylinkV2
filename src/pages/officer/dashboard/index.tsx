@@ -26,7 +26,7 @@ const DashboardOfficer = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-                <CardLink to="/dashboard-officer/detail-laporan-officer" >
+                <CardLink to="/dashboard-officer/submit-laporan-officer" >
                     <div className="images h-[150px] w-full relative">
                         <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
                     </div>

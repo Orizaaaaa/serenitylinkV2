@@ -9,6 +9,7 @@ import MyReportUser from './pages/user/myReport';
 import DashboardOfficer from './pages/officer/dashboard';
 import DetailRaportOfficer from './pages/officer/detailReport';
 import MyReportOfficer from './pages/officer/myReport';
+import SubmitReportAdmin from './pages/officer/submitReport';
 function App() {
   return (
     <Routes>
@@ -24,7 +25,8 @@ function App() {
       {/* router officer */}
       <Route path="/dashboard-officer" element={<DashboardOfficer />} />
       <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
-      <Route path="/dashboard-officer/detail-laporan-officer" element={<DetailRaportOfficer />} />
+      <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
+      <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportAdmin />} />
 
 
     </Routes>

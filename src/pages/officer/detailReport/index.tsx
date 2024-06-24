@@ -97,29 +97,7 @@ const DetailRaportOfficer = () => {
 
             {/* maps */}
             <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
-            <div className="images ">
-                {formData.image && formData.image instanceof Blob ? (
-                    <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
-                ) : (
-                    <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
-                        <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
-                            <img className="w-20 h-20 mx-auto" src={camera} />
-                            <p>*Masukan gambar sebagai bukti kuat pengajuan laporan</p>
-                        </button>
-                    </div>
-                )}
 
-                <input
-                    type="file"
-                    className="hidden"
-                    id="image-input-add"
-                    onChange={(e) => handleImageChange(e, 'add')}
-                />
-
-                <div className="flex justify-center gap-3 mt-3">
-                    <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
-                </div>
-            </div>
 
             <div className="coment">
 
@@ -130,8 +108,6 @@ const DetailRaportOfficer = () => {
                     <button className="bg-primary text-white px-4 py-2 rounded-md  mt-4" >Kirim pesan</button>
                 </div>
             </div>
-
-
 
         </DefaultLayout>
     )
