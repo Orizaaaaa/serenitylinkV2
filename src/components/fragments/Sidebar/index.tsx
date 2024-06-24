@@ -74,10 +74,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
         </>
       )
-    } else if (role === 'admin') {
+    } else if (role === 'officer') {
       return (
         <>
-          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-user" />
+          <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-officer" />
+          <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-officer" />
         </>
       )
     }
@@ -132,7 +133,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('user')}
+              {setSidebar('officer')}
 
 
               {/* <!-- Menu Item Calendar -->
