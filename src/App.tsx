@@ -19,7 +19,7 @@ function App() {
       {/* router user */}
       <Route path="/dashboard-user" element={<DashboardUser />} />
       <Route path="/dashboard-user/buat-laporan-user" element={<CreateReportUser />} />
-      <Route path="/dashboard-user/detail-laporan-user " element={<DetailReportUser />} />
+      <Route path="/dashboard-user/detail-laporan-user" element={<DetailReportUser />} />
       <Route path="/semua-laporan-user" element={<AllReportUser />} />
       <Route path="/laporan-saya-user" element={<MyReportUser />} />
 

@@ -1,6 +1,8 @@
 
 import Card from '../../../components/elemets/card/Card'
+import Maps from '../../../components/fragments/maps/Maps'
 import DefaultLayout from '../../../components/layout/DefaultLayout'
+import { manusiaLaptop } from '../../../image'
 
 
 const DashboardAdmin = () => {
@@ -32,9 +34,35 @@ const DashboardAdmin = () => {
 
     }
 
+    const dataMaps =
+        [
+            {
+                lat: -6.840540,
+                lng: 107.430687
+            },
+            {
+                lat: -6.840540,
+                lng: 107.430690
+            },
+
+        ]
+
     return (
         <DefaultLayout>
-            <div className="grid grid-cols-3 gap-3">
+            <Card>
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                    <div className="flex-col space-y-3 my-auto">
+                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Selamat datang di dashboard Admin !</h1>
+                        <p className="text-gray-500 text-sm md:text-base" >Senang melihat Anda kembali. Mari kita mulai hari ini dengan mengelola pengaudan yang telah di ajukan oleh masyarakat</p>
+                    </div>
+                    <div className="flex justify-center">
+                        <img src={manusiaLaptop} alt="dashboard" />
+                    </div>
+                </div>
+            </Card>
+
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
                 {dataCard.map((item, index) => (
                     <Card key={index}>
                         <div className="flex-col">
@@ -43,9 +71,11 @@ const DashboardAdmin = () => {
                         </div>
                     </Card>
                 ))}
-
-
             </div >
+
+
+
+
         </DefaultLayout>
 
     )
