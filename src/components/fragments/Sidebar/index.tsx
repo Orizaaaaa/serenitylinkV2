@@ -7,6 +7,7 @@ import { FaBookReader } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { logo } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
+import { IoMdPricetags } from "react-icons/io";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -84,6 +85,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       return (
         <>
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-admin" />
+          <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
         </>
       )
 

@@ -11,6 +11,7 @@ import DetailRaportOfficer from './pages/officer/detailReport';
 import MyReportOfficer from './pages/officer/myReport';
 import SubmitReportAdmin from './pages/officer/submitReport';
 import DashboardAdmin from './pages/admin/dashboard';
+import CategoryAdmin from './pages/admin/category';
 function App() {
   return (
     <Routes>
@@ -31,6 +32,7 @@ function App() {
 
       {/* admin */}
       <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+      <Route path="/kategori-admin" element={<CategoryAdmin />} />
 
 
     </Routes>

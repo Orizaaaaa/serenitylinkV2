@@ -8,6 +8,7 @@ import { manusiaLaptop } from '../../../image'
 
 const DashboardAdmin = () => {
 
+    //card
     const dataCard = [
         {
             name: 'Di Proses',
@@ -35,6 +36,7 @@ const DashboardAdmin = () => {
 
     }
 
+    //marker
     const markers = [
         { lat: -6.840540, lng: 107.430687, popupText: 'Hola amigos' },
         { lat: -7.039868, lng: 107.520927, popupText: 'Marker 2' },
@@ -68,18 +70,6 @@ const DashboardAdmin = () => {
                 ))}
             </div >
 
-            {/* <MapContainer className={'h-[370px] rounded-md my-5'} center={{ lat: -6.917464, lng: 107.619125 }} zoom={10} scrollWheelZoom={false}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {markers.map((marker, index) => (
-                    <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }}>
-                        <Popup>
-                            {marker.popupText}
-                        </Popup>
-                    </Marker>
-                ))}
-            </MapContainer> */}
             <MapsAdmin center={{ lat: -6.917464, lng: 107.619125 }} dataMarker={markers} />
 
 
