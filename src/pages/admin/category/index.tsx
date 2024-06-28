@@ -3,13 +3,17 @@ import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { buttonKategori } from "../../../utils/dataObject"
 import { FaPlus } from "react-icons/fa";
-import { Button, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
+import InputReport from "../../../components/elemets/input/InputReport";
+import { camera } from "../../../image";
 
 
 const CategoryAdmin = () => {
 
     const [formData, setFormData] = useState({
-        categori: ''
+        name: '',
+        categori: '',
+        image: null as File | null
     });
     const handleCategory = (value: string) => {
         setFormData({ ...formData, categori: value })
@@ -17,9 +21,33 @@ const CategoryAdmin = () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const handleButton = () => {
+    const handleAddCategory = () => {
         onOpen();
     }
+
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleFileManager = (fileName: string) => {
+        if (fileName === 'add') {
+            const fileInput = document.getElementById("image-input-add") as HTMLInputElement | null;
+            fileInput ? fileInput.click() : null;
+        } else {
+            console.log('error');
+
+        }
+    };
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, InputSelect: string) => {
+        if (InputSelect === 'add') {
+            const selectedImage = e.target.files?.[0];
+            setFormData({ ...formData, image: selectedImage || null });
+        } else {
+            console.log('error');
+
+        }
+    };
     return (
         <DefaultLayout>
             <Card>
@@ -34,7 +62,7 @@ const CategoryAdmin = () => {
                 <Card  >
                     <div className='flex flex-wrap justify-center mx-auto mt-5 gap-10 w-full'>
                         <div className="flex flex-col justify-center items-center">
-                            <button onClick={handleButton} className="w-[70px] h-[70px] bg-gray-400 rounded-full flex justify-center items-center" ><FaPlus /></button>
+                            <button onClick={handleAddCategory} className="w-[70px] h-[70px] bg-gray-400 rounded-full flex justify-center items-center" ><FaPlus /></button>
                             <p className="mt-3" >Tambah Kategori</p>
                         </div>
 
@@ -54,7 +82,7 @@ const CategoryAdmin = () => {
                 </Card>
 
                 <Modal
-                    size={'md'}
+                    size={'xl'}
                     isOpen={isOpen}
                     onClose={onClose}
                     isDismissable={false} isKeyboardDismissDisabled={true}
@@ -63,7 +91,32 @@ const CategoryAdmin = () => {
                         <>
                             <ModalBody>
 
-                                <p>halllo</p>
+                                <InputReport htmlFor="title" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
+
+                                <h1 className=" font-medium" >Logo Kategori :  </h1>
+                                <div className="images ">
+                                    {formData.image && formData.image instanceof Blob ? (
+                                        <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                                    ) : (
+                                        <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
+                                            <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
+                                                <img className="w-20 h-20 mx-auto" src={camera} />
+                                                <p>*Masukan gambar sebagai bukti kuat pengajuan laporan</p>
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    <input
+                                        type="file"
+                                        className="hidden"
+                                        id="image-input-add"
+                                        onChange={(e) => handleImageChange(e, 'add')}
+                                    />
+
+                                    <div className="flex justify-center gap-3 mt-3">
+                                        <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
+                                    </div>
+                                </div>
 
                             </ModalBody>
                         </>
