@@ -2,6 +2,8 @@ import { useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { buttonKategori } from "../../../utils/dataObject"
+import { FaPlus } from "react-icons/fa";
+import { Button, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
 
 
 const CategoryAdmin = () => {
@@ -11,6 +13,12 @@ const CategoryAdmin = () => {
     });
     const handleCategory = (value: string) => {
         setFormData({ ...formData, categori: value })
+    }
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const handleButton = () => {
+        onOpen();
     }
     return (
         <DefaultLayout>
@@ -23,8 +31,12 @@ const CategoryAdmin = () => {
                 </div>
             </Card >
             <div className="listcategory my-4">
-                <Card >
-                    <div className='flex flex-wrap justify-start mx-auto mt-5 gap-10 '>
+                <Card  >
+                    <div className='flex flex-wrap justify-center mx-auto mt-5 gap-10 w-full'>
+                        <div className="flex flex-col justify-center items-center">
+                            <button onClick={handleButton} className="w-[70px] h-[70px] bg-gray-400 rounded-full flex justify-center items-center" ><FaPlus /></button>
+                            <p className="mt-3" >Tambah Kategori</p>
+                        </div>
 
                         {buttonKategori.map((category, index) => (
                             <div className="image flex-col justify-center items-center" key={index}>
@@ -39,17 +51,24 @@ const CategoryAdmin = () => {
                         ))}
 
                     </div>
-                    {/* {buttonKategori.map((category, index) => (
-                        <button
-                            className={`p-3 md:p-6 mx-auto rounded-full ${formData.categori === category.value ? 'bg-primary text-black' : ''}`}
-                            key={index}
-                            onClick={() => handleCategory(category.value)}
-                        >
-                            <img className="w-[70px] h-[70px] " src={category.image} alt={'image kategori'} />
-                            <p className="text-sm md:text-base mt-3">{category.name}</p>
-                        </button>
-                    ))} */}
                 </Card>
+
+                <Modal
+                    size={'md'}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    isDismissable={false} isKeyboardDismissDisabled={true}
+                >
+                    <ModalContent>
+                        <>
+                            <ModalBody>
+
+                                <p>halllo</p>
+
+                            </ModalBody>
+                        </>
+                    </ModalContent>
+                </Modal>
             </div >
 
         </DefaultLayout >
