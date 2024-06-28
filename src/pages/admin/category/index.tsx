@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
 import InputReport from "../../../components/elemets/input/InputReport";
 import { camera } from "../../../image";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 
 const CategoryAdmin = () => {
@@ -69,10 +70,11 @@ const CategoryAdmin = () => {
                         {buttonKategori.map((category, index) => (
                             <div className="image flex-col justify-center items-center" key={index}>
                                 <img onClick={() => handleCategory(category.value)}
-                                    className={`w-[70px] h-[70px] mx-auto rounded-full object-cover   cursor-pointer
+                                    className={`w-[70px] h-[70px] mx-auto rounded-full object-cover   cursor-pointer 
                                     ${formData.categori === category.value ? 'border-2 border-primary' : ''}`}
                                     src={category.image} alt={'image kategori'} />
-                                <p className="text-sm md:text-base mt-3">{category.name}</p>
+                                <button className={`flex mt-1  ${formData.categori === category.value ? 'block' : 'hidden'}`} ><IoCloseCircleOutline size={20} color="red" /></button>
+                                <p className="text-sm md:text-base mt-1">{category.name}</p>
                             </div>
 
 
@@ -81,6 +83,7 @@ const CategoryAdmin = () => {
                     </div>
                 </Card>
 
+                {/* modal */}
                 <Modal
                     size={'xl'}
                     isOpen={isOpen}
