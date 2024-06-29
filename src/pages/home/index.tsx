@@ -7,11 +7,10 @@ import Footer from '../../components/fragments/home/Footer'
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendar } from "react-icons/fa";
 import CardLink from '../../components/elemets/card/CardLink'
-import { jalanRusak, rusak } from '../../image'
+import { jalanRusak, } from '../../image'
 
-type Props = {}
 
-const Home = (props: Props) => {
+const Home = () => {
     return (
         <>
             <Header />

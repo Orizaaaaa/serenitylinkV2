@@ -43,10 +43,10 @@ const SubmitReportAdmin = () => {
 
     });
 
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    // const handleChange = (e: any) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
     const handleCategory = (value: string) => {
         setFormData({ ...formData, categori: value })
     }
@@ -72,11 +72,11 @@ const SubmitReportAdmin = () => {
 
     // submit image
     const navigate = useNavigate()
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        console.log(formData);
-        navigate('/dashboard')
-    };
+    // const handleSubmit = (e: any) => {
+    //     e.preventDefault();
+    //     console.log(formData);
+    //     navigate('/dashboard')
+    // };
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
