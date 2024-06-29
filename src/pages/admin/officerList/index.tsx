@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteItem, Card, useDisclosure } from "@nextui-org/react"
+import { Autocomplete, AutocompleteItem, Button, Card, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from "@nextui-org/react"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
@@ -47,9 +47,25 @@ const OfficerList = () => {
                 </div>
             </div>
 
+            <Dropdown  >
+                <DropdownTrigger>
+                    <Button
+                        variant="bordered"
+                        className="my-4"
+                    >
+                        Pilih Unit Kerja
+                    </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions"  >
+                    <DropdownItem key="new">Basarnas</DropdownItem>
+                    <DropdownItem key="copy">Dinas Kesehatan</DropdownItem>
+                    <DropdownItem key="edit">Dinas sosial</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
 
             <Card>
                 <ButtonPrimary className=" rounded-md  m-3" onClick={handleAddCategory} >Tambah Petugas</ButtonPrimary>
+
                 <Table aria-label="Example static collection table">
                     <TableHeader>
                         <TableColumn>N0</TableColumn>
