@@ -2,7 +2,6 @@ import { useState } from "react"
 import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
-import { useNavigate } from "react-router-dom"
 
 
 const SubmitReportAdmin = () => {
@@ -47,9 +46,9 @@ const SubmitReportAdmin = () => {
     //     const { name, value } = e.target;
     //     setFormData({ ...formData, [name]: value });
     // };
-    const handleCategory = (value: string) => {
-        setFormData({ ...formData, categori: value })
-    }
+    // const handleCategory = (value: string) => {
+    //     setFormData({ ...formData, categori: value })
+    // }
     //input gambar
     const handleFileManager = (fileName: string) => {
         if (fileName === 'add') {
@@ -71,7 +70,7 @@ const SubmitReportAdmin = () => {
     };
 
     // submit image
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     // const handleSubmit = (e: any) => {
     //     e.preventDefault();
     //     console.log(formData);
