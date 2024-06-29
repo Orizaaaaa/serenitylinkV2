@@ -44,7 +44,32 @@ const MyReportOfficer = () => {
 
                         <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
                         <div className="w-full my-3">
-                            <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                            <p className=' text-white  text-sm p-1 rounded-lg bg-primary text-center' >Menunggu</p>
+                        </div>
+                    </div>
+                </CardLink>
+
+                <CardLink to="/laporan-saya-officer/detail-laporan" >
+                    <div className="images h-[150px] w-full relative">
+                        <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                    </div>
+                    <div className="space-y-2 mt-1">
+                        <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                        <div className="flex items-center gap-1 ">
+                            <FaLocationDot color='#6E849C' />
+                            <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                        </div>
+                        <div className="flex items-center gap-1 ">
+                            <FaCalendar color='#6E849C' />
+                            <p className='text-gray-500 text-sm'>12/12/2024</p>
+                        </div>
+
+
+
+                        <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                        <div className="w-full my-3">
+                            <p className=' text-white  text-sm p-1 rounded-lg bg-lime-700 text-center' >Selesai</p>
                         </div>
                     </div>
                 </CardLink>
