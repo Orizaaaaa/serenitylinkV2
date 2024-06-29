@@ -7,6 +7,7 @@ import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react
 import InputReport from "../../../components/elemets/input/InputReport";
 import { camera } from "../../../image";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 
 
 const CategoryAdmin = () => {
@@ -93,34 +94,35 @@ const CategoryAdmin = () => {
                     <ModalContent>
                         <>
                             <ModalBody>
+                                <form action="">
+                                    <InputReport htmlFor="title" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
 
-                                <InputReport htmlFor="title" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
+                                    <h1 className=" font-medium" >Logo Kategori :  </h1>
+                                    <div className="images ">
+                                        {formData.image && formData.image instanceof Blob ? (
+                                            <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                                        ) : (
+                                            <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
+                                                <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
+                                                    <img className="w-20 h-20 mx-auto" src={camera} />
+                                                    <p>*Masukan logo dari kategori tersebut</p>
+                                                </button>
+                                            </div>
+                                        )}
 
-                                <h1 className=" font-medium" >Logo Kategori :  </h1>
-                                <div className="images ">
-                                    {formData.image && formData.image instanceof Blob ? (
-                                        <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
-                                    ) : (
-                                        <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
-                                            <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
-                                                <img className="w-20 h-20 mx-auto" src={camera} />
-                                                <p>*Masukan gambar sebagai bukti kuat pengajuan laporan</p>
-                                            </button>
+                                        <input
+                                            type="file"
+                                            className="hidden"
+                                            id="image-input-add"
+                                            onChange={(e) => handleImageChange(e, 'add')}
+                                        />
+
+                                        <div className="flex justify-center gap-3 mt-3">
+                                            <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                         </div>
-                                    )}
-
-                                    <input
-                                        type="file"
-                                        className="hidden"
-                                        id="image-input-add"
-                                        onChange={(e) => handleImageChange(e, 'add')}
-                                    />
-
-                                    <div className="flex justify-center gap-3 mt-3">
-                                        <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                     </div>
-                                </div>
-
+                                    <ButtonPrimary className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                                </form>
                             </ModalBody>
                         </>
                     </ModalContent>
