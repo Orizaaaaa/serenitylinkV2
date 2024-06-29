@@ -5,7 +5,7 @@ import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
 import { FaBookReader } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { logo, logo2 } from "../../../image";
+import { logo2 } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdPricetags } from "react-icons/io";
 import { AiOutlineUserSwitch } from "react-icons/ai";
@@ -135,7 +135,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('admin')}
+              {setSidebar('user')}
 
 
               {/* <!-- Menu Item Calendar -->

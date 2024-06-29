@@ -47,7 +47,7 @@ const MyReportUser = () => {
             </div>
 
             <div className="flex mt-4 gap-3">
-                <Link to={"/dashboard-user/detail-laporan-user"} className="bg-primary text-white px-4 py-2 rounded-md " >
+                <Link to={"/dashboard-user/buat-laporan-user"} className="bg-primary text-white px-4 py-2 rounded-md " >
                     Buat Laporan
                 </Link>
 
@@ -78,7 +78,7 @@ const MyReportUser = () => {
 
             {/* data laporan saya */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-                <CardLink to="/" >
+                <CardLink to="/dashboard-user/detail-laporan-user" >
                     <div className="images h-[150px] w-full relative">
                         <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
                     </div>
