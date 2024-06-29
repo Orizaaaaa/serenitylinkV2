@@ -9,6 +9,7 @@ import { logo } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdPricetags } from "react-icons/io";
 import { AiOutlineUserSwitch } from "react-icons/ai";
+import { BsBuildingAdd } from "react-icons/bs";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -77,6 +78,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<FaBookOpen size={19} />} title="Laporan" pathname="/laporan-admin" />
           <NavigationList icon={<AiOutlineUserSwitch size={19} />} title="Petugas" pathname="/petugas-admin" />
+          <NavigationList icon={<BsBuildingAdd size={19} />} title="Unit Kerja" pathname="/unit-kerja-admin" />
         </>
       )
 
