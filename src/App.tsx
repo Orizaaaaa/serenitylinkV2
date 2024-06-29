@@ -16,10 +16,14 @@ import ReportAdmin from './pages/admin/report';
 import SubmitReportOfficer from './pages/officer/submitReport';
 import OfficerList from './pages/admin/officerList';
 import UnitKerjaAdmin from './pages/admin/unitKerja';
+import Login from './pages/auth/login';
+import Register from './pages/auth/register';
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* router user */}
       <Route path="/dashboard-user" element={<DashboardUser />} />

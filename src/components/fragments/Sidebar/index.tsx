@@ -135,7 +135,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('user')}
+              {setSidebar('admin')}
 
 
               {/* <!-- Menu Item Calendar -->
