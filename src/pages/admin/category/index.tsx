@@ -52,7 +52,7 @@ const CategoryAdmin = () => {
     };
     return (
         <DefaultLayout>
-            <Card>
+            <Card  >
                 <div className="grid ">
                     <div className="flex-col space-y-3 my-auto">
                         <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Kategori </h1>
@@ -60,6 +60,7 @@ const CategoryAdmin = () => {
                     </div>
                 </div>
             </Card >
+
             <div className="listcategory my-4">
                 <Card  >
                     <div className='flex flex-wrap justify-center mx-auto mt-5 gap-10 w-full'>

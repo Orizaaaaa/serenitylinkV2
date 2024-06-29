@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { logo } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdPricetags } from "react-icons/io";
+import { AiOutlineUserSwitch } from "react-icons/ai";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -75,6 +76,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<FaBookOpen size={19} />} title="Laporan" pathname="/laporan-admin" />
+          <NavigationList icon={<AiOutlineUserSwitch size={19} />} title="Petugas" pathname="/petugas-admin" />
         </>
       )
 

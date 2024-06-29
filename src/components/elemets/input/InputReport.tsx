@@ -8,12 +8,13 @@ type Props = {
     value: number | string
     placeholder?: string,
     className?: string
-    styleTitle?: string
+    styleTitle?: string,
+    marginY?: string
 }
 
-const InputReport = ({ htmlFor, title, type, onChange, value, placeholder }: Props) => {
+const InputReport = ({ htmlFor, title, type, onChange, value, placeholder, marginY = 'my-6' }: Props) => {
     return (
-        <div className="input my-6">
+        <div className={`input ${marginY}`}>
             <label htmlFor={htmlFor} className="font-medium " >{title} </label>
             <input type={type}
                 name={htmlFor}
