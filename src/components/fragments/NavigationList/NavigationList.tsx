@@ -1,5 +1,5 @@
 
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 type Props = {

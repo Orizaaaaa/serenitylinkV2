@@ -44,7 +44,7 @@ const DropdownUser = () => {
       <div className="flex items-center gap-4">
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black">
-            <p>Oriza sativa</p>
+            <p>{capitalizeFirstLetter('oriza sativa')}</p>
           </span>
           <span className="block text-xs">oriza@gmail.com</span>
         </span>
