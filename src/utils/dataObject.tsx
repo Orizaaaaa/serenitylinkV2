@@ -72,7 +72,7 @@ export const dataUnitKerja = [
     },
     {
         value: 'dinas_kesehatan',
-        name: 'Dinas_Kesehatan',
+        name: 'Dinas Kesehatan',
         image: dinasKesehatan
     },
 ]
