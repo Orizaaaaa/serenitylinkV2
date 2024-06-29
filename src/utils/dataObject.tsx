@@ -1,4 +1,5 @@
-import { bandit, education, garbage, hospital, medicalkit, noparking, polusi, road, taman, transfortasi, tree } from "../image";
+
+import { bandit, basarnas, dinasKesehatan, dishub, education, garbage, hospital, medicalkit, noparking, polusi, road, taman, transfortasi, tree } from "../image";
 
 export const buttonKategori = [
     {
@@ -55,5 +56,23 @@ export const buttonKategori = [
         value: 'transportasi',
         name: 'Transportasi',
         image: transfortasi
+    },
+]
+
+export const dataUnitKerja = [
+    {
+        value: 'dishub',
+        name: 'Dinas Perhubungan',
+        image: dishub
+    },
+    {
+        value: 'basarnas',
+        name: 'Basarnas',
+        image: basarnas
+    },
+    {
+        value: 'dinas_kesehatan',
+        name: 'Dinas_Kesehatan',
+        image: dinasKesehatan
     },
 ]
