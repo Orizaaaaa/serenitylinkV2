@@ -3,35 +3,10 @@ import Maps from "../../../components/fragments/maps/Maps";
 import DefaultLayout from "../../../components/layout/DefaultLayout";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import { jalanRusak } from "../../../image";
+import { dataDetailLaporan } from "../../../utils/dataObject";
 
 
 const SubmitReport = () => {
-    const data = [
-        {
-            title: 'Judul Laporan  ',
-            text: 'Jalan rusak'
-        },
-        {
-            title: 'Nomor Laporan ',
-            text: '85787eydyuxhbjkkksawekninookkontol'
-        },
-        {
-            title: 'Tanggal Laporan  ',
-            text: '12/12/2024'
-        },
-        {
-            title: 'Kategori Laporan  ',
-            text: 'Jalan'
-        },
-        {
-            title: 'Lokasi Kejadian  ',
-            text: 'Jalan kantor baru'
-        },
-        {
-            title: 'Deskripsi Laporan  ',
-            text: 'Banyak lubang dalam, sedalam perasaan'
-        },
-    ]
 
     const animals = [
         { label: "Cat", value: "cat", description: "The second most popular pet in the world" },
@@ -46,7 +21,7 @@ const SubmitReport = () => {
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
                 <div className="left space-y-6">
-                    {data.map((item, index) => (
+                    {dataDetailLaporan.map((item, index) => (
                         <div className="text" key={index}>
                             <h1 className="text-lg font-semibold">{item.title} </h1>
                             <p>{item.text}</p>
@@ -62,6 +37,7 @@ const SubmitReport = () => {
             {/* maps */}
             <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
 
+            <h1 className="mt-2 text-lg font-semibold" >Unit Kerja</h1>
             <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
                 <Autocomplete
                     label="Pilih Unit Kerja"
