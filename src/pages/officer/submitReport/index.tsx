@@ -4,7 +4,7 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
 
 
-const SubmitReportAdmin = () => {
+const SubmitReportOfficer = () => {
     const data = [
         {
             title: 'Judul Laporan  ',
@@ -131,4 +131,4 @@ const SubmitReportAdmin = () => {
     )
 }
 
-export default SubmitReportAdmin
+export default SubmitReportOfficer

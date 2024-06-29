@@ -9,10 +9,11 @@ import MyReportUser from './pages/user/myReport';
 import DashboardOfficer from './pages/officer/dashboard';
 import DetailRaportOfficer from './pages/officer/detailReport';
 import MyReportOfficer from './pages/officer/myReport';
-import SubmitReportAdmin from './pages/officer/submitReport';
+import SubmitReportAdmin from './pages/admin/submitReport';
 import DashboardAdmin from './pages/admin/dashboard';
 import CategoryAdmin from './pages/admin/category';
 import ReportAdmin from './pages/admin/report';
+import SubmitReportOfficer from './pages/officer/submitReport';
 function App() {
   return (
     <Routes>
@@ -29,12 +30,13 @@ function App() {
       <Route path="/dashboard-officer" element={<DashboardOfficer />} />
       <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
       <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
-      <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportAdmin />} />
+      <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportOfficer />} />
 
       {/* admin */}
       <Route path="/dashboard-admin" element={<DashboardAdmin />} />
       <Route path="/kategori-admin" element={<CategoryAdmin />} />
       <Route path="/laporan-admin" element={<ReportAdmin />} />
+      <Route path="/laporan-admin/submit-laporan-admin" element={<SubmitReportAdmin />} />
 
 
     </Routes>

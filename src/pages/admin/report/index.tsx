@@ -1,83 +1,48 @@
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react"
-import Maps from "../../../components/fragments/maps/Maps"
+
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { jalanRusak } from "../../../image"
-import ButtonPrimary from "../../../components/elemets/buttonPrimary"
+import { IoSearch } from "react-icons/io5"
+import CardLink from "../../../components/elemets/card/CardLink"
+import { FaCalendar, FaLocationDot } from "react-icons/fa6"
 
 
 const ReportAdmin = () => {
-    const data = [
-        {
-            title: 'Judul Laporan  ',
-            text: 'Jalan rusak'
-        },
-        {
-            title: 'Nomor Laporan ',
-            text: '85787eydyuxhbjkkksawekninookkontol'
-        },
-        {
-            title: 'Tanggal Laporan  ',
-            text: '12/12/2024'
-        },
-        {
-            title: 'Kategori Laporan  ',
-            text: 'Jalan'
-        },
-        {
-            title: 'Lokasi Kejadian  ',
-            text: 'Jalan kantor baru'
-        },
-        {
-            title: 'Deskripsi Laporan  ',
-            text: 'Banyak lubang dalam, sedalam perasaan'
-        },
-    ]
 
-    const animals = [
-        { label: "Cat", value: "cat", description: "The second most popular pet in the world" },
-        { label: "Dog", value: "dog", description: "The most popular pet in the world" },
-        { label: "Elephant", value: "elephant", description: "The largest land animal" },
-        { label: "Lion", value: "lion", description: "The king of the jungle" },
-        { label: "Tiger", value: "tiger", description: "The largest cat species" },
-        { label: "Giraffe", value: "giraffe", description: "The tallest land animal" },
-
-    ];
 
     return (
         <DefaultLayout>
-            <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
-                <div className="left space-y-6">
-                    {data.map((item, index) => (
-                        <div className="text" key={index}>
-                            <h1 className="text-lg font-semibold">{item.title} </h1>
-                            <p>{item.text}</p>
+            <div className="w-full  mt-4 relative ">
+                <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
+                <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
+                <CardLink to="/laporan-admin/submit-laporan-admin" >
+                    <div className="images h-[150px] w-full relative">
+                        <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
+                    </div>
+                    <div className="space-y-2 mt-1">
+                        <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
+
+                        <div className="flex items-center gap-1 ">
+                            <FaLocationDot color='#6E849C' />
+                            <p className='text-gray-500 text-sm'>jalan kalimulya</p>
                         </div>
-                    ))}
+                        <div className="flex items-center gap-1 ">
+                            <FaCalendar color='#6E849C' />
+                            <p className='text-gray-500 text-sm'>12/12/2024</p>
+                        </div>
 
-                </div>
-                <div className="right">
-                    <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={jalanRusak} alt="" />
-                </div>
+
+                        <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
+                        <div className="w-full my-3">
+                            <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                        </div>
+                    </div>
+                </CardLink>
+
+
             </div>
-
-            {/* maps */}
-            <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
-
-            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                <Autocomplete
-                    label="Pilih Unit Kerja"
-                    className="w-full"
-                >
-                    {animals.map((animal) => (
-                        <AutocompleteItem key={animal.value} value={animal.value}>
-                            {animal.label}
-                        </AutocompleteItem>
-                    ))}
-                </Autocomplete>
-            </div>
-            <ButtonPrimary className="w-full rounded-md mt-3"  >
-                Kirim
-            </ButtonPrimary>
         </DefaultLayout>
     )
 }
