@@ -1,8 +1,7 @@
-import { useState } from "react"
+
 import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { camera, jalanRusak } from "../../../image"
-import { useNavigate } from "react-router-dom"
+import { jalanRusak } from "../../../image"
 
 
 const DetailRaportOfficer = () => {
@@ -33,51 +32,9 @@ const DetailRaportOfficer = () => {
             text: 'Banyak lubang dalam, sedalam perasaan'
         },
     ]
-    const [formData, setFormData] = useState({
-        title: "",
-        image: null as File | null,
-        lat: -6.840540,
-        long: 107.430687,
-        location: '',
-        desc: '',
-        categori: ''
 
-    });
-
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-    const handleCategory = (value: string) => {
-        setFormData({ ...formData, categori: value })
-    }
-    //input gambar
-    const handleFileManager = (fileName: string) => {
-        if (fileName === 'add') {
-            const fileInput = document.getElementById("image-input-add") as HTMLInputElement | null;
-            fileInput ? fileInput.click() : null;
-        } else {
-            console.log('error');
-
-        }
-    };
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, InputSelect: string) => {
-        if (InputSelect === 'add') {
-            const selectedImage = e.target.files?.[0];
-            setFormData({ ...formData, image: selectedImage || null });
-        } else {
-            console.log('error');
-
-        }
-    };
 
     // submit image
-    const navigate = useNavigate()
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        console.log(formData);
-        navigate('/dashboard')
-    };
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
