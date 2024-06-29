@@ -77,6 +77,10 @@ const SubmitReport = () => {
             <ButtonPrimary className="w-full rounded-md mt-3"  >
                 Kirim
             </ButtonPrimary>
+
+            <ButtonPrimary className="w-full rounded-md mt-3" bg="bg-red-700"  >
+                Hapus Laporan
+            </ButtonPrimary>
         </DefaultLayout>
     )
 }
