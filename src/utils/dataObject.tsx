@@ -76,3 +76,35 @@ export const dataUnitKerja = [
         image: dinasKesehatan
     },
 ]
+
+
+export const dataDetailLaporan = [
+    {
+        title: 'Judul Laporan  ',
+        text: 'Jalan rusak'
+    },
+    {
+        title: 'Nomor Laporan ',
+        text: '85787eydyuxhbjkkksawekninookkontol'
+    },
+    {
+        title: 'Tanggal Laporan  ',
+        text: '12/12/2024'
+    },
+    {
+        title: 'Kategori Laporan  ',
+        text: 'Jalan'
+    },
+    {
+        title: 'Lokasi Kejadian  ',
+        text: 'Jalan kantor baru'
+    },
+    {
+        title: 'Status  ',
+        text: 'Menunggu'
+    },
+    {
+        title: 'Deskripsi Laporan  ',
+        text: 'Banyak lubang dalam, sedalam perasaan'
+    },
+]

@@ -2,35 +2,11 @@ import { useState } from "react"
 import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
+import { dataDetailLaporan } from "../../../utils/dataObject"
 
 
 const SubmitReportOfficer = () => {
-    const data = [
-        {
-            title: 'Judul Laporan  ',
-            text: 'Jalan rusak'
-        },
-        {
-            title: 'Nomor Laporan ',
-            text: '85787eydyuxhbjkkksawekninookkontol'
-        },
-        {
-            title: 'Tanggal Laporan  ',
-            text: '12/12/2024'
-        },
-        {
-            title: 'Kategori Laporan  ',
-            text: 'Jalan'
-        },
-        {
-            title: 'Lokasi Kejadian  ',
-            text: 'Jalan kantor baru'
-        },
-        {
-            title: 'Deskripsi Laporan  ',
-            text: 'Banyak lubang dalam, sedalam perasaan'
-        },
-    ]
+
     const [formData, setFormData] = useState({
         title: "",
         image: null as File | null,
@@ -42,13 +18,7 @@ const SubmitReportOfficer = () => {
 
     });
 
-    // const handleChange = (e: any) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
-    // const handleCategory = (value: string) => {
-    //     setFormData({ ...formData, categori: value })
-    // }
+
     //input gambar
     const handleFileManager = (fileName: string) => {
         if (fileName === 'add') {
@@ -69,18 +39,12 @@ const SubmitReportOfficer = () => {
         }
     };
 
-    // submit image
-    // const navigate = useNavigate()
-    // const handleSubmit = (e: any) => {
-    //     e.preventDefault();
-    //     console.log(formData);
-    //     navigate('/dashboard')
-    // };
+
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
                 <div className="left space-y-6">
-                    {data.map((item, index) => (
+                    {dataDetailLaporan.map((item, index) => (
                         <div className="text" key={index}>
                             <h1 className="text-lg font-semibold">{item.title} </h1>
                             <p>{item.text}</p>
