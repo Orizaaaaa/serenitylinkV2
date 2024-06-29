@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
@@ -19,9 +19,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
-
-
-  let storedSidebarExpanded = "true";
 
 
 
