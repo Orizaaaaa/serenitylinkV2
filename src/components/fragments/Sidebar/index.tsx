@@ -5,7 +5,7 @@ import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
 import { FaBookReader } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { logo } from "../../../image";
+import { logo, logo2 } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdPricetags } from "react-icons/io";
 import { AiOutlineUserSwitch } from "react-icons/ai";
@@ -95,7 +95,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between lg:justify-center gap-2 px-6 py-5.5 lg:py-6.5">
         <Link to="/">
-          <img className="w-20 h-20" src={logo} alt="logo" />
+          <img className="w-full" src={logo2} alt="logo" />
         </Link>
 
         <button
