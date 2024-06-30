@@ -55,7 +55,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   // sidebar validation
 
 
-  const role = 'admin'
+  const role = 'user'
 
   //role nya ambil dari redux atau localStorage
 

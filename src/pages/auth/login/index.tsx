@@ -5,10 +5,11 @@ import ButtonPrimary from "../../../components/elemets/buttonPrimary"
 import { Link, useNavigate } from "react-router-dom"
 import { FaEyeSlash } from "react-icons/fa6"
 import { IoEye } from "react-icons/io5"
+import { useAuth } from "../../../hooks/auth/AuthContext"
 
 
 const Login = () => {
-
+    const { login } = useAuth();
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(true)
     // const [errorLogin, setErrorLogin] = useState('')
@@ -16,7 +17,8 @@ const Login = () => {
     const [typePassword, setTypePassword] = useState("password")
     const [form, setForm] = useState({
         email: '',
-        password: ''
+        password: '',
+        role: 'user'
     })
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, } = e.target;
@@ -44,9 +46,11 @@ const Login = () => {
         }
     }
 
-    const role: string = 'admin'
+    const role: string = 'user'
     const handleLogin = () => {
 
+
+        login(form);
         // di sini fetch axios login nya bang
 
         if (role === 'user') {

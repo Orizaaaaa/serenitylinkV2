@@ -18,36 +18,50 @@ import OfficerList from './pages/admin/officerList';
 import UnitKerjaAdmin from './pages/admin/unitKerja';
 import Login from './pages/auth/login';
 import Register from './pages/auth/register';
+import { AuthProvider } from './hooks/auth/AuthContext';
+import PrivateRoute from './hooks/auth/PrivateRoute';
+
+
+
 function App() {
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <AuthProvider>
 
-      {/* router user */}
-      <Route path="/dashboard-user" element={<DashboardUser />} />
-      <Route path="/dashboard-user/buat-laporan-user" element={<CreateReportUser />} />
-      <Route path="/dashboard-user/detail-laporan-user" element={<DetailReportUser />} />
-      <Route path="/semua-laporan-user" element={<AllReportUser />} />
-      <Route path="/laporan-saya-user" element={<MyReportUser />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      {/* router officer */}
-      <Route path="/dashboard-officer" element={<DashboardOfficer />} />
-      <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
-      <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
-      <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportOfficer />} />
+        {/* Protected Routes for Users */}
+        <Route element={<PrivateRoute allowedRoles={['user']} />}>
+          <Route path="/dashboard-user" element={<DashboardUser />} />
+          <Route path="/dashboard-user/buat-laporan-user" element={<CreateReportUser />} />
+          <Route path="/dashboard-user/detail-laporan-user" element={<DetailReportUser />} />
+          <Route path="/semua-laporan-user" element={<AllReportUser />} />
+          <Route path="/laporan-saya-user" element={<MyReportUser />} />
+        </Route>
 
-      {/* admin */}
-      <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-      <Route path="/kategori-admin" element={<CategoryAdmin />} />
-      <Route path="/laporan-admin" element={<ReportAdmin />} />
-      <Route path="/laporan-admin/submit-laporan-admin" element={<SubmitReportAdmin />} />
-      <Route path="/petugas-admin" element={<OfficerList />} />
-      <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />
+        {/* Protected Routes for Officers */}
+        <Route element={<PrivateRoute allowedRoles={['officer']} />}>
+          <Route path="/dashboard-officer" element={<DashboardOfficer />} />
+          <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
+          <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
+          <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportOfficer />} />
+        </Route>
 
+        {/* Protected Routes for Admins */}
+        <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+          <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+          <Route path="/kategori-admin" element={<CategoryAdmin />} />
+          <Route path="/laporan-admin" element={<ReportAdmin />} />
+          <Route path="/laporan-admin/submit-laporan-admin" element={<SubmitReportAdmin />} />
+          <Route path="/petugas-admin" element={<OfficerList />} />
+          <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />
+        </Route>
+      </Routes>
 
-    </Routes>
+    </AuthProvider>
   )
 }
 
