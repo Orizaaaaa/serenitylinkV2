@@ -64,10 +64,13 @@ const CreateReportUser = () => {
     const navigate = useNavigate()
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        console.log(formData);
-        navigate('/dashboard')
-    };
+        if (formData && formData.image && formData.image && formData.lat && formData.long && formData.location && formData.desc && formData.categori) {
+            (navigate('/dashboard-user'))
+        } else {
+            (alert('isi field dengan lengkap'))
+        }
 
+    };
 
 
     return (
