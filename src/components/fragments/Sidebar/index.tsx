@@ -54,6 +54,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   // sidebar validation
 
+
+  const role = 'admin'
+
+  //role nya ambil dari redux atau localStorage
+
   const setSidebar = (role: string) => {
     if (role === 'user') {
       return (
@@ -135,7 +140,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Dashboard --> */}
 
               {/* logic sidebar ada di sini */}
-              {setSidebar('admin')}
+              {setSidebar(role)}
 
 
               {/* <!-- Menu Item Calendar -->

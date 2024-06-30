@@ -2,13 +2,14 @@ import { useState } from "react"
 import { logo } from "../../../image"
 import InputForm from "../../../components/elemets/input/InputForm"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaEyeSlash } from "react-icons/fa6"
 import { IoEye } from "react-icons/io5"
 
 
 const Login = () => {
 
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(true)
     // const [errorLogin, setErrorLogin] = useState('')
     const [disabled, setDisabled] = useState(true)
@@ -43,10 +44,25 @@ const Login = () => {
         }
     }
 
+    const role: string = 'officer'
+    const handleLogin = () => {
+
+        // di sini fetch axios login nya bang
+
+        if (role === 'user') {
+            navigate('/dashboard-user')
+        } else if (role === 'admin') {
+            navigate('/dashboard-admin')
+        } else if (role === 'officer') {
+            navigate('/dashboard-officer')
+        }
+
+    }
+
     return (
         <div className="login">
             <div className="container mx-auto flex justify-center items-center w-[100vw] h-[100vh]">
-                <form className='p-6 bg-[#F1FAEE] rounded-lg w-96 m-3 lg:m-0' >
+                <form className='p-6 bg-[#F1FAEE] rounded-lg w-96 m-3 lg:m-0' onSubmit={handleLogin} >
 
                     <div className="logo flex justify-center my-5">
                         <img className="h-24" src={logo} alt='logo' />
