@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/images/marker-icon.png'
 import 'animate.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
