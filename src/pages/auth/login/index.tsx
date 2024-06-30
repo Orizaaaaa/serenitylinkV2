@@ -44,7 +44,7 @@ const Login = () => {
         }
     }
 
-    const role: string = 'officer'
+    const role: string = 'admin'
     const handleLogin = () => {
 
         // di sini fetch axios login nya bang
