@@ -1,17 +1,19 @@
 
 import { useState } from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout'
-import { useNavigate } from 'react-router-dom';
 import { camera } from '../../image';
 import axios from 'axios';
 import { cloudName } from '../../service/auth';
 import ButtonPrimary from '../../components/elemets/buttonPrimary';
+import InputForm from '../../components/elemets/input/InputForm';
 
 
 const CobaGambar = () => {
 
     const [formData, setFormData] = useState({
-        status: 'menunggu',
+        name: '',
+        email: '',
+        password: '',
         image: null as File | null,
     });
 
@@ -37,7 +39,6 @@ const CobaGambar = () => {
     };
 
 
-    const navigate = useNavigate()
     const handleSubmit = async (e: any) => {
         e.preventDefault()
 
@@ -56,8 +57,19 @@ const CobaGambar = () => {
         }
     }
 
+    const handleChange = (e: any) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+
+    console.log(formData);
+
+
     return (
         <DefaultLayout>
+            <InputForm onChange={handleChange} htmlFor="name" title="Name" type="text" value={formData.name} placeholder="Name" />
+            <InputForm onChange={handleChange} htmlFor="email" title="email" type="email" value={formData.email} placeholder="Email" />
+            <InputForm onChange={handleChange} htmlFor="password" title="password" type="text" value={formData.password} placeholder="password" />
+
             <div className="images ">
                 {formData.image && formData.image instanceof Blob ? (
                     <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
