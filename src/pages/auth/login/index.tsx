@@ -18,7 +18,6 @@ const Login = () => {
     const [form, setForm] = useState({
         email: '',
         password: '',
-        role: 'user'
     })
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, } = e.target;
@@ -46,13 +45,14 @@ const Login = () => {
         }
     }
 
-    const role: string = 'user'
+    const role: string = 'officer'
     const handleLogin = () => {
 
+        //role untuk proteksi routes
+        login({ role });
 
-        login(form);
+
         // di sini fetch axios login nya bang
-
         if (role === 'user') {
             navigate('/dashboard-user')
         } else if (role === 'admin') {

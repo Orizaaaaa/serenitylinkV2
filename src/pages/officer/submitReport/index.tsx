@@ -3,19 +3,14 @@ import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
 import { dataDetailLaporan } from "../../../utils/dataObject"
+import { useNavigate } from "react-router-dom"
 
 
 const SubmitReportOfficer = () => {
 
     const [formData, setFormData] = useState({
-        title: "",
+        status: 'menunggu',
         image: null as File | null,
-        lat: -6.840540,
-        long: 107.430687,
-        location: '',
-        desc: '',
-        categori: ''
-
     });
 
 
@@ -40,6 +35,14 @@ const SubmitReportOfficer = () => {
     };
 
 
+    const navigate = useNavigate()
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        navigate('/laporan-saya-officer')
+
+    }
+
+
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
@@ -59,6 +62,7 @@ const SubmitReportOfficer = () => {
 
             {/* maps */}
             <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
+
             <div className="images ">
                 {formData.image && formData.image instanceof Blob ? (
                     <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
@@ -86,7 +90,7 @@ const SubmitReportOfficer = () => {
 
 
 
-            <button className="bg-primary text-white px-4 py-2 rounded-md w-full mt-4" >Selesaikan Pengaduan</button>
+            <button className="bg-primary text-white px-4 py-2 rounded-md w-full mt-4" onClick={handleSubmit}>Selesaikan Pengaduan</button>
 
 
 
