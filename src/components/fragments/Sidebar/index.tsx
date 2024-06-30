@@ -74,6 +74,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <>
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-officer" />
           <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-officer" />
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
         </>
       )
     } else if (role === 'admin') {
@@ -84,6 +85,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<AiOutlineUserSwitch size={19} />} title="Petugas" pathname="/petugas-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<BsBuildingAdd size={19} />} title="Unit Kerja" pathname="/unit-kerja-admin" />
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
         </>
       )
 
