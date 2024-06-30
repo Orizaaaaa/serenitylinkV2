@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
 import { FaBookReader } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logo2 } from "../../../image";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdPricetags } from "react-icons/io";
@@ -53,8 +53,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
 
   // sidebar validation
-
-
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    navigate('/login')
+  }
   const role = 'user'
 
   //role nya ambil dari redux atau localStorage
@@ -66,7 +68,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-user" />
           <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-user" />
           <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan-user" />
-          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
         </>
       )
     } else if (role === 'officer') {
@@ -74,7 +76,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <>
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-officer" />
           <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-officer" />
-          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
         </>
       )
     } else if (role === 'admin') {
@@ -85,7 +87,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<AiOutlineUserSwitch size={19} />} title="Petugas" pathname="/petugas-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<BsBuildingAdd size={19} />} title="Unit Kerja" pathname="/unit-kerja-admin" />
-          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" >Logout</button>
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
         </>
       )
 
