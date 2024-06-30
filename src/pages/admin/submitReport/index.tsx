@@ -9,14 +9,17 @@ import { dataDetailLaporan } from "../../../utils/dataObject";
 const SubmitReport = () => {
 
     const animals = [
-        { label: "Cat", value: "cat", description: "The second most popular pet in the world" },
-        { label: "Dog", value: "dog", description: "The most popular pet in the world" },
-        { label: "Elephant", value: "elephant", description: "The largest land animal" },
-        { label: "Lion", value: "lion", description: "The king of the jungle" },
-        { label: "Tiger", value: "tiger", description: "The largest cat species" },
-        { label: "Giraffe", value: "giraffe", description: "The tallest land animal" },
+        { label: "Cat", value: "cat", },
+        { label: "Dog", value: "dog", },
+        { label: "Elephant", value: "elephant", },
+        { label: "Lion", value: "lion", },
+        { label: "Tiger", value: "tiger", },
+        { label: "Giraffe", value: "giraffe" },
 
     ];
+
+    //logic dropdown adalah ketika nanti nge fetch data unit kerja masukan data nya ke state tersebut
+
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
@@ -43,9 +46,9 @@ const SubmitReport = () => {
                     label="Pilih Unit Kerja"
                     className="w-full"
                 >
-                    {animals.map((animal) => (
-                        <AutocompleteItem key={animal.value} value={animal.value}>
-                            {animal.label}
+                    {animals.map((item) => (
+                        <AutocompleteItem key={item.value} value={item.value}>
+                            {item.label}
                         </AutocompleteItem>
                     ))}
                 </Autocomplete>

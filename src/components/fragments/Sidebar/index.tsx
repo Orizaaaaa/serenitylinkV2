@@ -57,7 +57,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const handleLogout = () => {
     navigate('/login')
   }
-  const role = 'officer'
+  const role = 'admin'
 
   //role nya ambil dari redux atau localStorage
 

@@ -45,7 +45,7 @@ const Login = () => {
         }
     }
 
-    const role: string = 'officer'
+    const role: string = 'admin'
     const handleLogin = () => {
 
         //role untuk proteksi routes
