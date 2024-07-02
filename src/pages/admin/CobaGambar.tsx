@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout'
 import { camera } from '../../image';
-import axios from 'axios';
-import { cloudName } from '../../service/auth';
 import ButtonPrimary from '../../components/elemets/buttonPrimary';
 import InputForm from '../../components/elemets/input/InputForm';
+import { postImage } from '../../service/imagePost';
+import { register } from '../../service/auth';
 
 
 const CobaGambar = () => {
@@ -41,27 +41,23 @@ const CobaGambar = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
+        const imageUrl = await postImage({ image: formData.image });
+        console.log('Image URL:', imageUrl);
+        const formRegister: any = { name: formData.name, email: formData.email, password: formData.password, imageUrl, }
+        register(formRegister, (status: boolean, res: any) => {
+            if (status) {
+                console.log(res);
+            } else {
+                console.log("error");
 
-        const apiRequest = new FormData();
-        apiRequest.append('file', formData.image as File);  // Menggunakan 'file' sebagai parameter
-        apiRequest.append('upload_preset', 'kszcrdts');  // Ganti dengan upload preset Anda
+            }
+        })
 
-        try {
-            const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
-                apiRequest
-            );
-            console.log(response.data.secure_url);
-        } catch (error) {
-            console.error('Error uploading the image', error);
-        }
     }
 
     const handleChange = (e: any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
-
-    console.log(formData);
 
 
     return (
