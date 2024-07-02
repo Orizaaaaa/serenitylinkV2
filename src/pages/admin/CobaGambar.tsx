@@ -42,17 +42,17 @@ const CobaGambar = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         const imageUrl = await postImage({ image: formData.image });
-        console.log('Image URL:', imageUrl);
-        const formRegister: any = { name: formData.name, email: formData.email, password: formData.password, imageUrl, }
-        register(formRegister, (status: boolean, res: any) => {
-            if (status) {
-                console.log(res);
-            } else {
-                console.log("error");
+        const formRegister: any = { name: formData.name, email: formData.email, password: formData.password, image: imageUrl, }
+        if (imageUrl) {
+            register(formRegister, (status: boolean, res: any) => {
+                if (status) {
+                    console.log(res);
+                } else {
+                    console.log("error");
 
-            }
-        })
-
+                }
+            })
+        }
     }
 
     const handleChange = (e: any) => {
