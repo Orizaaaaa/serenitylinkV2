@@ -55,10 +55,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   // sidebar validation
   const navigate = useNavigate()
   const handleLogout = () => {
+    localStorage.clear()
     navigate('/login')
   }
   const role: any = localStorage.getItem('role')
-  //role nya ambil dari redux atau localStorage
+  //role localStorage
 
   const setSidebar = (role: string) => {
     if (role === 'user') {
