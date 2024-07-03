@@ -7,15 +7,16 @@ import { camera } from "../../../image";
 import { FaPlus } from "react-icons/fa6";
 import Card from "../../../components/elemets/card/Card";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { getAllUnitWork } from "../../../service/unitWork";
+import { createUnitWork, getAllUnitWork } from "../../../service/unitWork";
+import { postImage } from "../../../service/imagePost";
 
 
 const UnitKerjaAdmin = () => {
     const [unitKerja, setUnitKerja] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
-        categori: '',
-        image: null as File | null
+        image: null as File | null,
+        detail: 'ini adalah sebuah detail'
     });
 
     const [dataDelete, setDataDelete] = useState({
@@ -37,11 +38,9 @@ const UnitKerjaAdmin = () => {
         setDataDelete({ ...dataDelete, _id: value })
     }
 
-    console.log(dataDelete);
-    console.log(unitKerja);
 
-
-
+    //create unitWork
+    console.log(formData);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const handleAddUnitKerja = () => {
@@ -70,6 +69,25 @@ const UnitKerjaAdmin = () => {
             console.log('error');
 
         }
+    }
+
+    const handleCreateUnitWork = async (e: any) => {
+        e.preventDefault()
+        const imageUrl = await postImage({ image: formData.image });
+        if (imageUrl) {
+            const formUnitWork: any = { name: formData.name, image: [imageUrl], detail: formData.detail }
+            console.log(formUnitWork);
+
+            createUnitWork(formUnitWork, (status: boolean, res: any) => {
+                if (status) {
+                    console.log(res);
+                } else {
+                    console.log(res);
+
+                }
+            })
+        }
+
     }
 
     return (
@@ -119,7 +137,7 @@ const UnitKerjaAdmin = () => {
                     <ModalContent>
                         <>
                             <ModalBody>
-                                <form action="">
+                                <form onSubmit={handleCreateUnitWork}>
                                     <InputReport htmlFor="name" title="Nama Unit Kerja : " type="text" onChange={handleChange} value={formData.name} />
 
                                     <h1 className=" font-medium" >Logo Unit Kerja :  </h1>
@@ -146,7 +164,7 @@ const UnitKerjaAdmin = () => {
                                             <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                         </div>
                                     </div>
-                                    <ButtonPrimary className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
                                 </form>
                             </ModalBody>
                         </>

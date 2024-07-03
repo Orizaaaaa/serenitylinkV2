@@ -14,9 +14,9 @@ export const getAllUnitWork = (callback: any) => {
 export const createUnitWork = async (formUnitWork: any, callback: any) => {
     await axiosInterceptor.post('/unit-work', formUnitWork)
         .then((result) => {
-
-        }).catch((err) => {
-
+            callback(true, result.data)
+        }).catch((err: any) => {
+            console.log(false, err);
         });
 
 }
