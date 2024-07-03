@@ -1,14 +1,12 @@
 // AuthContext.tsx
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-// User.tsx
 interface User {
     role: any;
 }
 
-
 export interface AuthContextType {
-    user: any;
+    user: User | null;
     login: (userData: User) => void;
     logout: () => void;
 }
@@ -16,14 +14,19 @@ export interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | null>(() => {
+        const role = localStorage.getItem('role');
+        return role ? { role } : null;
+    });
 
     const login = (userData: User) => {
         setUser(userData);
+        localStorage.setItem('role', userData.role);
     };
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem('role');
     };
 
     return (
