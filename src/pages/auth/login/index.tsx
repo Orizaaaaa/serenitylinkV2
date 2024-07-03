@@ -50,11 +50,14 @@ const Login = () => {
         e.preventDefault()
         loginService(form, (status: boolean, res: any) => {
             if (status) {
-                console.log(res.data.role);
+
                 const role = res.data.role
+
                 login({ role })
+
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('role', res.data.role)
+                localStorage.setItem('email', res.data.email)
                 if (res.data.role === 'user') {
                     navigate('/dashboard-user')
                 } else if (res.data.role === 'admin') {
