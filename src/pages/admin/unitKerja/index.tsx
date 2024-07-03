@@ -1,25 +1,46 @@
 import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import InputReport from "../../../components/elemets/input/InputReport";
 import { camera } from "../../../image";
 import { FaPlus } from "react-icons/fa6";
 import Card from "../../../components/elemets/card/Card";
-import { dataUnitKerja } from "../../../utils/dataObject";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { getAllUnitWork } from "../../../service/unitWork";
 
 
 const UnitKerjaAdmin = () => {
-
+    const [unitKerja, setUnitKerja] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
         categori: '',
         image: null as File | null
     });
+
+    const [dataDelete, setDataDelete] = useState({
+        name: '',
+        image: '',
+        _id: ''
+    })
+
+
+    //consume get all unit kerja
+    useEffect(() => {
+        getAllUnitWork((result: any) => {
+            const data = result.unitWork
+            setUnitKerja(data)
+        })
+    }, [])
+
     const handleButton = (value: string) => {
-        setFormData({ ...formData, categori: value })
+        setDataDelete({ ...dataDelete, _id: value })
     }
+
+    console.log(dataDelete);
+    console.log(unitKerja);
+
+
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -70,16 +91,18 @@ const UnitKerjaAdmin = () => {
                             <p className="mt-3" >Tambah Kategori</p>
                         </div>
 
-                        {dataUnitKerja.map((category, index) => (
+                        {unitKerja.map((item: any, index) => (
                             <div className="image flex-col justify-center items-center" key={index}>
-                                <img onClick={() => handleButton(category.value)}
-                                    className={`w-[70px] h-[70px] mx-auto rounded-full object-cover   cursor-pointer 
-                                ${formData.categori === category.value ? 'border-2 border-primary' : ''}`}
-                                    src={category.image} alt={'image kategori'} />
-                                <button className={`flex mt-1  ${formData.categori === category.value ? 'block' : 'hidden'}`} ><IoCloseCircleOutline size={20} color="red" /></button>
-                                <p className="text-sm md:text-base mt-1">{category.name}</p>
-                            </div>
+                                <img onClick={() => handleButton(item._id)}
+                                    className={`w-[70px] h-[70px] mx-auto rounded-full object-cover cursor-pointer 
 
+                                    ${dataDelete._id === item._id ? 'border-2 border-primary' : ''}`}
+
+                                    src={item.image.map((image: any) => image)} alt={item.image.map((image: any) => image)} />
+
+                                <button className={`flex mt-1  ${dataDelete._id === item._id ? 'block' : 'hidden'}`} ><IoCloseCircleOutline size={20} color="red" /></button>
+                                <p className="text-sm md:text-base mt-1">{item.name}</p>
+                            </div>
 
                         ))}
 
@@ -97,7 +120,7 @@ const UnitKerjaAdmin = () => {
                         <>
                             <ModalBody>
                                 <form action="">
-                                    <InputReport htmlFor="title" title="Nama Unit Kerja : " type="text" onChange={handleChange} value={formData.name} />
+                                    <InputReport htmlFor="name" title="Nama Unit Kerja : " type="text" onChange={handleChange} value={formData.name} />
 
                                     <h1 className=" font-medium" >Logo Unit Kerja :  </h1>
                                     <div className="images ">
