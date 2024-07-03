@@ -6,13 +6,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { FaEyeSlash } from "react-icons/fa6"
 import { IoEye } from "react-icons/io5"
 import { useAuth } from "../../../hooks/auth/AuthContext"
+import { loginService } from "../../../service/auth"
 
 
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(true)
-    // const [errorLogin, setErrorLogin] = useState('')
+    const [errorLogin, setErrorLogin] = useState('')
     const [disabled, setDisabled] = useState(true)
     const [typePassword, setTypePassword] = useState("password")
     const [form, setForm] = useState({
@@ -45,22 +46,26 @@ const Login = () => {
         }
     }
 
-    const role: string = 'admin'
-    const handleLogin = () => {
-
-        //role untuk proteksi routes
-        login({ role });
-
-
-        // di sini fetch axios login nya bang
-        if (role === 'user') {
-            navigate('/dashboard-user')
-        } else if (role === 'admin') {
-            navigate('/dashboard-admin')
-        } else if (role === 'officer') {
-            navigate('/dashboard-officer')
-        }
-
+    const handleLogin = (e: any) => {
+        e.preventDefault()
+        loginService(form, (status: boolean, res: any) => {
+            if (status) {
+                console.log(res.data.role);
+                const role = res.data.role
+                login({ role })
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('role', res.data.role)
+                if (res.data.role === 'user') {
+                    navigate('/dashboard-user')
+                } else if (res.data.role === 'admin') {
+                    navigate('/dashboard-admin')
+                } else if (res.data.role === 'officer') {
+                    navigate('/dashboard-officer')
+                }
+            } else {
+                setErrorLogin('*Email atau password salah')
+            }
+        })
     }
 
     return (
@@ -79,7 +84,7 @@ const Login = () => {
                         </button>
                         <InputForm className='form-input-login' htmlFor="password" onChange={handleChange} type={typePassword} value={form.password} placeholder="Masukkan Kata Sandi" />
                     </div>
-                    {/* <p className='text-red my-3 text-sm' >{errorLogin}</p> */}
+                    <p className='text-red-500 my-3 text-sm ' >{errorLogin}</p>
                     <ButtonPrimary type='submit' bg={`${disabled ? 'bg-slate-400' : 'bg-primaryblue'}`} disabled={disabled} className={`rounded-lg w-full mb-3 font-medium`}>
                         Login
                     </ButtonPrimary>

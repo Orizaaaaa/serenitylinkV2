@@ -62,8 +62,6 @@ const Register = () => {
 
     const navigate = useNavigate()
     const handleSubmit = async (e: any) => {
-
-
         e.preventDefault()
         register(form, (status: boolean, res: any) => {
             if (status) {

@@ -5,13 +5,8 @@ export const cloudName = import.meta.env.VITE_CLOUDINARY_NAME
 export const cloudApiKey = import.meta.env.VITE_CLOUDINARY_API_KEY
 export const cloudApiSecret = import.meta.env.VITE_CLOUDINARY_API_SECRET
 
-type Props = {
-    formLogin: string,
-    callback: any
-}
-
-export const login = ({ formLogin, callback }: Props) => {
-    axios.post(`${url}/auth/login`, formLogin)
+export const loginService = (formLogin: any, callback: any) => {
+    axios.post(`${url}/user/login`, formLogin)
         .then((res) => {
             callback(true, res.data);
         }).catch((err) => {

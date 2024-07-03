@@ -3,12 +3,12 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 
 // User.tsx
 interface User {
-    role: string;
+    role: any;
 }
 
 
 export interface AuthContextType {
-    user: User | null;
+    user: any;
     login: (userData: User) => void;
     logout: () => void;
 }
