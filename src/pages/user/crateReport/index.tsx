@@ -7,8 +7,11 @@ import Maps from "../../../components/fragments/maps/Maps";
 import { camera } from "../../../image";
 import { useNavigate } from "react-router-dom";
 import { buttonKategori } from "../../../utils/dataObject";
+import { postImage } from "../../../service/imagePost";
+import { createReport } from "../../../service/report";
 
 const CreateReportUser = () => {
+    const [errorMsg, setErrorMsg] = useState('')
     const [formData, setFormData] = useState({
         title: "",
         image: null as File | null,
@@ -16,7 +19,7 @@ const CreateReportUser = () => {
         long: 107.430687,
         location: '',
         desc: '',
-        categori: ''
+        categori: 'jalan'
 
     });
 
@@ -60,17 +63,37 @@ const CreateReportUser = () => {
         }
     };
 
-    // submit image
+    // submit laporan 
     const navigate = useNavigate()
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (formData && formData.image && formData.image && formData.lat && formData.long && formData.location && formData.desc && formData.categori) {
-            (navigate('/dashboard-user'))
+            const imageUrl = await postImage({ image: formData.image });
+            if (imageUrl) {
+                const formUnitWork: any = {
+                    title: formData.title, imageReport: [imageUrl], longitude: String(formData.long), latitude: String(formData.lat),
+                    address: formData.location, description: formData.desc, category: formData.categori
+                }
+
+                createReport(formUnitWork, (status: boolean, res: any) => {
+                    if (status) {
+                        navigate('/laporan-saya-user')
+                        setErrorMsg('')
+                        console.log(res);
+                    }
+                })
+
+            } else {
+                setErrorMsg('*Tolong isi semua form dengan benar')
+            }
         } else {
-            (alert('isi field dengan lengkap'))
+            setErrorMsg('*Tolong isi semua form dengan benar')
         }
 
     };
+
+    console.log(formData);
+
 
 
     return (
@@ -126,7 +149,7 @@ const CreateReportUser = () => {
                     ))}
 
                 </div>
-
+                <p className="text-red-600 " >{errorMsg}</p>
                 <button className="bg-primary text-white px-4 py-2 rounded-md w-full mt-4" onClick={handleSubmit}>Kirim Laporan</button>
             </Card>
         </DefaultLayout>
