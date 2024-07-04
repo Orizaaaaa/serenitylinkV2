@@ -5,10 +5,9 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { useEffect, useRef, useState } from 'react'
 import Card from '../../../components/elemets/card/Card'
 import CardLink from '../../../components/elemets/card/CardLink'
-import { jalanRusak } from '../../../image'
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6'
 import { getAllReport } from '../../../service/report'
-import { formatCatrgory, formatDate } from '../../../utils/helper'
+import { formatCatrgory, formatDate, statusChange } from '../../../utils/helper'
 
 
 const AllReportUser = () => {
@@ -113,7 +112,7 @@ const AllReportUser = () => {
 
                             <p className='text-gray-500' >{formatCatrgory(item.description)}</p>
                             <div className="w-full my-3">
-                                <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                                <p className={` text-white  text-sm p-1 rounded-lg ${statusChange(item.status)} text-center`} >{item.status}</p>
                             </div>
                         </div>
                     </CardLink>

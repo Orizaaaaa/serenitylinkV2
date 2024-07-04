@@ -13,3 +13,14 @@ export function formatCatrgory(text: string, maxLength: number = 34): string {
     }
     return text;
 }
+
+
+export const statusChange = (value: string) => {
+    if (value === 'Di Proses') {
+        return ('bg-[#FF7F0A]')
+    } else if (value === 'Menunggu') {
+        return ('bg-primary')
+    } else if (value === 'Selesai') {
+        return ('bg-lime-700')
+    }
+}

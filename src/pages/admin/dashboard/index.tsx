@@ -10,13 +10,14 @@ const DashboardAdmin = () => {
 
     //card
     const dataCard = [
-        {
-            name: 'Di Proses',
-            value: 2
-        },
+
         {
             name: 'Menunggu',
             value: 4
+        },
+        {
+            name: 'Di Proses',
+            value: 2
         },
         {
             name: 'Selesai',
