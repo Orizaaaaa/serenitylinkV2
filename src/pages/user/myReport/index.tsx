@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import Card from "../../../components/elemets/card/Card";
 import CardLink from "../../../components/elemets/card/CardLink";
-import { jalanRusak } from "../../../image";
 import { FaCalendar, FaLocationDot } from "react-icons/fa6";
 import { getAllReport } from "../../../service/report";
 import { formatCatrgory, formatDate, statusChange } from "../../../utils/helper";
