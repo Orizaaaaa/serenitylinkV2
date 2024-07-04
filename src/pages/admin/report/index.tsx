@@ -4,10 +4,20 @@ import { jalanRusak } from "../../../image"
 import { IoSearch } from "react-icons/io5"
 import CardLink from "../../../components/elemets/card/CardLink"
 import { FaCalendar, FaLocationDot } from "react-icons/fa6"
+import { useEffect, useState } from "react"
+import { getAllReport } from "../../../service/report"
+import { formatCatrgory, formatDate, statusChange } from "../../../utils/helper"
 
 
 const ReportAdmin = () => {
 
+    const [dataReport, setDataReport] = useState([]);
+
+    useEffect(() => {
+        getAllReport((result: any) => {
+            setDataReport(result.reports)
+        })
+    }, []);
 
     return (
         <DefaultLayout>
@@ -17,30 +27,33 @@ const ReportAdmin = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-                <CardLink to="/laporan-admin/submit-laporan-admin" >
-                    <div className="images h-[150px] w-full relative">
-                        <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
-                    </div>
-                    <div className="space-y-2 mt-1">
-                        <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
 
-                        <div className="flex items-center gap-1 ">
-                            <FaLocationDot color='#6E849C' />
-                            <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                {dataReport.map((item: any, index: any) => (
+                    <CardLink to="/laporan-admin/submit-laporan-admin" key={index} >
+                        <div className="images h-[150px] w-full relative">
+                            <img className='rounded-lg w-full h-full' src={item.imageReport.map((item: any) => item)} alt="jalan rusak" />
                         </div>
-                        <div className="flex items-center gap-1 ">
-                            <FaCalendar color='#6E849C' />
-                            <p className='text-gray-500 text-sm'>12/12/2024</p>
+                        <div className="space-y-2 mt-1">
+                            <h1 className=' font-semibold text-lg'>{item.title}</h1>
+
+                            <div className="flex items-center gap-1 ">
+                                <FaLocationDot color='#6E849C' />
+                                <p className='text-gray-500 text-sm'>{item.address}</p>
+                            </div>
+                            <div className="flex items-center gap-1 ">
+                                <FaCalendar color='#6E849C' />
+                                <p className='text-gray-500 text-sm'>{formatDate(item.createdAt)}</p>
+                            </div>
+
+
+
+                            <p className='text-gray-500' >{formatCatrgory(item.description)}</p>
+                            <div className="w-full my-3">
+                                <p className={` text-white  text-sm p-1 rounded-lg ${statusChange(item.status)} text-center`} >{item.status}</p>
+                            </div>
                         </div>
-
-
-                        <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
-                        <div className="w-full my-3">
-                            <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
-                        </div>
-                    </div>
-                </CardLink>
-
+                    </CardLink>
+                ))}
 
             </div>
         </DefaultLayout>
