@@ -4,19 +4,23 @@ import DefaultLayout from "../../../components/layout/DefaultLayout";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import { jalanRusak } from "../../../image";
 import { dataDetailLaporan } from "../../../utils/dataObject";
+import { useEffect, useState } from "react";
+import { getAllUnitWork } from "../../../service/unitWork";
 
 
 const SubmitReport = () => {
+    const [unitKerja, setUnitKerja] = useState([]);
+    useEffect(() => {
+        getAllUnitWork((result: any) => {
+            const data = result.unitWork
+            setUnitKerja(data)
+        })
+    }, [])
 
-    const animals = [
-        { label: "Cat", value: "cat", },
-        { label: "Dog", value: "dog", },
-        { label: "Elephant", value: "elephant", },
-        { label: "Lion", value: "lion", },
-        { label: "Tiger", value: "tiger", },
-        { label: "Giraffe", value: "giraffe" },
-
-    ];
+    const dataDropdown = unitKerja.map((unit: { name: string, _id: string }) => ({
+        label: unit.name,
+        value: unit._id,
+    }));
 
     //logic dropdown adalah ketika nanti nge fetch data unit kerja masukan data nya ke state tersebut
 
@@ -46,7 +50,7 @@ const SubmitReport = () => {
                     label="Pilih Unit Kerja"
                     className="w-full"
                 >
-                    {animals.map((item) => (
+                    {dataDropdown.map((item) => (
                         <AutocompleteItem key={item.value} value={item.value}>
                             {item.label}
                         </AutocompleteItem>

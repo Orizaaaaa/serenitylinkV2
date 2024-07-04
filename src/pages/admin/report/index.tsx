@@ -1,6 +1,5 @@
 
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { jalanRusak } from "../../../image"
 import { IoSearch } from "react-icons/io5"
 import CardLink from "../../../components/elemets/card/CardLink"
 import { FaCalendar, FaLocationDot } from "react-icons/fa6"
