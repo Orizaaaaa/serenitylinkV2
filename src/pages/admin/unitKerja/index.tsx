@@ -13,6 +13,7 @@ import { postImage } from "../../../service/imagePost";
 
 const UnitKerjaAdmin = () => {
     const [unitKerja, setUnitKerja] = useState([]);
+    const [errorMsg, setErrorMsg] = useState('')
     const [formData, setFormData] = useState({
         name: '',
         image: null as File | null,
@@ -81,11 +82,28 @@ const UnitKerjaAdmin = () => {
             createUnitWork(formUnitWork, (status: boolean, res: any) => {
                 if (status) {
                     console.log(res);
+                    setFormData({
+                        name: '',
+                        image: null as File | null,
+                        detail: 'ini adalah sebuah detail'
+                    })
+
+                    getAllUnitWork((result: any) => {
+                        const data = result.unitWork
+                        setUnitKerja(data)
+                    })
+
+                    onClose();
+                    setErrorMsg('')
+
                 } else {
                     console.log(res);
-
+                    setErrorMsg('*Tolong isi semua form dengan benar')
                 }
             })
+
+        } else {
+            setErrorMsg('*Tolong isi semua form dengan benar')
         }
 
     }
@@ -163,6 +181,7 @@ const UnitKerjaAdmin = () => {
                                         <div className="flex justify-center gap-3 mt-3">
                                             <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                         </div>
+                                        <p className="mt-3 text-red-600" >{errorMsg}</p>
                                     </div>
                                     <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
                                 </form>
