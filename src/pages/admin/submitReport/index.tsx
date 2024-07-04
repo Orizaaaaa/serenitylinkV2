@@ -10,6 +10,10 @@ import { getAllUnitWork } from "../../../service/unitWork";
 
 const SubmitReport = () => {
     const [unitKerja, setUnitKerja] = useState([]);
+    const [formData, setFormData] = useState({
+        report_id: '',
+        unit_work_id: ''
+    })
     useEffect(() => {
         getAllUnitWork((result: any) => {
             const data = result.unitWork
@@ -17,10 +21,18 @@ const SubmitReport = () => {
         })
     }, [])
 
+    //value dropdown
     const dataDropdown = unitKerja.map((unit: { name: string, _id: string }) => ({
         label: unit.name,
         value: unit._id,
     }));
+
+    //ambil data dropdown
+    const getItem = (item: any) => {
+        setFormData({ ...formData, unit_work_id: item.value })
+    }
+    console.log(formData);
+
 
     //logic dropdown adalah ketika nanti nge fetch data unit kerja masukan data nya ke state tersebut
 
@@ -51,7 +63,7 @@ const SubmitReport = () => {
                     className="w-full"
                 >
                     {dataDropdown.map((item) => (
-                        <AutocompleteItem key={item.value} value={item.value}>
+                        <AutocompleteItem key={item.value} value={item.value} onClick={() => getItem(item)}  >
                             {item.label}
                         </AutocompleteItem>
                     ))}
