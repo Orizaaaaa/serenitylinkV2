@@ -7,26 +7,40 @@ import Card from '../../../components/elemets/card/Card'
 import CardLink from '../../../components/elemets/card/CardLink'
 import { jalanRusak } from '../../../image'
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6'
+import { getAllReport } from '../../../service/report'
+import { formatCatrgory, formatDate } from '../../../utils/helper'
 
 
 const AllReportUser = () => {
     // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
+    const [dataReport, setDataReport] = useState([]);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-    const handleClickOutside = (event: MouseEvent) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-            setIsOpen(false);
-        }
-    };
+
     useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
+        getAllReport((result: any) => {
+            setDataReport(result.reports)
+        })
     }, []);
+
+    console.log(dataReport);
+
+    // const handleClickOutside = (event: MouseEvent) => {
+    //     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    //         setIsOpen(false);
+    //     }
+    // };
+
+
+    // useEffect(() => {
+    //     document.addEventListener('mousedown', handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, []);
 
     return (
         <DefaultLayout>
@@ -78,30 +92,33 @@ const AllReportUser = () => {
 
             {/* data semua laporan */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-                <CardLink to="/dashboard-user/detail-laporan-user" >
-                    <div className="images h-[150px] w-full relative">
-                        <img className='rounded-lg w-full h-full' src={jalanRusak} alt="jalan rusak" />
-                    </div>
-                    <div className="space-y-2 mt-1">
-                        <h1 className=' font-semibold text-lg'>Jalan Rusak</h1>
-
-                        <div className="flex items-center gap-1 ">
-                            <FaLocationDot color='#6E849C' />
-                            <p className='text-gray-500 text-sm'>jalan kalimulya</p>
+                {dataReport.map((item: any, index: any) => (
+                    <CardLink to="/dashboard-user/detail-laporan-user" key={index} >
+                        <div className="images h-[150px] w-full relative">
+                            <img className='rounded-lg w-full h-full' src={item.imageReport.map((item: any) => item)} alt="jalan rusak" />
                         </div>
-                        <div className="flex items-center gap-1 ">
-                            <FaCalendar color='#6E849C' />
-                            <p className='text-gray-500 text-sm'>12/12/2024</p>
+                        <div className="space-y-2 mt-1">
+                            <h1 className=' font-semibold text-lg'>{item.title}</h1>
+
+                            <div className="flex items-center gap-1 ">
+                                <FaLocationDot color='#6E849C' />
+                                <p className='text-gray-500 text-sm'>{item.address}</p>
+                            </div>
+                            <div className="flex items-center gap-1 ">
+                                <FaCalendar color='#6E849C' />
+                                <p className='text-gray-500 text-sm'>{formatDate(item.createdAt)}</p>
+                            </div>
+
+
+
+                            <p className='text-gray-500' >{formatCatrgory(item.description)}</p>
+                            <div className="w-full my-3">
+                                <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
+                            </div>
                         </div>
+                    </CardLink>
+                ))}
 
-
-
-                        <p className='text-gray-500' >ada pohon tumbang menutupi jalan ...</p>
-                        <div className="w-full my-3">
-                            <p className=' text-white  text-sm p-1 rounded-lg bg-[#FF7F0A] text-center' >Di proses</p>
-                        </div>
-                    </div>
-                </CardLink>
 
 
             </div>

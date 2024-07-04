@@ -8,3 +8,15 @@ export const createReport = async (formUnitWork: any, callback: any) => {
             console.log(false, err);
         });
 }
+
+
+export const getAllReport = (callback: any) => {
+    //kalo error tambah utl api aja
+    axiosInterceptor.get('/reports/list')
+        .then((res) => {
+            callback(res.data);
+        })
+        .catch((error) => {
+            console.error("Error fetching all unit work:", error);
+        });
+}
