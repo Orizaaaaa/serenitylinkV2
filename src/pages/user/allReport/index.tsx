@@ -83,11 +83,17 @@ const AllReportUser = () => {
                         role="menu"
                     >
                         <div className="py-1" role="none">
+                            <button className="text-gray-700 block px-4 py-2 text-sm" onClick={() => handleStatusSelect("")}>
+                                Semua Status
+                            </button>
                             <button onClick={() => handleStatusSelect("Menunggu")} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
                                 Menunggu
                             </button>
                             <button onClick={() => handleStatusSelect("Diproses")} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
                                 Di Proses
+                            </button>
+                            <button onClick={() => handleStatusSelect("Selesai")} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
+                                selesai
                             </button>
 
                         </div>
