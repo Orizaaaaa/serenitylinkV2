@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useEffect, useRef, useState } from 'react'
 import Card from '../../../components/elemets/card/Card'
-import CardLink from '../../../components/elemets/card/CardLink'
-import { FaCalendar, FaLocationDot } from 'react-icons/fa6'
 import { getAllReport } from '../../../service/report'
-import { formatCatrgory, formatDate, statusChange } from '../../../utils/helper'
+import CardReport from '../../../components/fragments/CardReport/CardReport'
 
 
 const AllReportUser = () => {
@@ -28,19 +26,7 @@ const AllReportUser = () => {
     console.log(dataReport);
 
 
-    // const handleClickOutside = (event: MouseEvent) => {
-    //     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-    //         setIsOpen(false);
-    //     }
-    // };
 
-
-    // useEffect(() => {
-    //     document.addEventListener('mousedown', handleClickOutside);
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-    // }, []);
 
     return (
         <DefaultLayout>
@@ -91,38 +77,16 @@ const AllReportUser = () => {
 
 
             {/* data semua laporan */}
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
                 {dataReport.map((item: any, index: any) => (
-                    <CardLink to="/dashboard-user/detail-laporan-user" key={index} >
-                        <div className="images h-[150px] w-full relative">
-                            <img className='rounded-lg w-full h-full' src={item.imageReport.map((item: any) => item)} alt="jalan rusak" />
-                        </div>
-                        <div className="space-y-2 mt-1">
-                            <h1 className=' font-semibold text-lg'>{item.title}</h1>
-
-                            <div className="flex items-center gap-1 ">
-                                <FaLocationDot color='#6E849C' />
-                                <p className='text-gray-500 text-sm'>{item.address}</p>
-                            </div>
-                            <div className="flex items-center gap-1 ">
-                                <FaCalendar color='#6E849C' />
-                                <p className='text-gray-500 text-sm'>{formatDate(item.createdAt)}</p>
-                            </div>
-
-
-
-                            <p className='text-gray-500' >{formatCatrgory(item.description)}</p>
-                            <div className="w-full my-3">
-                                <p className={` text-white  text-sm p-1 rounded-lg ${statusChange(item.status)} text-center`} >{item.status}</p>
-                            </div>
-                        </div>
-                    </CardLink>
+                    <CardReport location={`/dashboard-user/detail-laporan-user/${item.id}`}
+                        image={item.imageReport.map((item: any) => item)} title={item.title} address={item.address} status={item.status}
+                        date={item.createdAt} desc={item.description} key={index} />
                 ))}
 
 
-
             </div>
-
 
         </DefaultLayout>
 
