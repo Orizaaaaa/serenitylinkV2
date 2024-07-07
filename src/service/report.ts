@@ -20,3 +20,13 @@ export const getAllReport = (callback: any) => {
             console.error("Error fetching all unit work:", error);
         });
 }
+
+export const getReportById = (id: string, callback: any) => {
+    axiosInterceptor.get(`/reports/${id}`)
+        .then((res) => {
+            callback(res.data);
+        })
+        .catch((error) => {
+            console.error("Error fetching all unit work:", error);
+        });
+}

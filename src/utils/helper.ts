@@ -24,3 +24,12 @@ export const statusChange = (value: string) => {
         return ('bg-lime-700')
     }
 }
+
+
+export const parseCoordinate = (coord: string): number => {
+    const parsedCoord = parseFloat(coord);
+    if (isNaN(parsedCoord)) {
+        throw new Error(`Invalid coordinate value: ${coord}`);
+    }
+    return parsedCoord;
+};

@@ -56,7 +56,7 @@ function App() {
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
           <Route path="/kategori-admin" element={<CategoryAdmin />} />
           <Route path="/laporan-admin" element={<ReportAdmin />} />
-          <Route path="/laporan-admin/submit-laporan-admin" element={<SubmitReportAdmin />} />
+          <Route path="/laporan-admin/submit-laporan-admin/:id" element={<SubmitReportAdmin />} />
           <Route path="/petugas-admin" element={<OfficerList />} />
           <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />
           <Route path="/coba-gambar" element={<CobaGambar />} />

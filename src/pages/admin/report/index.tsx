@@ -30,7 +30,7 @@ const ReportAdmin = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
 
                 {dataReport?.map((item: any, index: any) => (
-                    <CardLink to="/laporan-admin/submit-laporan-admin" key={index} >
+                    <CardLink to={`/laporan-admin/submit-laporan-admin/${item.id}`} key={index} >
                         <div className="images h-[150px] w-full relative">
                             <img className='rounded-lg w-full h-full' src={item.imageReport.map((item: any) => item)} alt="jalan rusak" />
                         </div>
