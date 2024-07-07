@@ -5,7 +5,7 @@ import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import { useEffect, useState } from "react";
 import { getAllUnitWork } from "../../../service/unitWork";
 import { useParams } from "react-router-dom";
-import { getReportById } from "../../../service/report";
+import { assignReport, getReportById } from "../../../service/report";
 import { formatDate, parseCoordinate } from "../../../utils/helper";
 
 interface Report {
@@ -22,6 +22,7 @@ interface Report {
     title: string;
     updatedAt: string;
     _id: string;
+    unitWorks: any
 }
 
 const SubmitReport = () => {
@@ -29,7 +30,7 @@ const SubmitReport = () => {
     const [unitKerja, setUnitKerja] = useState([]);
     const [dataReport, setDataReport] = useState<Report | null>(null);
     const [formData, setFormData] = useState({
-        report_id: '',
+        report_id: id,
         unit_work_id: ''
     })
 
@@ -88,6 +89,33 @@ const SubmitReport = () => {
         },
     ]
 
+    //change button 
+    const changeButton = (value: string) => {
+        if (value === 'Diproses') {
+            return ('hidden')
+        } else if (value === 'Selesai') {
+            return ('hidden')
+        } else {
+            return ('block')
+        }
+    }
+
+    //send data to officer
+    const handleAssign = (e: any) => {
+        e.preventDefault()
+        assignReport(formData, (status: boolean, res: any) => {
+            if (status) {
+                getReportById(id, (result: any) => {
+                    console.log(result);
+                    setDataReport(result.data)
+                })
+                console.log(res)
+            }
+        })
+    }
+
+
+
 
     return (
         <DefaultLayout>
@@ -107,14 +135,24 @@ const SubmitReport = () => {
                 </div>
             </div>
 
+
             {/* maps */}
             <Maps markerPosition={{
                 lat: parseCoordinate(dataReport?.latitude || '0'),
                 lng: parseCoordinate(dataReport?.longitude || '0'),
             }} zoom={10} text={`${dataReport?.address}`} className="h-[370px]  rounded-md my-5" />
 
-            <h1 className="mt-2 text-lg font-semibold" >Unit Kerja</h1>
-            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+
+            {/* unit kerja */}
+            <h1 className={`mt-2 text-lg font-semibold ${changeButton(dataReport?.status || '')}`} >Unit Kerja</h1>
+            {dataReport?.unitWorks &&
+                <>
+                    <p className="my-2" >Laporan ini telah di berikan ke petugas <b>{dataReport?.unitWorks.name}</b></p>
+                    <img className="w-15 h-15 rounded-full" src={dataReport?.unitWorks.image[0]} alt="image" />
+                </>
+            }
+
+            <div className={`flex w-full flex-wrap md:flex-nowrap gap-4 ${changeButton(dataReport?.status || '')}`}>
                 <Autocomplete
                     label="Pilih Unit Kerja"
                     className="w-full"
@@ -126,7 +164,7 @@ const SubmitReport = () => {
                     ))}
                 </Autocomplete>
             </div>
-            <ButtonPrimary className="w-full rounded-md mt-3"  >
+            <ButtonPrimary className={`w-full rounded-md mt-3 ${changeButton(dataReport?.status || '')}`} onClick={handleAssign}  >
                 Kirim
             </ButtonPrimary>
 

@@ -1,3 +1,4 @@
+
 export function formatDate(isoDateString: string): string {
     const date = new Date(isoDateString);
     const day = String(date.getUTCDate()).padStart(2, '0');
@@ -16,7 +17,7 @@ export function formatCatrgory(text: string, maxLength: number = 34): string {
 
 
 export const statusChange = (value: string) => {
-    if (value === 'Di Proses') {
+    if (value === 'Diproses') {
         return ('bg-[#FF7F0A]')
     } else if (value === 'Menunggu') {
         return ('bg-primary')

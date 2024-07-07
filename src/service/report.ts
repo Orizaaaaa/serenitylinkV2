@@ -30,3 +30,11 @@ export const getReportById = (id: string, callback: any) => {
             console.error("Error fetching all unit work:", error);
         });
 }
+export const assignReport = async (formData: any, callback: any) => {
+    await axiosInterceptor.post('/reports/assign', formData)
+        .then((result) => {
+            callback(true, result.data)
+        }).catch((err: any) => {
+            console.log(false, err);
+        });
+}
