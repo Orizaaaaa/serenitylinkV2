@@ -14,9 +14,9 @@ const MyReportUser = () => {
 
     useEffect(() => {
         getAllReport((result: any) => {
-            const data = result.reports.filter((report: any) => report.reporter.name === localStorage.getItem('name'));
-            setDataReport(data)
-        })
+            const data = result.data ? result.data.filter((report: any) => report.reporter.name === localStorage.getItem('name')) : [];
+            setDataReport(data);
+        });
     }, []);
 
 
@@ -27,17 +27,6 @@ const MyReportUser = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-            setIsOpen(false);
-        }
-    };
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
 
     return (
         <DefaultLayout>
@@ -88,7 +77,7 @@ const MyReportUser = () => {
 
             {/* data laporan saya */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-                {dataReport.map((item: any, index: any) => (
+                {dataReport?.map((item: any, index: any) => (
                     <CardLink to="/dashboard-user/detail-laporan-user" key={index} >
                         <div className="images h-[150px] w-full relative">
                             <img className='rounded-lg w-full h-full' src={item.imageReport.map((item: any) => item)} alt="jalan rusak" />

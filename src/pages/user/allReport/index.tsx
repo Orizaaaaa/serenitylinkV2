@@ -21,7 +21,7 @@ const AllReportUser = () => {
 
     useEffect(() => {
         getAllReport((result: any) => {
-            setDataReport(result.reports)
+            setDataReport(result.data)
         })
     }, []);
 

@@ -24,9 +24,9 @@ const DashboardUser = () => {
 
     useEffect(() => {
         getAllReport((result: any) => {
-            const data = result.reports.filter((report: any) => report.reporter.name === localStorage.getItem('name'));
-            setDataReport(data)
-        })
+            const data = result.data ? result.data.filter((report: any) => report.reporter.name === localStorage.getItem('name')) : [];
+            setDataReport(data);
+        });
     }, []);
 
     return (
