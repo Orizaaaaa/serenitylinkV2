@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import Card from '../../../components/elemets/card/Card'
 import { getAllReport } from '../../../service/report'
 import CardReport from '../../../components/fragments/CardReport/CardReport'
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
 
 
 const AllReportUser = () => {
@@ -73,31 +74,20 @@ const AllReportUser = () => {
 
                 {/* dropdown status */}
                 <div className="relative inline-block text-left" ref={dropdownRef}>
-                    <button className=" bg-white text-black px-4 py-2 rounded-md flex justify-center items-center gap-2" onClick={toggleDropdown} >
-                        Status
-                        <IoIosArrowDown />
-                    </button>
-                    <div
-                        id="dropdownMenu"
-                        className={`${isOpen ? '' : 'hidden'} z-9999 origin-top-right absolute right-0 md:left-0 mt-2 w-56 rounded-md bg-white`}
-                        role="menu"
-                    >
-                        <div className="py-1" role="none">
-                            <button className="text-gray-700 block px-4 py-2 text-sm" onClick={() => handleStatusSelect("")}>
-                                Semua Status
-                            </button>
-                            <button onClick={() => handleStatusSelect("Menunggu")} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
-                                Menunggu
-                            </button>
-                            <button onClick={() => handleStatusSelect("Diproses")} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
-                                Di Proses
-                            </button>
-                            <button onClick={() => handleStatusSelect("Selesai")} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
-                                selesai
-                            </button>
-
-                        </div>
-                    </div>
+                    <Dropdown>
+                        <DropdownTrigger>
+                            <Button
+                                variant="bordered"
+                            >
+                                Status
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu aria-label="Static Actions">
+                            <DropdownItem key="Semua Status" onClick={() => handleStatusSelect("")}>Semua Status</DropdownItem>
+                            <DropdownItem key="Menunggu" onClick={() => handleStatusSelect("Menunggu")}> Menunggu</DropdownItem>
+                            <DropdownItem onClick={() => handleStatusSelect("Diproses")} key="Diproses">Di Proses</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </div>
             </div>
 
