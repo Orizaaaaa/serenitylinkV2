@@ -33,15 +33,14 @@ const SubmitReport = () => {
         unit_work_id: ''
     })
 
-
     useEffect(() => {
+        //fetch laporan
         getReportById(id, (result: any) => {
             console.log(result);
             setDataReport(result.data)
         })
-    }, []);
 
-    useEffect(() => {
+        //fetch unit kerja 
         getAllUnitWork((result: any) => {
             const data = result.unitWork
             setUnitKerja(data)
@@ -58,8 +57,6 @@ const SubmitReport = () => {
     const getItem = (item: any) => {
         setFormData({ ...formData, unit_work_id: item.value })
     }
-
-    console.log('ini data report', dataReport);
     const dataDetailLaporan = [
         {
             title: 'Judul Laporan  ',
@@ -91,10 +88,6 @@ const SubmitReport = () => {
         },
     ]
 
-
-
-    //logic dropdown adalah ketika nanti nge fetch data unit kerja masukan data nya ke state tersebut
-    console.log('parse babi', parseCoordinate(dataReport?.latitude || '0'));
 
     return (
         <DefaultLayout>
