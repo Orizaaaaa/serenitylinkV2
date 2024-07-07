@@ -15,7 +15,7 @@ type Props = {
 
 const CardReport = ({ location, image, title, address, status, date, desc }: Props) => {
     return (
-        <CardLink to={`/laporan-admin/submit-laporan-admin/${location}`}  >
+        <CardLink to={`${location}`}  >
             <div className="images h-[150px] w-full relative">
                 <img className='rounded-lg w-full h-full' src={image} alt="jalan rusak" />
             </div>
