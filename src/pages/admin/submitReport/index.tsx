@@ -152,6 +152,7 @@ const SubmitReport = () => {
                 </>
             }
 
+            {/* unit kerja dropdown */}
             <div className={`flex w-full flex-wrap md:flex-nowrap gap-4 ${changeButton(dataReport?.status || '')}`}>
                 <Autocomplete
                     label="Pilih Unit Kerja"
@@ -164,6 +165,8 @@ const SubmitReport = () => {
                     ))}
                 </Autocomplete>
             </div>
+
+
             <ButtonPrimary className={`w-full rounded-md mt-3 ${changeButton(dataReport?.status || '')}`} onClick={handleAssign}  >
                 Kirim
             </ButtonPrimary>
