@@ -1,8 +1,7 @@
 import { IoSearch } from 'react-icons/io5'
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { Link } from 'react-router-dom'
-import { IoIosArrowDown } from 'react-icons/io'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from '../../../components/elemets/card/Card'
 import { getAllReport } from '../../../service/report'
 import CardReport from '../../../components/fragments/CardReport/CardReport'
@@ -13,13 +12,8 @@ const AllReportUser = () => {
     // untuk dropdown
     const [isOpen, setIsOpen] = useState(false);
     const [dataReport, setDataReport] = useState([]);
-    const dropdownRef = useRef<HTMLDivElement>(null);
     const [selectedStatus, setSelectedStatus] = useState("");
     const [searchData, setSearchData] = useState("");
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
 
     const handleStatusSelect = (status: any) => {
         setSelectedStatus(status);
@@ -73,23 +67,23 @@ const AllReportUser = () => {
                 </Link>
 
                 {/* dropdown status */}
-                <div className="relative inline-block text-left" ref={dropdownRef}>
-                    <Dropdown>
-                        <DropdownTrigger>
-                            <Button
-                                variant="bordered"
-                            >
-                                Status
-                            </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu aria-label="Static Actions">
-                            <DropdownItem key="Semua Status" onClick={() => handleStatusSelect("")}>Semua Status</DropdownItem>
-                            <DropdownItem key="Menunggu" onClick={() => handleStatusSelect("Menunggu")}> Menunggu</DropdownItem>
-                            <DropdownItem onClick={() => handleStatusSelect("Diproses")} key="Diproses">Di Proses</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                </div>
+
+                <Dropdown>
+                    <DropdownTrigger>
+                        <Button
+                            variant="bordered"
+                        >
+                            Status
+                        </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label="Static Actions">
+                        <DropdownItem key="Semua Status" onClick={() => handleStatusSelect("")}>Semua Status</DropdownItem>
+                        <DropdownItem key="Menunggu" onClick={() => handleStatusSelect("Menunggu")}> Menunggu</DropdownItem>
+                        <DropdownItem onClick={() => handleStatusSelect("Diproses")} key="Diproses">Di Proses</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
             </div>
+
 
 
             {/* data semua laporan */}
