@@ -1,0 +1,12 @@
+import { axiosInterceptor } from "./axiosInterceptor"
+
+export const getAllUser = (callback: any) => {
+    axiosInterceptor.get('/user/list')
+        .then((res) => {
+            callback(res.data);
+        })
+        .catch((error) => {
+            console.error("Error fetching all unit work:", error);
+        });
+
+}

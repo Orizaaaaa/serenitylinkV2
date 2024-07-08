@@ -10,7 +10,6 @@ import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@
 
 const AllReportUser = () => {
     // untuk dropdown
-    const [isOpen, setIsOpen] = useState(false);
     const [dataReport, setDataReport] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState("");
     const [searchData, setSearchData] = useState("");
