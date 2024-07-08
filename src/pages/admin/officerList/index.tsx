@@ -3,11 +3,14 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import ModalDefault from "../../../components/fragments/modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputReport from "../../../components/elemets/input/InputReport";
+import { getAllUser } from "../../../service/user";
+import { capitalizeWords } from "../../../utils/helper";
 
 const OfficerList = () => {
     const { onOpen, onClose, isOpen } = useDisclosure();
+    const [dataUser, setDataUser] = useState([]);
     const [formData, setFormData] = useState({
         name: ' ',
         email: '',
@@ -24,6 +27,7 @@ const OfficerList = () => {
     };
 
 
+
     const animals = [
         { label: "Cat", value: "cat", description: "The second most popular pet in the world" },
         { label: "Dog", value: "dog", description: "The most popular pet in the world" },
@@ -33,6 +37,20 @@ const OfficerList = () => {
         { label: "Giraffe", value: "giraffe", description: "The tallest land animal" },
 
     ];
+
+    //get all user
+
+    useEffect(() => {
+        getAllUser((result: any) => {
+            const data = result.data ? result.data.filter((role: any) =>
+                role.role !== 'user') : [];
+            setDataUser(data)
+        })
+    }, []);
+
+    console.log(dataUser);
+
+
     return (
         <DefaultLayout>
 
@@ -70,39 +88,22 @@ const OfficerList = () => {
                     <TableHeader>
                         <TableColumn>N0</TableColumn>
                         <TableColumn>NAME</TableColumn>
-                        <TableColumn>LEVEL</TableColumn>
+                        <TableColumn>ROLE</TableColumn>
                         <TableColumn>UNIT KERJA</TableColumn>
                         <TableColumn>ACTION</TableColumn>
                     </TableHeader>
                     <TableBody>
-                        <TableRow key="1">
-                            <TableCell>1</TableCell>
-                            <TableCell>CEO</TableCell>
-                            <TableCell>Active</TableCell>
-                            <TableCell>Active</TableCell>
-                            <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full" >Delete</ButtonPrimary></TableCell>
-                        </TableRow>
-                        <TableRow key="2">
-                            <TableCell>2</TableCell>
-                            <TableCell>Technical Lead</TableCell>
-                            <TableCell>Paused</TableCell>
-                            <TableCell>Active</TableCell>
-                            <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full" >Delete</ButtonPrimary></TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell>3</TableCell>
-                            <TableCell>Senior Developer</TableCell>
-                            <TableCell>Active</TableCell>
-                            <TableCell>Active</TableCell>
-                            <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full" >Delete</ButtonPrimary></TableCell>
-                        </TableRow>
-                        <TableRow key="4">
-                            <TableCell>4</TableCell>
-                            <TableCell>Community Manager</TableCell>
-                            <TableCell>Vacation</TableCell>
-                            <TableCell>Active</TableCell>
-                            <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full" >Delete</ButtonPrimary></TableCell>
-                        </TableRow>
+                        {dataUser?.map((user: any, index: any) => (
+                            <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
+                                <TableCell>{capitalizeWords(user.name)}</TableCell>
+                                <TableCell>{capitalizeWords(user.role)}</TableCell>
+                                <TableCell>{user.unitWork ? capitalizeWords(user.unitWork.name) : '-'}</TableCell>
+                                <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full" >Delete</ButtonPrimary></TableCell>
+                            </TableRow>
+                        ))}
+
+                        {/* key nya di buat index */}
                     </TableBody>
                 </Table>
             </Card>
