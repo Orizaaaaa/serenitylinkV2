@@ -35,13 +35,13 @@ const UnitKerjaAdmin = () => {
         })
     }, [])
 
+    //nanti nya untuk delete unit kerja
     const handleButton = (value: string) => {
         setDataDelete({ ...dataDelete, _id: value })
     }
 
 
     //create unitWork
-    console.log(formData);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const handleAddUnitKerja = () => {
