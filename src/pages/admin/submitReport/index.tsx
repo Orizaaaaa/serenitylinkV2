@@ -26,6 +26,7 @@ interface Report {
 }
 
 const SubmitReport = () => {
+    const name = localStorage.getItem("name");
     const { id = "" } = useParams();
     const [unitKerja, setUnitKerja] = useState([]);
     const [dataReport, setDataReport] = useState<Report | null>(null);
@@ -142,6 +143,49 @@ const SubmitReport = () => {
                 lng: parseCoordinate(dataReport?.longitude || '0'),
             }} zoom={10} text={`${dataReport?.address}`} className="h-[370px]  rounded-md my-5" />
 
+            <div className="coment">
+                <h1 className="text-primary font-semibold">Komentar (0)</h1>
+                <div className="display-comment bg-white w-full min-h-60 rounded-md p-3">
+                    {dataReport?.comment.length === 0 && (
+                        <p className="text-gray-400">Belum ada komentar</p>
+                    )}
+
+                    {dataReport?.comment.map((item: any, index) => (
+                        <>
+                            {item.name !== name ? (
+                                <div className="comment p-2 bg-gray-500 w-fit rounded-tl-2xl rounded-r-xl" key={index} >
+                                    <p className="text-white text-sm">{item.name}</p>
+                                    <p className="text-white text-sm">{item.message}</p>
+                                </div>
+                            ) : (
+                                <div className="flex justify-end">
+                                    <div className="comment p-2 bg-primary w-fit rounded-tr-2xl rounded-l-xl  " key={index} >
+                                        <p className="text-white text-sm">{item.name}</p>
+                                        <p className="text-white text-sm">{item.message}</p>
+                                    </div>
+                                </div>
+
+                            )
+
+                            }
+
+                        </>
+
+                    ))}
+                </div>
+
+                <h1 className="mt-4">Pesan :</h1>
+                <input
+                    className="w-full h-9 rounded-md bg-gray-400 px-3 outline-none"
+                    type="text"
+                />
+
+                <div className="flex justify-end">
+                    <button className="bg-primary text-white px-4 py-2 rounded-md mt-4">
+                        Kirim pesan
+                    </button>
+                </div>
+            </div>
 
             {/* unit kerja */}
             <h1 className={`mt-2 text-lg font-semibold ${changeButton(dataReport?.status || '')}`} >Unit Kerja</h1>
@@ -151,6 +195,7 @@ const SubmitReport = () => {
                     <img className="w-15 h-15 rounded-full" src={dataReport?.unitWorks.image[0]} alt="image" />
                 </>
             }
+
 
             {/* unit kerja dropdown */}
             <div className={`flex w-full flex-wrap md:flex-nowrap gap-4 ${changeButton(dataReport?.status || '')}`}>
@@ -168,7 +213,7 @@ const SubmitReport = () => {
 
 
             <ButtonPrimary className={`w-full rounded-md mt-3 ${changeButton(dataReport?.status || '')}`} onClick={handleAssign}  >
-                Kirim
+                Kirim Laporan
             </ButtonPrimary>
 
             <ButtonPrimary className="w-full rounded-md mt-3" bg="bg-red-700"  >
