@@ -4,9 +4,26 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { jalanRusak, manusiaLaptop } from "../../../image"
 import CardLink from "../../../components/elemets/card/CardLink"
 import { FaCalendar, FaLocationDot } from "react-icons/fa6"
+import { getReportByUnitWork } from "../../../service/officer"
+import { useEffect } from "react"
 
 
 const DashboardOfficer = () => {
+
+    const id: any = localStorage.getItem('id')
+    console.log(id);
+
+    useEffect(() => {
+        getReportByUnitWork(id, (status: boolean, res: any) => {
+            if (status) {
+                console.log(res);
+            } else {
+                console.log(res);
+
+            }
+        })
+    }, []);
+
     return (
         <DefaultLayout>
             <Card>

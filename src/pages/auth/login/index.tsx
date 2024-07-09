@@ -59,6 +59,7 @@ const Login = () => {
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('email', res.data.email)
                 localStorage.setItem('name', res.data.name)
+                localStorage.setItem('id', res.data.id)
 
                 if (res.data.role === 'user') {
                     navigate('/dashboard-user')
