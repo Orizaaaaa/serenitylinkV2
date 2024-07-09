@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { capitalizeWords } from "../../../utils/helper";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  //membuat huruf kapital awalan
-  function capitalizeFirstLetter(name: string): string {
-    if (!name) return name;
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-  }
+  const name: any = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -44,9 +41,9 @@ const DropdownUser = () => {
       <div className="flex items-center gap-4">
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black">
-            <p>{capitalizeFirstLetter('oriza sativa')}</p>
+            <p>{capitalizeWords(name)}</p>
           </span>
-          <span className="block text-xs">oriza@gmail.com</span>
+          <span className="block text-xs">{email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
