@@ -78,7 +78,7 @@ const DetailReportUser = () => {
             />
 
             <div className="coment">
-                <h1 className="text-primary font-semibold">Komentar (0)</h1>
+                <h1 className="text-primary font-semibold">Komentar ({dataReport?.comment.length})</h1>
                 <div className="display-comment bg-white w-full min-h-60 rounded-md p-3">
                     {dataReport?.comment.length === 0 && (
                         <p className="text-gray-400">Belum ada komentar</p>

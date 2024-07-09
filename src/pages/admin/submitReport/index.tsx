@@ -27,6 +27,7 @@ interface Report {
 
 const SubmitReport = () => {
     const name = localStorage.getItem("name");
+
     const { id = "" } = useParams();
     const [unitKerja, setUnitKerja] = useState([]);
     const [dataReport, setDataReport] = useState<Report | null>(null);
@@ -144,7 +145,7 @@ const SubmitReport = () => {
             }} zoom={10} text={`${dataReport?.address}`} className="h-[370px]  rounded-md my-5" />
 
             <div className="coment">
-                <h1 className="text-primary font-semibold">Komentar (0)</h1>
+                <h1 className="text-primary font-semibold">Komentar ({dataReport?.comment.length})</h1>
                 <div className="display-comment bg-white w-full min-h-60 rounded-md p-3">
                     {dataReport?.comment.length === 0 && (
                         <p className="text-gray-400">Belum ada komentar</p>
@@ -185,6 +186,8 @@ const SubmitReport = () => {
                         Kirim pesan
                     </button>
                 </div>
+
+
             </div>
 
             {/* unit kerja */}
