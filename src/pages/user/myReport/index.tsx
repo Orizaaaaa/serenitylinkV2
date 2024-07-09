@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { IoIosArrowDown } from "react-icons/io";
 import Card from "../../../components/elemets/card/Card";
 import { getAllReport } from "../../../service/report";
 import CardReport from "../../../components/fragments/CardReport/CardReport";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 
 const MyReportUser = () => {
     const [dataReport, setDataReport] = useState([]);
@@ -19,10 +19,23 @@ const MyReportUser = () => {
 
 
     // untuk dropdown
-    const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+    const [searchData, setSearchData] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState("");
+
+
+    const filteredData = dataReport.filter((item: any) => {
+        return (
+            item.title && item.title.toLowerCase().includes(searchData.toLowerCase()) &&
+            (selectedStatus === "" || item.status === selectedStatus)
+        );
+    });
+
+    const handleSearch = (e: any) => {
+        setSearchData(e.target.value);
+    };
+
+    const handleStatusSelect = (status: any) => {
+        setSelectedStatus(status);
     };
 
 
@@ -39,7 +52,7 @@ const MyReportUser = () => {
 
             {/* search and dropdown */}
             <div className="w-full  mt-4 relative ">
-                <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
+                <input onChange={handleSearch} className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
                 <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
             </div>
 
@@ -49,33 +62,26 @@ const MyReportUser = () => {
                 </Link>
 
                 {/* dropdown status */}
-                <div className="relative inline-block text-left" ref={dropdownRef}>
-                    <button className=" bg-white text-black px-4 py-2 rounded-md flex justify-center items-center gap-2" onClick={toggleDropdown} >
-                        Status
-                        <IoIosArrowDown />
-                    </button>
-                    <div
-                        id="dropdownMenu"
-                        className={`${isOpen ? '' : 'hidden'} z-9999 origin-top-right absolute right-0 md:left-0 mt-2 w-56 rounded-md bg-white`}
-                        role="menu"
-                    >
-                        <div className="py-1" role="none">
-                            <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
-                                Menunggu
-                            </button>
-                            <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem">
-                                Di Proses
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
+                <Dropdown>
+                    <DropdownTrigger>
+                        <Button
+                            variant="bordered"
+                        >
+                            Status
+                        </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label="Static Actions">
+                        <DropdownItem key="Semua Status" onClick={() => handleStatusSelect("")}>Semua Status</DropdownItem>
+                        <DropdownItem key="Menunggu" onClick={() => handleStatusSelect("Menunggu")}> Menunggu</DropdownItem>
+                        <DropdownItem onClick={() => handleStatusSelect("Diproses")} key="Diproses">Di Proses</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
             </div>
 
 
             {/* data laporan saya */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-                {dataReport.map((item: any, index: any) => (
+                {filteredData.map((item: any, index: any) => (
                     <CardReport location={`/dashboard-user/detail-laporan-user/${item.id}`}
                         image={item.imageReport.map((item: any) => item)} title={item.title} address={item.address} status={item.status}
                         date={item.createdAt} desc={item.description} key={index} />
