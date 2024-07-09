@@ -141,13 +141,14 @@ const CreateReportUser = () => {
 
                 <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 container mx-auto gap-5 mt-5'>
 
-                    {buttonKategori.map((category, index) => (
-                        <button className={` p-3 md:p-6 mx-auto rounded-md ${formData.categori === category.value && 'bg-primary text-black'} `} key={index} onClick={() => handleCategory(category.value)} >
-                            <img className="w-full h-[70px] md:h-[100px] " src={category.image} alt={'image kategori'} />
-                            <p className="text-sm md:text-base mt-3  " >{category.name}</p>
-                        </button>
-                    ))}
+                    {buttonKategori.map((item, index) => (
+                        <div className="image flex-col justify-center items-center" key={index}>
+                            <img onClick={() => handleCategory(item.name)} src={item.image} className={`w-[70px] h-[70px] mx-auto rounded-full
+                             object-cover cursor-pointer ${formData.categori === item.name ? 'border-3 border-primary' : ''} `} alt='image' />
 
+                            <p className={`text-sm md:text-base mt-1 text-center`}>{item.name}</p>
+                        </div>
+                    ))}
                 </div>
                 <p className="text-red-600 " >{errorMsg}</p>
                 <button className="bg-primary text-white px-4 py-2 rounded-md w-full mt-4" onClick={handleSubmit}>Kirim Laporan</button>
