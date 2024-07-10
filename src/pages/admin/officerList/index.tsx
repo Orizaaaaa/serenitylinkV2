@@ -8,6 +8,7 @@ import InputReport from "../../../components/elemets/input/InputReport";
 import { getAllUser } from "../../../service/user";
 import { capitalizeWords } from "../../../utils/helper";
 import { getAllUnitWork } from "../../../service/unitWork";
+import { register } from "../../../service/auth";
 
 const OfficerList = () => {
     const { onOpen, onClose, isOpen } = useDisclosure();
@@ -109,7 +110,37 @@ const OfficerList = () => {
     });
 
 
-    console.log(formData);
+    //membuat petugas
+    const createOfficer = async (e: any) => {
+        e.preventDefault();
+        console.log(formData);
+
+        await register(formData, (status: boolean, res: any) => {
+            console.log(register);
+
+            if (status) {
+                console.log(res);
+                setFormData({
+                    name: ' ',
+                    email: '',
+                    unitWork: '',
+                    password: '',
+                    role: 'officer'
+                })
+
+                getAllUser((result: any) => {
+                    const data = result.data ? result.data.filter((role: any) =>
+                        role.role !== 'user') : [];
+                    setDataUser(data)
+                })
+                onClose();
+            } else {
+                console.log(res);
+            }
+        })
+
+
+    }
 
 
 
@@ -191,7 +222,7 @@ const OfficerList = () => {
 
                 <InputReport marginY="my-1" htmlFor="password" title="Password " type="text" onChange={handleChange} value={formData.password} />
                 <p className="text-red-600">{errorMsg}</p>
-                <ButtonPrimary disabled={disabled} className={`rounded-md w-full my-4 ${disabled ? 'bg-slate-400' : 'bg-primaryblue'}`}  >Buat Petugas</ButtonPrimary>
+                <ButtonPrimary disabled={disabled} className={`rounded-md w-full my-4 ${disabled ? 'bg-slate-400' : 'bg-primaryblue'}`} onClick={createOfficer} >Buat Petugas</ButtonPrimary>
             </ModalDefault>
         </DefaultLayout>
     )
