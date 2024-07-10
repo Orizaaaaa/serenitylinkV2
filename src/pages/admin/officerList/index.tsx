@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteItem, Button, Card, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from "@nextui-org/react"
+import { Autocomplete, AutocompleteItem, Card, useDisclosure } from "@nextui-org/react"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
@@ -7,9 +7,12 @@ import { useEffect, useState } from "react";
 import InputReport from "../../../components/elemets/input/InputReport";
 import { getAllUser } from "../../../service/user";
 import { capitalizeWords } from "../../../utils/helper";
+import { getAllUnitWork } from "../../../service/unitWork";
 
 const OfficerList = () => {
     const { onOpen, onClose, isOpen } = useDisclosure();
+    const [selectedUnitWork, setSelectedUnitWork] = useState('');
+    const [unitKerja, setUnitKerja] = useState([]);
     const [dataUser, setDataUser] = useState([]);
     const [formData, setFormData] = useState({
         name: ' ',
@@ -17,6 +20,24 @@ const OfficerList = () => {
         unitKerja: '',
         password: ''
     })
+
+    //get all user
+    useEffect(() => {
+        getAllUser((result: any) => {
+            const data = result.data ? result.data.filter((role: any) =>
+                role.role !== 'user') : [];
+            setDataUser(data)
+        })
+    }, []);
+
+
+    //getAllUnitKerja
+    useEffect(() => {
+        getAllUnitWork((result: any) => {
+            setUnitKerja(result.unitWork)
+        })
+    }, []);
+
     const handleAddCategory = () => {
         onOpen();
     }
@@ -28,27 +49,30 @@ const OfficerList = () => {
 
 
 
-    const animals = [
-        { label: "Cat", value: "cat", description: "The second most popular pet in the world" },
-        { label: "Dog", value: "dog", description: "The most popular pet in the world" },
-        { label: "Elephant", value: "elephant", description: "The largest land animal" },
-        { label: "Lion", value: "lion", description: "The king of the jungle" },
-        { label: "Tiger", value: "tiger", description: "The largest cat species" },
-        { label: "Giraffe", value: "giraffe", description: "The tallest land animal" },
+    //dropdown
+    const dataDropdown = unitKerja.map((unit: { name: string, _id: string }) => ({
+        label: unit.name,
+        value: unit._id,
+    }));
 
-    ];
 
-    //get all user
+    //get item dari dropdown
+    const getItem = (item: any) => {
+        console.log(item.label);
+        setSelectedUnitWork(item.label)
 
-    useEffect(() => {
-        getAllUser((result: any) => {
-            const data = result.data ? result.data.filter((role: any) =>
-                role.role !== 'user') : [];
-            setDataUser(data)
-        })
-    }, []);
+    }
 
-    console.log(dataUser);
+
+    // filter data by get item dropdown
+    const filteredData = dataUser.filter((item: any) => {
+        console.log(item.unitWork);
+        return (
+            item?.unitWork?.name && item.unitWork.name.includes(selectedUnitWork)
+        );
+    });
+
+
 
 
     return (
@@ -65,24 +89,25 @@ const OfficerList = () => {
                 </div>
             </div>
 
-            <Dropdown  >
-                <DropdownTrigger>
-                    <Button
-                        variant="bordered"
-                        className="my-4"
-                    >
-                        Pilih Unit Kerja
-                    </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Static Actions"  >
-                    <DropdownItem key="new">Basarnas</DropdownItem>
-                    <DropdownItem key="copy">Dinas Kesehatan</DropdownItem>
-                    <DropdownItem key="edit">Dinas sosial</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
 
             <Card>
-                <ButtonPrimary className=" rounded-md  m-3" onClick={handleAddCategory} >Tambah Petugas</ButtonPrimary>
+                <div className="grid grid-cols-2 p-3 gap-3">
+                    <Autocomplete
+                        label="Filter Berdasarkan Unit Kerja"
+                        className=""
+                        clearButtonProps={{ size: 'sm', onClick: () => setSelectedUnitWork('') }}
+                    >
+                        {dataDropdown.map((item) => (
+                            <AutocompleteItem key={item.value} value={item.value}
+                                onClick={() => getItem(item)}   >
+                                {item.label}
+                            </AutocompleteItem>
+
+                        ))}
+                    </Autocomplete>
+                    <ButtonPrimary className=" rounded-md" onClick={handleAddCategory} >Tambah Petugas</ButtonPrimary>
+                </div>
+
 
                 <Table aria-label="Example static collection table">
                     <TableHeader>
@@ -93,7 +118,7 @@ const OfficerList = () => {
                         <TableColumn>ACTION</TableColumn>
                     </TableHeader>
                     <TableBody>
-                        {dataUser?.map((user: any, index: any) => (
+                        {filteredData?.map((user: any, index: any) => (
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>{capitalizeWords(user.name)}</TableCell>
@@ -117,7 +142,7 @@ const OfficerList = () => {
                         label="Pilih Unit Kerja"
                         className="w-full"
                     >
-                        {animals.map((animal) => (
+                        {dataDropdown.map((animal) => (
                             <AutocompleteItem key={animal.value} value={animal.value}>
                                 {animal.label}
                             </AutocompleteItem>
