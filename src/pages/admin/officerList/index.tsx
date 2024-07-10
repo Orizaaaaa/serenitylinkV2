@@ -11,14 +11,17 @@ import { getAllUnitWork } from "../../../service/unitWork";
 
 const OfficerList = () => {
     const { onOpen, onClose, isOpen } = useDisclosure();
+    const [disabled, setDisabled] = useState(true)
+    const [errorMsg, setErrorMsg] = useState(' ')
     const [selectedUnitWork, setSelectedUnitWork] = useState('');
     const [unitKerja, setUnitKerja] = useState([]);
     const [dataUser, setDataUser] = useState([]);
     const [formData, setFormData] = useState({
         name: ' ',
         email: '',
-        unitKerja: '',
-        password: ''
+        unitWork: '',
+        password: '',
+        role: 'officer'
     })
 
     //get all user
@@ -45,11 +48,41 @@ const OfficerList = () => {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
+        const updatedValues = {
+            ...formData,
+            [name]: value,
+        };
+
+        if (updatedValues.email !== "" && updatedValues.password !== "" && (updatedValues.email.includes('@gmail.com') || updatedValues.email.includes('@test.com'))) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+        const nameRegex = /^[A-Za-z\s\-\_\'\.\,\&\(\)]{1,100}$/; //validasi nama
+        const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/ //validasi email
+        const passwordRegex = /^[A-Za-z0-9]+$/ //validasi password
+        if (!nameRegex.test(formData.name)) {
+            setErrorMsg('*Masukan nama yang valid')
+            setDisabled(true);
+        } else if (!emailRegex.test(formData.email)) {
+            setDisabled(true);
+            setErrorMsg('*Masukan email yang valid')
+        } else if (!passwordRegex.test(formData.password) || formData.password.length < 8) {
+            setDisabled(true);
+            setErrorMsg('*Password harus 8 karakter atau lebih')
+        } else if (formData.unitWork === '') {
+            setDisabled(true);
+            setErrorMsg('*Pilih salah satu unit kerja')
+        } else {
+            setDisabled(false);
+            setErrorMsg('')
+        }
     };
 
 
 
-    //dropdown
+    //dropdown name di ubah jadi label dan id di ubah jadi value
     const dataDropdown = unitKerja.map((unit: { name: string, _id: string }) => ({
         label: unit.name,
         value: unit._id,
@@ -57,10 +90,13 @@ const OfficerList = () => {
 
 
     //get item dari dropdown
-    const getItem = (item: any) => {
-        console.log(item.label);
-        setSelectedUnitWork(item.label)
-
+    const getItem = (item: any, type: string) => {
+        if (type === 'form') {
+            setFormData({ ...formData, unitWork: item.value })
+        } else {
+            console.log(item.label);
+            setSelectedUnitWork(item.label)
+        }
     }
 
 
@@ -72,6 +108,8 @@ const OfficerList = () => {
         );
     });
 
+
+    console.log(formData);
 
 
 
@@ -99,7 +137,7 @@ const OfficerList = () => {
                     >
                         {dataDropdown.map((item) => (
                             <AutocompleteItem key={item.value} value={item.value}
-                                onClick={() => getItem(item)}   >
+                                onClick={() => getItem(item, 'dropdown')}   >
                                 {item.label}
                             </AutocompleteItem>
 
@@ -141,18 +179,19 @@ const OfficerList = () => {
                     <Autocomplete
                         label="Pilih Unit Kerja"
                         className="w-full"
+                        clearButtonProps={{ size: 'sm', onClick: () => setFormData({ ...formData, unitWork: '' }) }}
                     >
-                        {dataDropdown.map((animal) => (
-                            <AutocompleteItem key={animal.value} value={animal.value}>
-                                {animal.label}
+                        {dataDropdown.map((item) => (
+                            <AutocompleteItem key={item.value} value={item.value} onClick={() => getItem(item, 'form')}>
+                                {item.label}
                             </AutocompleteItem>
                         ))}
                     </Autocomplete>
                 </div>
 
                 <InputReport marginY="my-1" htmlFor="password" title="Password " type="text" onChange={handleChange} value={formData.password} />
-
-                <ButtonPrimary className="rounded-md w-full"  >Buat Petugas</ButtonPrimary>
+                <p className="text-red-600">{errorMsg}</p>
+                <ButtonPrimary disabled={disabled} className={`rounded-md w-full my-4 ${disabled ? 'bg-slate-400' : 'bg-primaryblue'}`}  >Buat Petugas</ButtonPrimary>
             </ModalDefault>
         </DefaultLayout>
     )
