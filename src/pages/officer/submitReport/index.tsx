@@ -3,14 +3,16 @@ import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
 import { dataDetailLaporan } from "../../../utils/dataObject"
-import { useNavigate } from "react-router-dom"
+import { finishReportByOfficer } from "../../../service/report"
+import { postImage } from "../../../service/imagePost"
 
 
 const SubmitReportOfficer = () => {
 
     const [formData, setFormData] = useState({
-        status: 'menunggu',
-        image: null as File | null,
+        id_report: '668a0bbbffbfcb46a26abd63',
+        message: 'sudah beres',
+        imageReport: null as File | null,
     });
 
 
@@ -27,7 +29,7 @@ const SubmitReportOfficer = () => {
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, InputSelect: string) => {
         if (InputSelect === 'add') {
             const selectedImage = e.target.files?.[0];
-            setFormData({ ...formData, image: selectedImage || null });
+            setFormData({ ...formData, imageReport: selectedImage || null });
         } else {
             console.log('error');
 
@@ -35,12 +37,20 @@ const SubmitReportOfficer = () => {
     };
 
 
-    const navigate = useNavigate()
-    const handleSubmit = (e: any) => {
+    // const navigate = useNavigate()
+    // navigate('/laporan-saya-officer')
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
-        navigate('/laporan-saya-officer')
+        const imageUrl = await postImage({ image: formData.imageReport });
 
+        if (imageUrl) {
+            finishReportByOfficer({ ...formData, imageReport: [imageUrl] }, (result: any) => {
+                console.log(result);
+            })
+
+        }
     }
+
 
 
     return (
@@ -61,11 +71,12 @@ const SubmitReportOfficer = () => {
             </div>
 
             {/* maps */}
-            <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
+            <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={10}
+                text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
 
             <div className="images ">
-                {formData.image && formData.image instanceof Blob ? (
-                    <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                {formData.imageReport && formData.imageReport instanceof Blob ? (
+                    <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.imageReport)} />
                 ) : (
                     <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
                         <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
@@ -83,7 +94,7 @@ const SubmitReportOfficer = () => {
                 />
 
                 <div className="flex justify-center gap-3 mt-3">
-                    <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
+                    <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.imageReport === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                 </div>
             </div>
 

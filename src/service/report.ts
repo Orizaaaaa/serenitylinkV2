@@ -38,3 +38,14 @@ export const assignReport = async (formData: any, callback: any) => {
             console.log(false, err);
         });
 }
+
+
+export const finishReportByOfficer = (formData: any, callback: any) => {
+    axiosInterceptor.post('/reports/officer/done', formData)
+        .then((result) => {
+            callback(result.data)
+
+        }).catch((err) => {
+            console.log(err);
+        });
+}
