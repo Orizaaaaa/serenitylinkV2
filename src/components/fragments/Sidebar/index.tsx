@@ -49,8 +49,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       // Mengubah milidetik ke menit
       const diffMinutes = Math.floor(diff / 60000);
 
-      // Cek jika selisih waktu lebih dari 55 menit
-      if (diffMinutes > 55) {
+      // Cek jika selisih waktu lebih dari sehari
+      if (diffMinutes > 1440) {
         onOpen();
         // Atur count sesuai kebutuhan
         const timer = setInterval(() => {
