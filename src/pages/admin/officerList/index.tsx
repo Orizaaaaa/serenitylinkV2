@@ -5,7 +5,7 @@ import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import ModalDefault from "../../../components/fragments/modal/Modal";
 import { useEffect, useState } from "react";
 import InputReport from "../../../components/elemets/input/InputReport";
-import { getAllUser } from "../../../service/user";
+import { deleteUser, getAllUser } from "../../../service/user";
 import { capitalizeWords } from "../../../utils/helper";
 import { getAllUnitWork } from "../../../service/unitWork";
 import { register } from "../../../service/auth";
@@ -142,6 +142,20 @@ const OfficerList = () => {
 
     }
 
+    //hapus petugas
+    const handleDelete = async (id: any) => {
+        await deleteUser(id, (result: any) => {
+            console.log(result);
+            getAllUser((result: any) => {
+                const data = result.data ? result.data.filter((role: any) =>
+                    role.role !== 'user') : [];
+                setDataUser(data)
+            })
+        })
+    }
+
+    console.log(dataUser);
+
 
 
     return (
@@ -193,7 +207,8 @@ const OfficerList = () => {
                                 <TableCell>{capitalizeWords(user.name)}</TableCell>
                                 <TableCell>{capitalizeWords(user.role)}</TableCell>
                                 <TableCell>{user.unitWork ? capitalizeWords(user.unitWork.name) : '-'}</TableCell>
-                                <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full" >Delete</ButtonPrimary></TableCell>
+                                <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full"
+                                    onClick={() => handleDelete(user.id)}  >Delete</ButtonPrimary></TableCell>
                             </TableRow>
                         ))}
 

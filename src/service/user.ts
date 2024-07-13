@@ -10,3 +10,12 @@ export const getAllUser = (callback: any) => {
         });
 
 }
+
+export const deleteUser = async (id: any, callback: any) => {
+    await axiosInterceptor.delete(`/user/delete/${id}`)
+        .then((result) => {
+            callback(true, result.data)
+        }).catch((err: any) => {
+            console.log(false, err);
+        });
+}
