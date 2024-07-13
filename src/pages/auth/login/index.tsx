@@ -60,6 +60,8 @@ const Login = () => {
                 localStorage.setItem('email', res.data.email)
                 localStorage.setItem('name', res.data.name)
                 localStorage.setItem('id', res.data.id)
+                const loginTime = new Date().getTime();
+                localStorage.setItem('loginTime', loginTime.toString());
 
                 if (res.data.role === 'user') {
                     navigate('/dashboard-user')

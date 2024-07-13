@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
@@ -10,6 +10,10 @@ import { FaBookOpen } from "react-icons/fa6";
 import { IoMdPricetags } from "react-icons/io";
 import { AiOutlineUserSwitch } from "react-icons/ai";
 import { BsBuildingAdd } from "react-icons/bs";
+import ModalDefault from "../modal/Modal";
+import { useDisclosure } from "@nextui-org/react";
+import { Player } from "@lottiefiles/react-lottie-player";
+import animationLogout from "../../../assets/logoutAnimation.json";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -17,11 +21,70 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
-  // useLogin()
 
+  const { onOpen, onClose, isOpen } = useDisclosure();
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
+  const [count, setCount] = useState(5);
 
+  const navigates = useNavigate();
+
+
+  //login time
+  useEffect(() => {
+
+    // Mendapatkan waktu login dari localStorage
+    const loginTimeStr = localStorage.getItem('loginTime');
+
+    if (loginTimeStr) {
+      // Konversi waktu login dari string ke objek Date
+      const loginTime = new Date(parseInt(loginTimeStr, 10));
+
+      // Waktu saat ini
+      const currentTime = new Date();
+
+      // Menghitung selisih waktu dalam milidetik
+      const diff = currentTime.getTime() - loginTime.getTime();
+
+      // Mengubah milidetik ke menit
+      const diffMinutes = Math.floor(diff / 60000);
+
+      // Cek jika selisih waktu lebih dari 55 menit
+      if (diffMinutes > 55) {
+        onOpen();
+        // Atur count sesuai kebutuhan
+        const timer = setInterval(() => {
+          setCount(prevCount => {
+            if (prevCount > 0) {
+              return prevCount - 1;
+            } else {
+              clearInterval(timer);
+              navigates('/login');
+              localStorage.clear();
+              return 0; // Pastikan count kembali ke 0 setelah navigasi dilakukan
+            }
+          });
+        }, 1000);
+
+        return () => clearInterval(timer);
+      }
+    }
+  }, []);
+
+  //modal
+  const handleOpenModal = () => {
+    onOpen();
+  }
+
+  // sidebar validation
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
+
+  //role localStorage
+  const role: any = localStorage.getItem('role')
 
 
   // close on click outside
@@ -40,6 +103,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     return () => document.removeEventListener("click", clickHandler);
   });
 
+
   // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ key }: KeyboardEvent) => {
@@ -52,14 +116,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
 
 
-  // sidebar validation
-  const navigate = useNavigate()
-  const handleLogout = () => {
-    localStorage.clear()
-    navigate('/login')
-  }
-  const role: any = localStorage.getItem('role')
-  //role localStorage
+
 
   const setSidebar = (role: string) => {
     if (role === 'user') {
@@ -89,6 +146,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<BsBuildingAdd size={19} />} title="Unit Kerja" pathname="/unit-kerja-admin" />
           <NavigationList icon={<BsBuildingAdd size={19} />} title="Coba Gambar" pathname="/coba-gambar" />
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
+          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleOpenModal} >modal</button>
         </>
       )
 
@@ -146,6 +204,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
               {/* logic sidebar ada di sini */}
               {setSidebar(role)}
+              <ModalDefault isOpen={isOpen} onClose={onClose} closeButton={true} >
+                <Player autoplay loop src={animationLogout} />
+                <h1 className="text-center text-lg">Sesi login kamu akan berakhir, silahkan login kembali...</h1>
+                <h2 className="text-center text-xl font-semibold text-red-600" >{count}</h2>
+
+              </ModalDefault>
 
 
               {/* <!-- Menu Item Calendar -->
