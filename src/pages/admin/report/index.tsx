@@ -5,20 +5,30 @@ import { useEffect, useState } from "react"
 import { getAllReport } from "../../../service/report"
 import CardReport from "../../../components/fragments/CardReport/CardReport"
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react"
+import { useDispatch, useSelector } from "react-redux"
+import { addReport } from "../../../redux/report/reportSlice"
 
 
 const ReportAdmin = () => {
 
     const [dataReport, setDataReport] = useState([]);
-
-    useEffect(() => {
-        getAllReport((result: any) => {
-            setDataReport(result.data)
-        })
-    }, []);
-
     const [selectedStatus, setSelectedStatus] = useState("");
     const [searchData, setSearchData] = useState("");
+    const dispatch = useDispatch();
+    const report = useSelector((state: any) => state.report.reportList);
+
+
+    useEffect(() => {
+        if (report.length < 1) {
+            getAllReport((result: any) => {
+                dispatch(addReport(result.data));
+                setDataReport(result.data);
+            });
+        } else {
+            setDataReport(report);
+        }
+    }, [report, dispatch]);
+
 
     const handleStatusSelect = (status: any) => {
         setSelectedStatus(status);
@@ -29,8 +39,6 @@ const ReportAdmin = () => {
             setDataReport(result.data)
         })
     }, []);
-
-    console.log(dataReport);
 
     const handleSearch = (e: any) => {
         setSearchData(e.target.value);
@@ -43,6 +51,8 @@ const ReportAdmin = () => {
         );
     });
 
+
+    console.log(report);
     console.log(dataReport);
 
     return (
