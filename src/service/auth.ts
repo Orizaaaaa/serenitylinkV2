@@ -6,7 +6,6 @@ export const cloudApiKey = import.meta.env.VITE_CLOUDINARY_API_KEY
 export const cloudApiSecret = import.meta.env.VITE_CLOUDINARY_API_SECRET
 
 export const loginService = async (formLogin: any, callback: any) => {
-    localStorage.clear()
     await axios.post(`${url}/user/login`, formLogin)
         .then((res) => {
             callback(true, res.data);
