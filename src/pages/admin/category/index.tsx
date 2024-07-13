@@ -1,27 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { buttonKategori } from "../../../utils/dataObject"
 import { FaPlus } from "react-icons/fa";
 import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
 import InputReport from "../../../components/elemets/input/InputReport";
 import { camera } from "../../../image";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
+import { createCategory, deleteCategory, getCategories } from "../../../service/category";
+import { postImage } from "../../../service/imagePost";
 
 
 const CategoryAdmin = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [category, setCategory] = useState([]);
 
+    // form data untuk create category
     const [formData, setFormData] = useState({
         name: '',
-        categori: '',
         image: null as File | null
     });
-    const handleCategory = (value: string) => {
-        setFormData({ ...formData, categori: value })
-    }
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [dataDelete, setDataDelete] = useState({
+        name: ''
+    })
+    const handleCategory = (value: string) => {
+        setDataDelete({ ...dataDelete, name: value })
+    }
 
     const handleAddCategory = () => {
         onOpen();
@@ -50,6 +55,48 @@ const CategoryAdmin = () => {
 
         }
     };
+
+    //get all category
+    useEffect(() => {
+        getCategories((result: any) => {
+            setCategory(result.data)
+        })
+    }, []);
+
+
+    const handleDelete = (value: string) => {
+        deleteCategory(value, (result: any) => {
+            console.log(result);
+            getCategories((result: any) => {
+                setCategory(result.data)
+            })
+        })
+    }
+
+    const handlecreateCategory = async (e: any) => {
+        e.preventDefault()
+        setDataDelete({ ...dataDelete, name: '' })
+        const imageUrl = await postImage({ image: formData.image });
+        if (imageUrl) {
+            const data = { name: formData.name, image: imageUrl }
+            await createCategory(data, (result: any) => {
+                console.log(result);
+                onClose()
+                getCategories((result: any) => {
+                    setCategory(result.data)
+                })
+                setFormData({
+                    name: '',
+                    image: null as File | null
+                })
+            })
+        }
+
+    }
+
+
+
+
     return (
         <DefaultLayout>
             <Card  >
@@ -69,13 +116,16 @@ const CategoryAdmin = () => {
                             <p className="mt-1" >Tambah Kategori</p>
                         </div>
 
-                        {buttonKategori.map((category, index) => (
+                        {category.map((category: any, index) => (
                             <div className="image flex-col justify-center items-center" key={index}>
-                                <img onClick={() => handleCategory(category.value)}
+                                <img onClick={() => handleCategory(category?.name)}
+
                                     className={`w-[70px] h-[70px] mx-auto rounded-full object-cover   cursor-pointer 
-                                    ${formData.categori === category.value ? 'border-2 border-primary' : ''}`}
+                                    ${dataDelete?.name === category?.name ? 'border-2 border-primary' : ''}`}
                                     src={category.image} alt={'image kategori'} />
-                                <button className={`flex mt-1  ${formData.categori === category.value ? 'block' : 'hidden'}`} ><IoCloseCircleOutline size={20} color="red" /></button>
+
+                                <button className={`flex mt-1  ${dataDelete?.name === category.name ? 'block' : 'hidden'}`}
+                                    onClick={() => handleDelete(category._id)} ><IoCloseCircleOutline size={20} color="red" /></button>
                                 <p className="text-sm md:text-base mt-1">{category.name}</p>
                             </div>
 
@@ -95,8 +145,8 @@ const CategoryAdmin = () => {
                     <ModalContent>
                         <>
                             <ModalBody>
-                                <form action="">
-                                    <InputReport htmlFor="title" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
+                                <form onSubmit={handlecreateCategory}>
+                                    <InputReport htmlFor="name" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
 
                                     <h1 className=" font-medium" >Logo Kategori :  </h1>
                                     <div className="images ">
@@ -122,7 +172,7 @@ const CategoryAdmin = () => {
                                             <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                         </div>
                                     </div>
-                                    <ButtonPrimary className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
                                 </form>
                             </ModalBody>
                         </>
