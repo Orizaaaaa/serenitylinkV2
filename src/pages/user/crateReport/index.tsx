@@ -19,7 +19,7 @@ const CreateReportUser = () => {
         long: 107.430687,
         location: '',
         desc: '',
-        categori: 'jalan'
+        categori: '66924fb7c8bfce4f1d6d9790'
 
     });
 

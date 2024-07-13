@@ -11,7 +11,9 @@ import { coment } from "../../../service/coment";
 
 interface Report {
     address: string;
-    category: string;
+    category: {
+        name: string;
+    };
     comment: string[];
     createdAt: string;
     description: string;
@@ -81,7 +83,7 @@ const SubmitReport = () => {
         },
         {
             title: 'Kategori Laporan  ',
-            text: dataReport?.category
+            text: dataReport?.category.name || ""
         },
         {
             title: 'Lokasi Kejadian  ',

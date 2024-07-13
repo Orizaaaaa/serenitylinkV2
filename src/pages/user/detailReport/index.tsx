@@ -8,7 +8,9 @@ import { coment } from "../../../service/coment";
 
 interface Report {
     address: string;
-    category: string;
+    category: {
+        name: string;
+    };
     comment: string[];
     createdAt: string;
     description: string;
@@ -43,7 +45,7 @@ const DetailReportUser = () => {
         { title: "Judul Laporan", text: dataReport?.title },
         { title: "Nomor Laporan", text: dataReport?._id },
         { title: "Tanggal Laporan", text: formatDate(dataReport?.createdAt || "") },
-        { title: "Kategori Laporan", text: dataReport?.category },
+        { title: "Kategori Laporan", text: dataReport?.category.name || "" },
         { title: "Lokasi Kejadian", text: dataReport?.address },
         { title: "Status", text: dataReport?.status },
         { title: "Deskripsi Laporan", text: dataReport?.description },
@@ -80,13 +82,13 @@ const DetailReportUser = () => {
 
         })
     }
-
+    console.log(dataReport);
 
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
                 <div className="left space-y-6">
-                    {dataDetailLaporan.map((item, index) => (
+                    {dataDetailLaporan.map((item: any, index) => (
                         <div className="text" key={index}>
                             <h1 className="text-lg font-semibold">{item.title}</h1>
                             <p>{item.text}</p>
