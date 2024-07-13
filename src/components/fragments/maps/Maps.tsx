@@ -22,7 +22,7 @@ const Maps = ({ markerPosition, zoom, text, children, className }: Props) => {
     L.Marker.prototype.options.icon = DefaultIcon;
 
     return (
-        <MapContainer className={className} center={{ lat: -6.917464, lng: 107.619125 }} zoom={zoom} scrollWheelZoom={false} >
+        <MapContainer className={`${className} z-30`} center={{ lat: -6.917464, lng: 107.619125 }} zoom={zoom} scrollWheelZoom={false} >
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
