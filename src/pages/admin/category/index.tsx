@@ -66,7 +66,7 @@ const CategoryAdmin = () => {
                     <div className='flex flex-wrap justify-center mx-auto mt-5 gap-10 w-full'>
                         <div className="flex flex-col justify-center items-center">
                             <button onClick={handleAddCategory} className="w-[70px] h-[70px] bg-gray-400 rounded-full flex justify-center items-center" ><FaPlus /></button>
-                            <p className="mt-3" >Tambah Kategori</p>
+                            <p className="mt-1" >Tambah Kategori</p>
                         </div>
 
                         {buttonKategori.map((category, index) => (
