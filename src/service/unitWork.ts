@@ -20,3 +20,12 @@ export const createUnitWork = async (formUnitWork: any, callback: any) => {
         });
 
 }
+
+export const deleteUnitWork = async (id: any, callback: any) => {
+    await axiosInterceptor.delete(`/unit-work/${id}`)
+        .then((result) => {
+            callback(true, result.data)
+        }).catch((err: any) => {
+            console.log(false, err);
+        });
+}

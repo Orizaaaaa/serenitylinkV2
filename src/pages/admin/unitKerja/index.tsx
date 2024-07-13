@@ -7,8 +7,9 @@ import { camera } from "../../../image";
 import { FaPlus } from "react-icons/fa6";
 import Card from "../../../components/elemets/card/Card";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { createUnitWork, getAllUnitWork } from "../../../service/unitWork";
+import { createUnitWork, deleteUnitWork, getAllUnitWork } from "../../../service/unitWork";
 import { postImage } from "../../../service/imagePost";
+import ModalDefault from "../../../components/fragments/modal/Modal";
 
 
 const UnitKerjaAdmin = () => {
@@ -21,8 +22,6 @@ const UnitKerjaAdmin = () => {
     });
 
     const [dataDelete, setDataDelete] = useState({
-        name: '',
-        image: '',
         _id: ''
     })
 
@@ -108,6 +107,22 @@ const UnitKerjaAdmin = () => {
 
     }
 
+
+    //delete unitWork
+    const handleDeleteUnitWork = async (id: string) => {
+        await deleteUnitWork(id, (status: boolean, res: any) => {
+            if (status) {
+                getAllUnitWork((result: any) => {
+                    const data = result.unitWork
+                    setUnitKerja(data)
+                })
+
+            } else {
+                console.log(res);
+            }
+        })
+    }
+
     return (
         <DefaultLayout>
             <Card  >
@@ -136,7 +151,7 @@ const UnitKerjaAdmin = () => {
 
                                     src={item.image.map((image: any) => image)} alt={item.image.map((image: any) => image)} />
 
-                                <button className={`flex mt-1  ${dataDelete._id === item._id ? 'block' : 'hidden'}`} ><IoCloseCircleOutline size={20} color="red" /></button>
+                                <button className={`flex mt-1  ${dataDelete._id === item._id ? 'block' : 'hidden'}`} onClick={() => handleDeleteUnitWork(item._id)} ><IoCloseCircleOutline size={20} color="red" /></button>
                                 <p className="text-sm md:text-base mt-1">{item.name}</p>
                             </div>
 
@@ -146,49 +161,38 @@ const UnitKerjaAdmin = () => {
                 </Card>
 
                 {/* modal */}
-                <Modal
-                    size={'xl'}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    isDismissable={false} isKeyboardDismissDisabled={true}
-                >
-                    <ModalContent>
-                        <>
-                            <ModalBody>
-                                <form onSubmit={handleCreateUnitWork}>
-                                    <InputReport htmlFor="name" title="Nama Unit Kerja : " type="text" onChange={handleChange} value={formData.name} />
+                <ModalDefault isOpen={isOpen} onClose={onClose}  >
+                    <form onSubmit={handleCreateUnitWork}>
+                        <InputReport htmlFor="name" title="Nama Unit Kerja : " type="text" onChange={handleChange} value={formData.name} />
 
-                                    <h1 className=" font-medium" >Logo Unit Kerja :  </h1>
-                                    <div className="images ">
-                                        {formData.image && formData.image instanceof Blob ? (
-                                            <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
-                                        ) : (
-                                            <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
-                                                <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
-                                                    <img className="w-20 h-20 mx-auto" src={camera} />
-                                                    <p>*Masukan logo dari Unit Kerja tersebut</p>
-                                                </button>
-                                            </div>
-                                        )}
+                        <h1 className=" font-medium" >Logo Unit Kerja :  </h1>
+                        <div className="images ">
+                            {formData.image && formData.image instanceof Blob ? (
+                                <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                            ) : (
+                                <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
+                                    <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
+                                        <img className="w-20 h-20 mx-auto" src={camera} />
+                                        <p>*Masukan logo dari Unit Kerja tersebut</p>
+                                    </button>
+                                </div>
+                            )}
 
-                                        <input
-                                            type="file"
-                                            className="hidden"
-                                            id="image-input-add"
-                                            onChange={(e) => handleImageChange(e, 'add')}
-                                        />
+                            <input
+                                type="file"
+                                className="hidden"
+                                id="image-input-add"
+                                onChange={(e) => handleImageChange(e, 'add')}
+                            />
 
-                                        <div className="flex justify-center gap-3 mt-3">
-                                            <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
-                                        </div>
-                                        <p className="mt-3 text-red-600" >{errorMsg}</p>
-                                    </div>
-                                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
-                                </form>
-                            </ModalBody>
-                        </>
-                    </ModalContent>
-                </Modal>
+                            <div className="flex justify-center gap-3 mt-3">
+                                <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
+                            </div>
+                            <p className="mt-3 text-red-600" >{errorMsg}</p>
+                        </div>
+                        <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                    </form>
+                </ModalDefault>
             </div >
 
         </DefaultLayout >
