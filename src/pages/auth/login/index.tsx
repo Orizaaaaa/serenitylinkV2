@@ -48,9 +48,9 @@ const Login = () => {
 
     const handleLogin = (e: any) => {
         e.preventDefault()
+        localStorage.clear()
         loginService(form, (status: boolean, res: any) => {
             if (status) {
-
                 const role = res.data.role
 
                 login({ role })
