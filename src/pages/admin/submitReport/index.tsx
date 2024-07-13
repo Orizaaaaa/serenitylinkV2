@@ -83,7 +83,7 @@ const SubmitReport = () => {
         },
         {
             title: 'Kategori Laporan  ',
-            text: dataReport?.category.name || ""
+            text: dataReport?.category?.name || "Tidak ada kategori"
         },
         {
             title: 'Lokasi Kejadian  ',
