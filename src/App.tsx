@@ -20,7 +20,6 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import { AuthProvider } from './hooks/auth/AuthContext';
 import PrivateRoute from './hooks/auth/PrivateRoute';
-import CobaGambar from './pages/admin/CobaGambar';
 
 
 
@@ -59,7 +58,6 @@ function App() {
           <Route path="/laporan-admin/submit-laporan-admin/:id" element={<SubmitReportAdmin />} />
           <Route path="/petugas-admin" element={<OfficerList />} />
           <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />
-          <Route path="/coba-gambar" element={<CobaGambar />} />
         </Route>
       </Routes>
 

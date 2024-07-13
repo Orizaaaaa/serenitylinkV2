@@ -71,11 +71,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   }, []);
 
-  //modal
-  const handleOpenModal = () => {
-    onOpen();
-  }
-
   // sidebar validation
   const navigate = useNavigate()
   const handleLogout = () => {
@@ -144,9 +139,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<AiOutlineUserSwitch size={19} />} title="Petugas" pathname="/petugas-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<BsBuildingAdd size={19} />} title="Unit Kerja" pathname="/unit-kerja-admin" />
-          <NavigationList icon={<BsBuildingAdd size={19} />} title="Coba Gambar" pathname="/coba-gambar" />
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
-          <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleOpenModal} >modal</button>
         </>
       )
 
@@ -202,7 +195,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
 
-              {/* logic sidebar ada di sini */}
+              {/* modal dan sidebar */}
               {setSidebar(role)}
               <ModalDefault isOpen={isOpen} onClose={onClose} closeButton={true} >
                 <Player autoplay loop src={animationLogout} />
