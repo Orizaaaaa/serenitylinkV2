@@ -20,6 +20,8 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import { AuthProvider } from './hooks/auth/AuthContext';
 import PrivateRoute from './hooks/auth/PrivateRoute';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 
 
@@ -27,39 +29,40 @@ function App() {
 
   return (
     <AuthProvider>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+          {/* Protected Routes for Users */}
+          <Route element={<PrivateRoute allowedRoles={['user']} />}>
+            <Route path="/dashboard-user" element={<DashboardUser />} />
+            <Route path="/dashboard-user/buat-laporan-user" element={<CreateReportUser />} />
+            <Route path="/dashboard-user/detail-laporan-user/:id" element={<DetailReportUser />} />
+            <Route path="/semua-laporan-user" element={<AllReportUser />} />
+            <Route path="/laporan-saya-user" element={<MyReportUser />} />
+          </Route>
 
-        {/* Protected Routes for Users */}
-        <Route element={<PrivateRoute allowedRoles={['user']} />}>
-          <Route path="/dashboard-user" element={<DashboardUser />} />
-          <Route path="/dashboard-user/buat-laporan-user" element={<CreateReportUser />} />
-          <Route path="/dashboard-user/detail-laporan-user/:id" element={<DetailReportUser />} />
-          <Route path="/semua-laporan-user" element={<AllReportUser />} />
-          <Route path="/laporan-saya-user" element={<MyReportUser />} />
-        </Route>
+          {/* Protected Routes for Officers */}
+          <Route element={<PrivateRoute allowedRoles={['officer']} />}>
+            <Route path="/dashboard-officer" element={<DashboardOfficer />} />
+            <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
+            <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
+            <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportOfficer />} />
+          </Route>
 
-        {/* Protected Routes for Officers */}
-        <Route element={<PrivateRoute allowedRoles={['officer']} />}>
-          <Route path="/dashboard-officer" element={<DashboardOfficer />} />
-          <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
-          <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
-          <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportOfficer />} />
-        </Route>
-
-        {/* Protected Routes for Admins */}
-        <Route element={<PrivateRoute allowedRoles={['admin']} />}>
-          <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-          <Route path="/kategori-admin" element={<CategoryAdmin />} />
-          <Route path="/laporan-admin" element={<ReportAdmin />} />
-          <Route path="/laporan-admin/submit-laporan-admin/:id" element={<SubmitReportAdmin />} />
-          <Route path="/petugas-admin" element={<OfficerList />} />
-          <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />
-        </Route>
-      </Routes>
+          {/* Protected Routes for Admins */}
+          <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+            <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+            <Route path="/kategori-admin" element={<CategoryAdmin />} />
+            <Route path="/laporan-admin" element={<ReportAdmin />} />
+            <Route path="/laporan-admin/submit-laporan-admin/:id" element={<SubmitReportAdmin />} />
+            <Route path="/petugas-admin" element={<OfficerList />} />
+            <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />
+          </Route>
+        </Routes>
+      </Provider>
 
     </AuthProvider>
   )
