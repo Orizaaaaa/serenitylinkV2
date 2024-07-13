@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import InputReport from "../../../components/elemets/input/InputReport"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
@@ -6,12 +6,13 @@ import { useMapEvents } from 'react-leaflet';
 import Maps from "../../../components/fragments/maps/Maps";
 import { camera } from "../../../image";
 import { useNavigate } from "react-router-dom";
-import { buttonKategori } from "../../../utils/dataObject";
 import { postImage } from "../../../service/imagePost";
 import { createReport } from "../../../service/report";
+import { getCategories } from "../../../service/category";
 
 const CreateReportUser = () => {
     const [errorMsg, setErrorMsg] = useState('')
+    const [category, setCategory] = useState([])
     const [formData, setFormData] = useState({
         title: "",
         image: null as File | null,
@@ -19,9 +20,15 @@ const CreateReportUser = () => {
         long: 107.430687,
         location: '',
         desc: '',
-        categori: '66924fb7c8bfce4f1d6d9790'
+        categori: ''
 
     });
+
+    useEffect(() => {
+        getCategories((result: any) => {
+            setCategory(result.data)
+        })
+    }, []);
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -138,13 +145,13 @@ const CreateReportUser = () => {
                 <Maps markerPosition={{ lat: formData.lat, lng: formData.long }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md mt-4" >
                     <MapEvents />
                 </Maps>
-
+                <h1 className="my-3 text-medium font-medium" >Pilih salah satu kategori</h1>
                 <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 container mx-auto gap-5 mt-5'>
 
-                    {buttonKategori.map((item, index) => (
+                    {category.map((item: any, index) => (
                         <div className="image flex-col justify-center items-center" key={index}>
-                            <img onClick={() => handleCategory(item.name)} src={item.image} className={`w-[70px] h-[70px] mx-auto rounded-full
-                             object-cover cursor-pointer ${formData.categori === item.name ? 'border-3 border-primary' : ''} `} alt='image' />
+                            <img onClick={() => handleCategory(item._id)} src={item.image} className={`w-[70px] h-[70px] mx-auto rounded-full
+                             object-cover cursor-pointer ${formData.categori === item._id ? 'border-3 border-primary' : ''} `} alt='image' />
 
                             <p className={`text-sm md:text-base mt-1 text-center`}>{item.name}</p>
                         </div>
