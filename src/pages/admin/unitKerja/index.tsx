@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { useEffect, useState } from "react";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
