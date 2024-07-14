@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { FaPlus } from "react-icons/fa";
-import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import InputReport from "../../../components/elemets/input/InputReport";
 import { camera } from "../../../image";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import { createCategory, deleteCategory, getCategories } from "../../../service/category";
 import { postImage } from "../../../service/imagePost";
+import ModalDefault from "../../../components/fragments/modal/Modal";
 
 
 const CategoryAdmin = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
     const [category, setCategory] = useState([]);
 
     // form data untuk create category
@@ -21,16 +23,8 @@ const CategoryAdmin = () => {
         image: null as File | null
     });
 
-    const [dataDelete, setDataDelete] = useState({
-        name: ''
-    })
-    const handleCategory = (value: string) => {
-        setDataDelete({ ...dataDelete, name: value })
-    }
+    const [dataDelete, setDataDelete] = useState('')
 
-    const handleAddCategory = () => {
-        onOpen();
-    }
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -64,18 +58,10 @@ const CategoryAdmin = () => {
     }, []);
 
 
-    const handleDelete = (value: string) => {
-        deleteCategory(value, (result: any) => {
-            console.log(result);
-            getCategories((result: any) => {
-                setCategory(result.data)
-            })
-        })
-    }
 
     const handlecreateCategory = async (e: any) => {
         e.preventDefault()
-        setDataDelete({ ...dataDelete, name: '' })
+        setDataDelete('')
         const imageUrl = await postImage({ image: formData.image });
         if (imageUrl) {
             const data = { name: formData.name, image: imageUrl }
@@ -94,6 +80,29 @@ const CategoryAdmin = () => {
 
     }
 
+    const handleChangeId = (value: string) => {
+        setDataDelete(value)
+    }
+
+    const handleAddCategory = () => {
+        onOpen();
+    }
+    const handleDeleteModal = () => {
+        onWarningOpen();
+    };
+
+    const confirmDelete = () => {
+        if (dataDelete) {
+            deleteCategory(dataDelete, (result: any) => {
+                console.log(result);
+                getCategories((result: any) => {
+                    setCategory(result.data);
+                });
+                setDataDelete('');
+                onWarningClose();
+            });
+        }
+    };
 
 
 
@@ -118,69 +127,62 @@ const CategoryAdmin = () => {
 
                         {category.map((category: any, index) => (
                             <div className="image flex-col justify-center items-center" key={index}>
-                                <img onClick={() => handleCategory(category?.name)}
-
+                                <img onClick={() => handleChangeId(category?._id)}
                                     className={`w-[70px] h-[70px] mx-auto rounded-full object-cover   cursor-pointer 
-                                    ${dataDelete?.name === category?.name ? 'border-2 border-primary' : ''}`}
+                                   ${dataDelete === category?._id ? 'border-2 border-primary' : ''}`}
                                     src={category.image} alt={'image kategori'} />
 
-                                <button className={`flex mt-1  ${dataDelete?.name === category.name ? 'block' : 'hidden'}`}
-                                    onClick={() => handleDelete(category._id)} ><IoCloseCircleOutline size={20} color="red" /></button>
+                                <button className={`flex mt-1  ${dataDelete === category._id ? 'block' : 'hidden'}`}
+                                    onClick={handleDeleteModal} ><IoCloseCircleOutline size={20} color="red" /></button>
                                 <p className="text-sm md:text-base mt-1">{category.name}</p>
                             </div>
-
-
                         ))}
-
                     </div>
                 </Card>
 
                 {/* modal */}
-                <Modal
-                    size={'xl'}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    isDismissable={false} isKeyboardDismissDisabled={true}
-                >
-                    <ModalContent>
-                        <>
-                            <ModalBody>
-                                <form onSubmit={handlecreateCategory}>
-                                    <InputReport htmlFor="name" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
+                <ModalDefault isOpen={isOpen} onClose={onClose}>
+                    <form onSubmit={handlecreateCategory}>
+                        <InputReport htmlFor="name" title="Nama Kategori : " type="text" onChange={handleChange} value={formData.name} />
 
-                                    <h1 className=" font-medium" >Logo Kategori :  </h1>
-                                    <div className="images ">
-                                        {formData.image && formData.image instanceof Blob ? (
-                                            <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
-                                        ) : (
-                                            <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
-                                                <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
-                                                    <img className="w-20 h-20 mx-auto" src={camera} />
-                                                    <p>*Masukan logo dari kategori tersebut</p>
-                                                </button>
-                                            </div>
-                                        )}
+                        <h1 className=" font-medium" >Logo Kategori :  </h1>
+                        <div className="images ">
+                            {formData.image && formData.image instanceof Blob ? (
+                                <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                            ) : (
+                                <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
+                                    <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
+                                        <img className="w-20 h-20 mx-auto" src={camera} />
+                                        <p>*Masukan logo dari kategori tersebut</p>
+                                    </button>
+                                </div>
+                            )}
+                            <input
+                                type="file"
+                                className="hidden"
+                                id="image-input-add"
+                                onChange={(e) => handleImageChange(e, 'add')}
+                            />
+                            <div className="flex justify-center gap-3 mt-3">
+                                <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
+                            </div>
+                        </div>
+                        <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                    </form>
+                </ModalDefault>
 
-                                        <input
-                                            type="file"
-                                            className="hidden"
-                                            id="image-input-add"
-                                            onChange={(e) => handleImageChange(e, 'add')}
-                                        />
 
-                                        <div className="flex justify-center gap-3 mt-3">
-                                            <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
-                                        </div>
-                                    </div>
-                                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
-                                </form>
-                            </ModalBody>
-                        </>
-                    </ModalContent>
-                </Modal>
-            </div >
-
-        </DefaultLayout >
+                {/* Warning Modal */}
+                <ModalDefault isOpen={isWarningOpen} onClose={onWarningClose}>
+                    <h2 className="text-lg font-semibold">Peringatan</h2>
+                    <p> apakah Anda yakin ingin menghapus kategori ini?</p>
+                    <div className="flex justify-end gap-4 mt-4">
+                        <ButtonPrimary onClick={onWarningClose} className="bg-gray-300 text-black rounded-md">Batal</ButtonPrimary>
+                        <ButtonPrimary onClick={confirmDelete} className="bg-red-500 text-white rounded-md">Hapus</ButtonPrimary>
+                    </div>
+                </ModalDefault>
+            </div>
+        </DefaultLayout>
     )
 }
 
