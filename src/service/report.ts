@@ -49,3 +49,13 @@ export const finishReportByOfficer = (formData: any, callback: any) => {
             console.log(err);
         });
 }
+
+
+export const deleteReport = async (id: any, callback: any) => {
+    await axiosInterceptor.delete(`/reports/${id}`)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}

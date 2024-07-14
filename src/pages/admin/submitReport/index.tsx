@@ -4,8 +4,8 @@ import DefaultLayout from "../../../components/layout/DefaultLayout";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import { useEffect, useRef, useState } from "react";
 import { getAllUnitWork } from "../../../service/unitWork";
-import { useParams } from "react-router-dom";
-import { assignReport, getReportById } from "../../../service/report";
+import { useNavigate, useParams } from "react-router-dom";
+import { assignReport, deleteReport, getReportById } from "../../../service/report";
 import { capitalizeWords, formatDate, parseCoordinate } from "../../../utils/helper";
 import { coment } from "../../../service/coment";
 import Card from "../../../components/elemets/card/Card";
@@ -125,6 +125,8 @@ const SubmitReport = () => {
         })
     }
 
+
+
     //coment
     const handleChangeComent = (e: any) => {
         setFormComent({ ...formComent, message: e.target.value })
@@ -157,12 +159,16 @@ const SubmitReport = () => {
 
         })
 
-
-
-
     }
 
-
+    //delete report
+    const navigates: any = useNavigate()
+    const handleDeleteReport = (value: any) => {
+        deleteReport(value, (result: any) => {
+            console.log(result);
+            navigates('/laporan-admin')
+        })
+    }
 
     return (
         <DefaultLayout>
@@ -266,7 +272,7 @@ const SubmitReport = () => {
                     Kirim Laporan
                 </ButtonPrimary>
 
-                <ButtonPrimary className="w-full rounded-md mt-3" bg="bg-red-700"  >
+                <ButtonPrimary type="button" onClick={() => handleDeleteReport(id)} className="w-full rounded-md mt-3" bg="bg-red-700"  >
                     Hapus Laporan
                 </ButtonPrimary>
             </Card>
