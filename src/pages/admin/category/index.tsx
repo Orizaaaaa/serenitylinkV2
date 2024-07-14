@@ -23,6 +23,7 @@ const CategoryAdmin = () => {
         image: null as File | null
     });
 
+    //form data untuk delete category
     const [dataDelete, setDataDelete] = useState('')
 
 
