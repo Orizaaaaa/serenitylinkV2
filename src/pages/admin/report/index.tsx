@@ -27,7 +27,7 @@ const ReportAdmin = () => {
         } else {
             setDataReport(report);
         }
-    }, [report, dispatch]);
+    }, []);
 
 
     const handleStatusSelect = (status: any) => {
