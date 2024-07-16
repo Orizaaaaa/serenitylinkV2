@@ -5,17 +5,19 @@ import { jalanRusak, manusiaLaptop } from "../../../image"
 import CardLink from "../../../components/elemets/card/CardLink"
 import { FaCalendar, FaLocationDot } from "react-icons/fa6"
 import { getReportByUnitWork } from "../../../service/officer"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import CardReport from "../../../components/fragments/CardReport/CardReport"
 
 
 const DashboardOfficer = () => {
 
+    const [dataReport, setDataReport] = useState([])
     const id: any = localStorage.getItem('id')
 
     useEffect(() => {
         getReportByUnitWork(id, (status: boolean, res: any) => {
             if (status) {
-                console.log(res);
+                setDataReport(res.data)
             } else {
                 console.log(res);
 
@@ -67,6 +69,12 @@ const DashboardOfficer = () => {
                     </div>
                 </CardLink>
 
+                {dataReport?.map((item: any, index: any) => (
+                    <CardReport location={`/dashboard-officer/submit-laporan-officer`}
+                        image={item.imageReport.map((item: any) => item)} title={item.title} address={item.address} status={item.status}
+                        date={item.createdAt} desc={item.description} key={index} />
+
+                ))}
 
             </div>
 
