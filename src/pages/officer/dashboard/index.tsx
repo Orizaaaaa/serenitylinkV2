@@ -11,7 +11,6 @@ import { useEffect } from "react"
 const DashboardOfficer = () => {
 
     const id: any = localStorage.getItem('id')
-    console.log(id);
 
     useEffect(() => {
         getReportByUnitWork(id, (status: boolean, res: any) => {

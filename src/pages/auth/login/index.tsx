@@ -59,7 +59,7 @@ const Login = () => {
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('email', res.data.email)
                 localStorage.setItem('name', res.data.name)
-                localStorage.setItem('id', res.data.id)
+                localStorage.setItem('id', res.data.unitWork.id)
                 const loginTime = new Date().getTime();
                 localStorage.setItem('loginTime', loginTime.toString());
 

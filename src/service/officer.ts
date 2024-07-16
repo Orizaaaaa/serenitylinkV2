@@ -1,7 +1,7 @@
 import { axiosInterceptor } from "./axiosInterceptor";
 
 export const getReportByUnitWork = (id: string, callback: any) => {
-    axiosInterceptor.get(`/reports/user/${id}`)
+    axiosInterceptor.get(`/reports/unit-work/${id}`)
         .then((res) => {
             callback(true, res.data);
         }).catch((err) => {
