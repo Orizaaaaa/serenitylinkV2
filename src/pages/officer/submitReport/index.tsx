@@ -4,7 +4,7 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
 import { finishReportByOfficer, getReportById } from "../../../service/report"
 import { postImage } from "../../../service/imagePost"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { formatDate, parseCoordinate } from "../../../utils/helper"
 
 
@@ -80,15 +80,15 @@ const SubmitReportOfficer = () => {
 
     // const navigate = useNavigate()
     // navigate('/laporan-saya-officer')
+    const navigate = useNavigate()
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         const imageUrl = await postImage({ image: formData.imageReport });
-
         if (imageUrl) {
             finishReportByOfficer({ ...formData, imageReport: [imageUrl] }, (result: any) => {
                 console.log(result);
             })
-
+            navigate('/laporan-saya-officer')
         }
 
     }
