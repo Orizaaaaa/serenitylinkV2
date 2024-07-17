@@ -15,15 +15,15 @@ import ModalDefault from "../../../components/fragments/modal/Modal";
 const UnitKerjaAdmin = () => {
     const [unitKerja, setUnitKerja] = useState([]);
     const [errorMsg, setErrorMsg] = useState('')
+    const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
     const [formData, setFormData] = useState({
         name: '',
         image: null as File | null,
         detail: 'ini adalah sebuah detail'
     });
 
-    const [dataDelete, setDataDelete] = useState({
-        _id: ''
-    })
+    //form data untuk delete category
+    const [dataDelete, setDataDelete] = useState('')
 
 
     //consume get all unit kerja
@@ -35,9 +35,9 @@ const UnitKerjaAdmin = () => {
     }, [])
 
     //nanti nya untuk delete unit kerja
-    const handleButton = (value: string) => {
-        setDataDelete({ ...dataDelete, _id: value })
-    }
+    // const handleButton = (value: string) => {
+    //     setDataDelete({ ...dataDelete, _id: value })
+    // }
 
 
     //create unitWork
@@ -109,8 +109,8 @@ const UnitKerjaAdmin = () => {
 
 
     //delete unitWork
-    const handleDeleteUnitWork = async (id: string) => {
-        await deleteUnitWork(id, (status: boolean, res: any) => {
+    const handleDeleteUnitWork = async () => {
+        await deleteUnitWork(dataDelete, (status: boolean, res: any) => {
             if (status) {
                 getAllUnitWork((result: any) => {
                     const data = result.unitWork
@@ -121,7 +121,16 @@ const UnitKerjaAdmin = () => {
                 console.log(res);
             }
         })
+        onWarningClose();
     }
+
+    const handleChangeId = (value: string) => {
+        setDataDelete(value)
+    }
+
+    const handleDeleteModal = () => {
+        onWarningOpen();
+    };
 
     return (
         <DefaultLayout>
@@ -144,14 +153,14 @@ const UnitKerjaAdmin = () => {
 
                         {unitKerja.map((item: any, index) => (
                             <div className="image flex-col justify-center items-center" key={index}>
-                                <img onClick={() => handleButton(item._id)}
+                                <img onClick={() => handleChangeId(item._id)}
                                     className={`w-[70px] h-[70px] mx-auto rounded-full object-cover cursor-pointer 
 
-                                    ${dataDelete._id === item._id ? 'border-2 border-primary' : ''}`}
+                                    ${dataDelete === item._id ? 'border-2 border-primary' : ''}`}
 
                                     src={item.image.map((image: any) => image)} alt={item.image.map((image: any) => image)} />
 
-                                <button className={`flex mt-1  ${dataDelete._id === item._id ? 'block' : 'hidden'}`} onClick={() => handleDeleteUnitWork(item._id)} ><IoCloseCircleOutline size={20} color="red" /></button>
+                                <button className={`flex mt-1  ${dataDelete === item._id ? 'block' : 'hidden'}`} onClick={handleDeleteModal} ><IoCloseCircleOutline size={20} color="red" /></button>
                                 <p className="text-sm md:text-base mt-1">{item.name}</p>
                             </div>
 
@@ -192,6 +201,16 @@ const UnitKerjaAdmin = () => {
                         </div>
                         <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
                     </form>
+                </ModalDefault>
+
+                {/* Warning Modal */}
+                <ModalDefault isOpen={isWarningOpen} onClose={onWarningClose}>
+                    <h2 className="text-lg font-semibold">Peringatan</h2>
+                    <p> apakah Anda yakin ingin menghapus kategori ini?</p>
+                    <div className="flex justify-end gap-4 mt-4">
+                        <ButtonPrimary onClick={onWarningClose} className="bg-gray-300 text-black rounded-md">Batal</ButtonPrimary>
+                        <ButtonPrimary onClick={handleDeleteUnitWork} className="bg-red-500 text-white rounded-md">Hapus</ButtonPrimary>
+                    </div>
                 </ModalDefault>
             </div >
 
