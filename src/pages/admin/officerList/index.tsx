@@ -12,6 +12,7 @@ import { register } from "../../../service/auth";
 
 const OfficerList = () => {
     const { onOpen, onClose, isOpen } = useDisclosure();
+    const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
     const [disabled, setDisabled] = useState(true)
     const [errorMsg, setErrorMsg] = useState(' ')
     const [selectedUnitWork, setSelectedUnitWork] = useState('');
@@ -24,6 +25,7 @@ const OfficerList = () => {
         password: '',
         role: 'officer'
     })
+    const [dataDelete, setDataDelete] = useState('')
 
     //get all user
     useEffect(() => {
@@ -143,8 +145,13 @@ const OfficerList = () => {
     }
 
     //hapus petugas
-    const handleDelete = async (id: any) => {
-        await deleteUser(id, (result: any) => {
+    const handleDeleteModal = (value: any) => {
+        console.log("Value received:", value); // Tambahkan log untuk memastikan nilai yang diterima
+        onWarningOpen();
+        setDataDelete(value);
+    };
+    const handleDelete = async () => {
+        await deleteUser(dataDelete, (result: any) => {
             console.log(result);
             getAllUser((result: any) => {
                 const data = result.data ? result.data.filter((role: any) =>
@@ -152,9 +159,10 @@ const OfficerList = () => {
                 setDataUser(data)
             })
         })
+        onWarningClose();
     }
 
-    console.log(dataUser);
+
 
 
 
@@ -208,7 +216,7 @@ const OfficerList = () => {
                                 <TableCell>{capitalizeWords(user.role)}</TableCell>
                                 <TableCell>{user.unitWork ? capitalizeWords(user.unitWork.name) : '-'}</TableCell>
                                 <TableCell><ButtonPrimary className="bg-red-700 rounded-md w-full"
-                                    onClick={() => handleDelete(user.id)}  >Delete</ButtonPrimary></TableCell>
+                                    onClick={() => handleDeleteModal(user.id)}>Delete</ButtonPrimary></TableCell>
                             </TableRow>
                         ))}
 
@@ -238,6 +246,16 @@ const OfficerList = () => {
                 <InputReport marginY="my-1" htmlFor="password" title="Password " type="text" onChange={handleChange} value={formData.password} />
                 <p className="text-red-600">{errorMsg}</p>
                 <ButtonPrimary disabled={disabled} className={`rounded-md w-full my-4 ${disabled ? 'bg-slate-400' : 'bg-primaryblue'}`} onClick={createOfficer} >Buat Petugas</ButtonPrimary>
+            </ModalDefault>
+
+            {/* Warning Modal */}
+            <ModalDefault isOpen={isWarningOpen} onClose={onWarningClose}>
+                <h2 className="text-lg font-semibold">Peringatan</h2>
+                <p> apakah Anda yakin ingin menghapus petugas tersebut ?</p>
+                <div className="flex justify-end gap-4 mt-4">
+                    <ButtonPrimary onClick={onWarningClose} className="bg-gray-300 text-black rounded-md">Batal</ButtonPrimary>
+                    <ButtonPrimary onClick={handleDelete} className="bg-red-500 text-white rounded-md">Hapus</ButtonPrimary>
+                </div>
             </ModalDefault>
         </DefaultLayout>
     )
