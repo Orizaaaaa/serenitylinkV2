@@ -49,7 +49,7 @@ function App() {
             <Route path="/dashboard-officer" element={<DashboardOfficer />} />
             <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
             <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
-            <Route path="/dashboard-officer/submit-laporan-officer" element={<SubmitReportOfficer />} />
+            <Route path="/dashboard-officer/submit-laporan-officer/:id" element={<SubmitReportOfficer />} />
           </Route>
 
           {/* Protected Routes for Admins */}
