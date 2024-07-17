@@ -1,27 +1,45 @@
 
+import { useEffect, useState } from 'react'
 import Card from '../../../components/elemets/card/Card'
 import MapsAdmin from '../../../components/fragments/mapsAdmin/MapsAdmin'
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { manusiaLaptop } from '../../../image'
+import { coordinateDashboard, statusDashboard } from '../../../service/dashboard'
+import { parseCoordinate } from '../../../utils/helper'
 
-
+interface Report {
+    Menunggu: number
+    Diproses: number
+    Selesai: number
+}
 
 const DashboardAdmin = () => {
+    const [dataDashboard, setDataDashboard] = useState({} as Report);
+    const [dataCoordinate, setDataCoordinate] = useState([]);
+    useEffect(() => {
+        statusDashboard((result: any) => {
+            setDataDashboard(result.data)
+        })
+        coordinateDashboard((result: any) => {
+            setDataCoordinate(result.data)
+        })
+    }, []);
+
 
     //card
     const dataCard = [
 
         {
             name: 'Menunggu',
-            value: 4
+            value: dataDashboard.Menunggu
         },
         {
             name: 'Di Proses',
-            value: 2
+            value: dataDashboard.Diproses
         },
         {
             name: 'Selesai',
-            value: 9
+            value: dataDashboard.Selesai
         },
 
     ]
@@ -37,13 +55,23 @@ const DashboardAdmin = () => {
 
     }
 
-    //marker
-    const markers = [
-        { lat: -6.840540, lng: 107.430687, popupText: 'Hola amigos' },
-        { lat: -7.039868, lng: 107.520927, popupText: 'Marker 2' },
-        { lat: -6.884082, lng: 107.541306, popupText: 'Marker 3' },
-        // Tambahkan marker lainnya di sini
-    ];
+    //marker error
+    const markers = dataCoordinate.map((item: any) => {
+        return {
+            lat: parseCoordinate(item.latitude),
+            lng: parseCoordinate(item.longitude),
+            popupText: item.title
+        }
+
+    })
+
+    console.log('marker', markers);
+
+
+
+
+    console.log(dataCoordinate);
+
 
     return (
         <DefaultLayout>

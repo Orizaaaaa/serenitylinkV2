@@ -24,7 +24,7 @@ const MapsAdmin = ({ center, dataMarker }: Props) => {
             {dataMarker.map((marker: any, index: any) => (
                 <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} >
                     <Popup>
-                        <p>hallo</p>
+                        <p>{marker.popupText}</p>
                     </Popup>
                 </Marker>
             ))}
