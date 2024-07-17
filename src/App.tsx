@@ -48,7 +48,7 @@ function App() {
           <Route element={<PrivateRoute allowedRoles={['officer']} />}>
             <Route path="/dashboard-officer" element={<DashboardOfficer />} />
             <Route path="/laporan-saya-officer" element={<MyReportOfficer />} />
-            <Route path="/laporan-saya-officer/detail-laporan" element={<DetailRaportOfficer />} />
+            <Route path="/laporan-saya-officer/detail-laporan/:id" element={<DetailRaportOfficer />} />
             <Route path="/dashboard-officer/submit-laporan-officer/:id" element={<SubmitReportOfficer />} />
           </Route>
 

@@ -52,6 +52,7 @@ const Login = () => {
         loginService(form, (status: boolean, res: any) => {
             if (status) {
                 const role = res.data.role
+                console.log(res.data);
 
                 login({ role })
 
@@ -67,6 +68,7 @@ const Login = () => {
                 } else if (res.data.role === 'admin') {
                     navigate('/dashboard-admin')
                 } else if (res.data.role === 'officer') {
+                    localStorage.setItem('idOfficer', res.data.id)
                     localStorage.setItem('id', res.data.unitWork.id)
                     navigate('/dashboard-officer')
                 }

@@ -8,3 +8,12 @@ export const getReportByUnitWork = (id: string, callback: any) => {
             callback(false, err)
         })
 }
+
+export const getReportByIdOfficer = (id: string, callback: any) => {
+    axiosInterceptor.get(`/reports/officer/${id}`)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}

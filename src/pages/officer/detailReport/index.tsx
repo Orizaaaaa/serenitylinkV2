@@ -1,16 +1,52 @@
 
+import { useEffect, useState } from "react"
 import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { jalanRusak } from "../../../image"
-import { dataDetailLaporan } from "../../../utils/dataObject"
+import { getReportById } from "../../../service/report"
+import { useParams } from "react-router-dom"
+import { formatDate, parseCoordinate } from "../../../utils/helper"
 
-
+interface Report {
+    address: string;
+    category: {
+        name: string;
+    };
+    comment: string[];
+    createdAt: string;
+    description: string;
+    imageReport: string[];
+    latitude: string;
+    longitude: string;
+    reporter: string;
+    status: string;
+    title: string;
+    updatedAt: string;
+    _id: string;
+    unitWorks: any;
+}
 const DetailRaportOfficer = () => {
 
+    const { id }: any = useParams()
+    const [dataReport, setDataReport] = useState<Report | null>(null);
+
+    useEffect(() => {
+        getReportById(id, (result: any) => {
+            setDataReport(result.data)
+        })
+    }, []);
+    const dataDetailLaporan = [
+        { title: "Judul Laporan", text: dataReport?.title },
+        { title: "Nomor Laporan", text: dataReport?._id },
+        { title: "Tanggal Laporan", text: formatDate(dataReport?.createdAt || "") },
+        { title: "Kategori Laporan", text: dataReport?.category.name || "" },
+        { title: "Lokasi Kejadian", text: dataReport?.address },
+        { title: "Status", text: dataReport?.status },
+        { title: "Deskripsi Laporan", text: dataReport?.description },
+    ];
 
 
+    console.log(dataReport);
 
-    // submit image
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
@@ -24,12 +60,23 @@ const DetailRaportOfficer = () => {
 
                 </div>
                 <div className="right">
-                    <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={jalanRusak} alt="" />
+                    <img
+                        className="h-[170px] md:h-[300px] rounded-md w-auto mx-auto"
+                        src={dataReport?.imageReport[0]}
+                        alt=""
+                    />
                 </div>
             </div>
 
-            {/* maps */}
-            <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={13} text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
+            <Maps
+                markerPosition={{
+                    lat: parseCoordinate(dataReport?.latitude || "0"),
+                    lng: parseCoordinate(dataReport?.longitude || "0"),
+                }}
+                zoom={10}
+                text="Lokasi kejadian"
+                className="h-[370px] rounded-md my-5"
+            />
 
         </DefaultLayout>
     )
