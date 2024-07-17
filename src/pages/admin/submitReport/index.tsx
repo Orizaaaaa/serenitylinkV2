@@ -191,7 +191,7 @@ const SubmitReport = () => {
                     <div className="right">
                         {dataReport?.status === 'Selesai' ? (
                             <>
-                                <h1 className="text-lg font-semibold my-2" >Bukti laporan dari unit kerja : </h1>
+                                <h1 className="text-lg font-semibold mb-2" >Bukti laporan dari unit kerja  </h1>
                                 <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={dataReport?.officerReport?.imageReport[0]} alt="" />
                             </>
                         ) : <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={dataReport?.imageReport[0]} alt="" />}
