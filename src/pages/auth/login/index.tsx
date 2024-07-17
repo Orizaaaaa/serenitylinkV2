@@ -59,7 +59,6 @@ const Login = () => {
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('email', res.data.email)
                 localStorage.setItem('name', res.data.name)
-                localStorage.setItem('id', res.data.unitWork.id)
                 const loginTime = new Date().getTime();
                 localStorage.setItem('loginTime', loginTime.toString());
 
@@ -68,8 +67,10 @@ const Login = () => {
                 } else if (res.data.role === 'admin') {
                     navigate('/dashboard-admin')
                 } else if (res.data.role === 'officer') {
+                    localStorage.setItem('id', res.data.unitWork.id)
                     navigate('/dashboard-officer')
                 }
+
             } else {
                 setErrorLogin('*Email atau password salah')
             }
