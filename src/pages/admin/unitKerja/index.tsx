@@ -206,7 +206,7 @@ const UnitKerjaAdmin = () => {
                 {/* Warning Modal */}
                 <ModalDefault isOpen={isWarningOpen} onClose={onWarningClose}>
                     <h2 className="text-lg font-semibold">Peringatan</h2>
-                    <p> apakah Anda yakin ingin menghapus kategori ini?</p>
+                    <p> apakah Anda yakin ingin menghapus unit kerja ini?</p>
                     <div className="flex justify-end gap-4 mt-4">
                         <ButtonPrimary onClick={onWarningClose} className="bg-gray-300 text-black rounded-md">Batal</ButtonPrimary>
                         <ButtonPrimary onClick={handleDeleteUnitWork} className="bg-red-500 text-white rounded-md">Hapus</ButtonPrimary>
