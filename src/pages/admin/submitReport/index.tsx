@@ -27,6 +27,10 @@ interface Report {
     updatedAt: string;
     _id: string;
     unitWorks: any
+    officerReport: {
+        imageReport: string[]
+    }
+
 }
 
 const SubmitReport = () => {
@@ -170,6 +174,7 @@ const SubmitReport = () => {
         })
     }
 
+    console.log(dataReport?.status);
     return (
         <DefaultLayout>
             <Card>
@@ -184,7 +189,13 @@ const SubmitReport = () => {
 
                     </div>
                     <div className="right">
-                        <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={dataReport?.imageReport[0]} alt="" />
+                        {dataReport?.status === 'Selesai' ? (
+                            <>
+                                <h1 className="text-lg font-semibold my-2" >Bukti laporan dari unit kerja : </h1>
+                                <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={dataReport?.officerReport?.imageReport[0]} alt="" />
+                            </>
+                        ) : <img className="h-[170px] md:h-[300px] rounded-md w-auto  mx-auto" src={dataReport?.imageReport[0]} alt="" />}
+
                     </div>
                 </div>
 
