@@ -1,19 +1,60 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Maps from "../../../components/fragments/maps/Maps"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
-import { dataDetailLaporan } from "../../../utils/dataObject"
-import { finishReportByOfficer } from "../../../service/report"
+import { finishReportByOfficer, getReportById } from "../../../service/report"
 import { postImage } from "../../../service/imagePost"
+import { useParams } from "react-router-dom"
+import { formatDate, parseCoordinate } from "../../../utils/helper"
+
+
+interface Report {
+    address: string;
+    category: {
+        name: string;
+    };
+    comment: string[];
+    createdAt: string;
+    description: string;
+    imageReport: string[];
+    latitude: string;
+    longitude: string;
+    reporter: string;
+    status: string;
+    title: string;
+    updatedAt: string;
+    _id: string;
+    unitWorks: any;
+}
 
 
 const SubmitReportOfficer = () => {
 
+    const { id = "" } = useParams();
+    const [dataReport, setDataReport] = useState<Report | null>(null);
     const [formData, setFormData] = useState({
-        id_report: '668a0bbbffbfcb46a26abd63',
+        id_report: id,
         message: 'sudah beres',
         imageReport: null as File | null,
     });
+
+    //get data report
+    useEffect(() => {
+        getReportById(id, (result: any) => {
+            setDataReport(result.data);
+        });
+    }, [id]);
+
+    //data mapping
+    const dataDetailLaporan = [
+        { title: "Judul Laporan", text: dataReport?.title },
+        { title: "Nomor Laporan", text: dataReport?._id },
+        { title: "Tanggal Laporan", text: formatDate(dataReport?.createdAt || "") },
+        { title: "Kategori Laporan", text: dataReport?.category.name || "" },
+        { title: "Lokasi Kejadian", text: dataReport?.address },
+        { title: "Status", text: dataReport?.status },
+        { title: "Deskripsi Laporan", text: dataReport?.description },
+    ];
 
 
     //input gambar
@@ -49,7 +90,9 @@ const SubmitReportOfficer = () => {
             })
 
         }
+
     }
+
 
 
 
@@ -57,9 +100,9 @@ const SubmitReportOfficer = () => {
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-3 gap-8 lg:gap-0">
                 <div className="left space-y-6">
-                    {dataDetailLaporan.map((item, index) => (
+                    {dataDetailLaporan.map((item: any, index) => (
                         <div className="text" key={index}>
-                            <h1 className="text-lg font-semibold">{item.title} </h1>
+                            <h1 className="text-lg font-semibold">{item.title}</h1>
                             <p>{item.text}</p>
                         </div>
                     ))}
@@ -71,8 +114,11 @@ const SubmitReportOfficer = () => {
             </div>
 
             {/* maps */}
-            <Maps markerPosition={{ lat: -6.840540, lng: 107.430687 }} zoom={10}
-                text="Lokasi kejadian" className="h-[370px]  rounded-md my-5" />
+            <Maps markerPosition={{
+                lat: parseCoordinate(dataReport?.latitude || '0'),
+                lng: parseCoordinate(dataReport?.longitude || '0'),
+            }} zoom={10} text={`${dataReport?.address}`} className="h-[370px]  rounded-md my-5" />
+
 
             <div className="images ">
                 {formData.imageReport && formData.imageReport instanceof Blob ? (

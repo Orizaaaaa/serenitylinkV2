@@ -27,7 +27,7 @@ export const getReportById = (id: string, callback: any) => {
             callback(res.data);
         })
         .catch((error) => {
-            console.error("Error fetching all unit work:", error);
+            console.error("Error fetching get report by id", error);
         });
 }
 export const assignReport = async (formData: any, callback: any) => {
