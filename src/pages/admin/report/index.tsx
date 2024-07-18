@@ -7,10 +7,11 @@ import CardReport from "../../../components/fragments/CardReport/CardReport"
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react"
 import { useDispatch, useSelector } from "react-redux"
 import { addReport } from "../../../redux/report/reportSlice"
+import CardLoading from "../../../components/fragments/CardLoading/CardLoading"
 
 
 const ReportAdmin = () => {
-
+    const [loading, setLoading] = useState(false)
     const [dataReport, setDataReport] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState("");
     const [searchData, setSearchData] = useState("");
@@ -20,12 +21,15 @@ const ReportAdmin = () => {
 
     useEffect(() => {
         if (report.length < 1) {
+            setLoading(true)
             getAllReport((result: any) => {
                 dispatch(addReport(result.data));
                 setDataReport(result.data);
+                setLoading(false)
             });
         } else {
             setDataReport(report);
+            setLoading(false)
         }
     }, []);
 
@@ -80,15 +84,25 @@ const ReportAdmin = () => {
             </div>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-
-                {filteredData?.map((item: any, index: any) => (
-                    <CardReport location={`/laporan-admin/submit-laporan-admin/${item.id}`}
-                        image={item.imageReport.map((item: any) => item)} title={item.title} address={item.address} status={item.status}
-                        date={item.createdAt} desc={item.description} key={index} />
-                ))}
-
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-3">
+                {loading ? (
+                    <CardLoading />
+                ) : (
+                    filteredData?.map((item: any, index: any) => (
+                        <CardReport
+                            location={`/laporan-admin/submit-laporan-admin/${item.id}`}
+                            image={item.imageReport.map((img: any) => img)}
+                            title={item.title}
+                            address={item.address}
+                            status={item.status}
+                            date={item.createdAt}
+                            desc={item.description}
+                            key={index}
+                        />
+                    ))
+                )}
             </div>
+
         </DefaultLayout>
     )
 }
