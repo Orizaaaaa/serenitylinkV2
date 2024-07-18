@@ -7,11 +7,14 @@ import { FaEyeSlash } from "react-icons/fa6"
 import { IoEye } from "react-icons/io5"
 import { useAuth } from "../../../hooks/auth/AuthContext"
 import { loginService } from "../../../service/auth"
+import { Spinner } from "@nextui-org/react"
+
 
 
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(true)
     const [errorLogin, setErrorLogin] = useState('')
     const [disabled, setDisabled] = useState(true)
@@ -49,6 +52,7 @@ const Login = () => {
     const handleLogin = (e: any) => {
         e.preventDefault()
         localStorage.clear()
+        setLoading(true)
         loginService(form, (status: boolean, res: any) => {
             if (status) {
                 const role = res.data.role
@@ -72,9 +76,10 @@ const Login = () => {
                     localStorage.setItem('id', res.data.unitWork.id)
                     navigate('/dashboard-officer')
                 }
-
+                setLoading(false)
             } else {
                 setErrorLogin('*Email atau password salah')
+                setLoading(false)
             }
         })
     }
@@ -96,8 +101,12 @@ const Login = () => {
                         <InputForm className='form-input-login' htmlFor="password" onChange={handleChange} type={typePassword} value={form.password} placeholder="Masukkan Kata Sandi" />
                     </div>
                     <p className='text-red-500 my-3 text-sm ' >{errorLogin}</p>
-                    <ButtonPrimary type='submit' bg={`${disabled ? 'bg-slate-400' : 'bg-primaryblue'}`} disabled={disabled} className={`rounded-lg w-full mb-3 font-medium`}>
-                        Login
+                    <ButtonPrimary type='submit' bg={`${disabled ? 'bg-slate-400' : 'bg-primaryblue'} 
+                    `} disabled={disabled} className={`rounded-lg w-full mb-3 font-medium`}>
+                        <div className="flex justify-center items-center">
+                            <Spinner className={`w-5 h-5 mr-3 ${loading ? '' : 'hidden'}`} size="sm" color="white" />
+                            Login
+                        </div>
                     </ButtonPrimary>
 
                     <p className='text-sm  mt-3' >Apakah belum punya akun? <Link to={'/register'} className='text-primaryblue font-bold' >Register</Link> </p>
