@@ -91,12 +91,14 @@ const DashboardAdmin = () => {
 
                 {dataCard.map((item, index) => (
                     <>
-                        {loading ? (<Card>
-                            <div role="status" className="max-w-sm animate-pulse flex-col justify-center items-center">
-                                <div className="h-4 bg-gray-300 rounded-md  max-w-[360px] mb-2.5"></div>
-                                <div className="h-7  w-7  bg-gray-300 rounded-md mb-4"></div>
-                            </div>
-                        </Card>) : (<Card key={index}>
+                        {loading ? (
+                            <Card>
+                                <div role="status" className="max-w-sm animate-pulse flex-col justify-center items-center">
+                                    <div className="h-4 bg-gray-300 rounded-md  max-w-[360px] mb-2.5"></div>
+                                    <div className="h-7  w-7  bg-gray-300 rounded-md mb-4"></div>
+                                </div>
+                            </Card>
+                        ) : (<Card key={index}>
                             <div className="flex-col">
                                 <h1>{item.name}</h1>
                                 <h1 className={`text-2xl font-semibold ${colorCard(item.name)}`}>{item.value}</h1>
