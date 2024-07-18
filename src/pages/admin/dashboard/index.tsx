@@ -15,10 +15,13 @@ interface Report {
 
 const DashboardAdmin = () => {
     const [dataDashboard, setDataDashboard] = useState({} as Report);
+    const [loading, setLoading] = useState(false)
     const [dataCoordinate, setDataCoordinate] = useState([]);
     useEffect(() => {
+        setLoading(true)
         statusDashboard((result: any) => {
             setDataDashboard(result.data)
+            setLoading(false)
         })
         coordinateDashboard((result: any) => {
             setDataCoordinate(result.data)
@@ -65,12 +68,6 @@ const DashboardAdmin = () => {
 
     })
 
-    console.log('marker', markers);
-
-
-
-
-    console.log(dataCoordinate);
 
 
     return (
@@ -89,13 +86,24 @@ const DashboardAdmin = () => {
 
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+
+
+
                 {dataCard.map((item, index) => (
-                    <Card key={index}>
-                        <div className="flex-col">
-                            <h1>{item.name}</h1>
-                            <h1 className={`text-2xl font-semibold ${colorCard(item.name)}`}>{item.value}</h1>
-                        </div>
-                    </Card>
+                    <>
+                        {loading ? (<Card>
+                            <div role="status" className="max-w-sm animate-pulse flex-col justify-center items-center">
+                                <div className="h-4 bg-gray-300 rounded-md  max-w-[360px] mb-2.5"></div>
+                                <div className="h-7  w-7  bg-gray-300 rounded-md mb-4"></div>
+                            </div>
+                        </Card>) : (<Card key={index}>
+                            <div className="flex-col">
+                                <h1>{item.name}</h1>
+                                <h1 className={`text-2xl font-semibold ${colorCard(item.name)}`}>{item.value}</h1>
+                            </div>
+                        </Card>)
+                        }
+                    </>
                 ))}
             </div >
 
