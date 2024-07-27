@@ -56,8 +56,6 @@ const ReportAdmin = () => {
     });
 
 
-    console.log(report);
-    console.log(dataReport);
 
     return (
         <DefaultLayout>
