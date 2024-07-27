@@ -135,7 +135,7 @@ const CategoryAdmin = () => {
 
                                 <button className={`flex mt-1  ${dataDelete === category._id ? 'block' : 'hidden'}`}
                                     onClick={handleDeleteModal} ><IoCloseCircleOutline size={20} color="red" /></button>
-                                <p className="text-sm md:text-base mt-1">{category.name}</p>
+                                <p className="text-sm md:text-base mt-1 text-center">{category.name}</p>
                             </div>
                         ))}
                     </div>

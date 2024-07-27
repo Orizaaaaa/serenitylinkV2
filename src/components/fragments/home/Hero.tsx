@@ -17,7 +17,6 @@ function Hero() {
     })
   }, []);
 
-  console.log(dataDashboard);
 
   return (
     <>
