@@ -2,7 +2,23 @@ import { Link } from 'react-router-dom';
 import { logo } from '../../../image';
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { FaUsersGear } from "react-icons/fa6";
+import { useEffect, useState } from 'react';
+import { statusDashboard } from '../../../service/dashboard';
+interface Report {
+  Menunggu: number
+  Diproses: number
+  Selesai: number
+}
 function Hero() {
+  const [dataDashboard, setDataDashboard] = useState({} as Report);
+  useEffect(() => {
+    statusDashboard((result: any) => {
+      setDataDashboard(result.data)
+    })
+  }, []);
+
+  console.log(dataDashboard);
+
   return (
     <>
       <section className=' min-h-[92vh] grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-5 overflow-x-hidden '
@@ -25,7 +41,7 @@ function Hero() {
             <div className="flex justify-start mt-3 gap-2">
               <IoChatbubblesSharp size={24} color='#2FACD6' />
               <div className="flex-col font-semibold text-black">
-                <p>1</p>
+                <p>{dataDashboard.Diproses}</p>
                 <p>Total Pengaduan</p>
               </div>
             </div>
@@ -33,8 +49,8 @@ function Hero() {
             <div className="flex justify-start mt-3 gap-2">
               <FaUsersGear size={24} color='#2FACD6' />
               <div className="flex-col font-semibold text-black">
-                <p>1</p>
-                <p>aduan yang telah di tidak lanjuti</p>
+                <p>{dataDashboard.Selesai}</p>
+                <p>aduan yang telah di tindak lanjuti</p>
               </div>
             </div>
           </div>
